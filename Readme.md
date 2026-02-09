@@ -1,4 +1,3 @@
-```md
 # 📌 StayEase – Project Design Notes  
 **(Read Before Making Changes)**
 
@@ -153,4 +152,3 @@ Before changing the schema, ask:
 
 ✅ These rules define the **core design philosophy** of StayEase.  
 Violating them will lead to **inconsistency, bugs, or audit issues**.
-```
