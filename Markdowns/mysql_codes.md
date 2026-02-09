@@ -9,6 +9,7 @@
 ```sql
 CREATE DATABASE stayease;
 USE stayease;
+```
 
 ---
 
