@@ -22,7 +22,7 @@
 - **Age** (INT, NOT NULL, CHECK (Age > 0))  
 - **Contact_Number** (VARCHAR, NOT NULL, UNIQUE)  
 - **Email** (VARCHAR, NOT NULL, UNIQUE)  
-- **Emergency_Contact** (VARCHAR, NOT NULL)  
+- **Emergency_Contact** (VARCHAR)  
 - **Image_Path** (VARCHAR)  
 - **Role_ID** (FK, INT, NOT NULL) → Roles(Role_ID)  
 - **Status** (VARCHAR, NOT NULL)  
@@ -91,35 +91,22 @@
 
 ---
 
-## 7️⃣ Visitors
+## 7️⃣ Visitor Log
 **Purpose:** Stores details of non-hostel visitors only.
 
-### Visitors
-- **Visitor_ID** (PK, INT, NOT NULL)  
+### Visitor_Logs
+- **Log_ID** (PK, INT, NOT NULL)  
 - **Visitor_Name** (VARCHAR, NOT NULL)  
 - **Contact_Number** (VARCHAR, NOT NULL, UNIQUE)  
 - **ID_Proof_Type** (VARCHAR, NOT NULL)  
 - **ID_Proof_Number** (VARCHAR, NOT NULL, UNIQUE)
-
----
-
-## 8️⃣ Visitor_Logs
-**Purpose:** Tracks visitor movement.
-
-### Visitor_Logs
-- **Log_ID** (PK, INT, NOT NULL)  
-- **Visitor_ID** (FK, INT, NOT NULL) → Visitors(Visitor_ID)  
 - **Host_Member_ID** (FK, INT, NOT NULL) → Members(Member_ID)  
-- **Entry_Time** (TIMESTAMP, NOT NULL)  
-- **Exit_Time** (TIMESTAMP)  
+- **Entry_Time** (TIMESTAMP, NOT NULL)
 - **Purpose** (VARCHAR, NOT NULL)
 
-**Constraints**
-- `CHECK (Exit_Time > Entry_Time OR Exit_Time IS NULL)`
-
 ---
 
-## 9️⃣ Member_Movement_Logs
+## 8 Member_Movement_Logs
 **Purpose:** Tracks hostel exit/entry of members (students).
 
 ### Member_Movement_Logs
@@ -134,19 +121,19 @@
 
 ---
 
-## 🔟 Fee_Structures
+## 9 Fee_Structures
 **Purpose:** Defines types of fees.
 
 ### Fee_Structures
 - **Fee_Type_ID** (PK, INT, NOT NULL)  
 - **Fee_Name** (VARCHAR, NOT NULL)  
-  - e.g., Hostel Rent  
+  - e.g., Hostel Rent, Mess Rent, Laundry Rent
 - **Amount** (DECIMAL(10,2), NOT NULL)  
 - **Academic_Year** (VARCHAR, NOT NULL)
 
 ---
 
-## 1️⃣1️⃣ Payments
+## 10 Payments
 **Purpose:** Tracks payments made by members.
 
 ### Payments
@@ -161,19 +148,19 @@
 
 ---
 
-## 1️⃣2️⃣ Complaint_Types
+## 11 Complaint_Types
 **Purpose:** Master table for complaint classification.
 
 ### Complaint_Types
 - **Complaint_Type_ID** (PK, INT, NOT NULL)  
 - **Type_Name** (VARCHAR, NOT NULL)  
-  - e.g., Electrical  
+  - e.g., Electrical, Mechanical, Civil
 - **Sub_Type** (VARCHAR, NOT NULL)  
   - e.g., Fan, Switch  
 
 ---
 
-## 1️⃣3️⃣ Complaints
+## 12 Complaints
 **Purpose:** Stores complaint records.
 
 ### Complaints
@@ -190,13 +177,3 @@
 - If `Status = 'Resolved'` → `Resolved_Date` must **NOT** be NULL.
 
 ---
-
-## 1️⃣4️⃣ Complaint_Logs
-**Purpose:** Maintains action history on complaints.
-
-### Complaint_Logs
-- **Log_ID** (PK, INT, NOT NULL)  
-- **Complaint_ID** (FK, INT, NOT NULL) → Complaints(Complaint_ID)  
-- **Action_By** (FK, INT, NOT NULL) → Members(Member_ID)  
-- **Action_Date** (TIMESTAMP, NOT NULL)  
-- **Remarks** (TEXT, NOT NULL)
