@@ -23,12 +23,12 @@ CREATE TABLE Members (
     Member_ID INT PRIMARY KEY,
     First_Name VARCHAR(100) NOT NULL,
     Last_Name VARCHAR(100),
-    Gender VARCHAR(20) NOT NULL,
+    Gender CHAR(1) NOT NULL CHECK (Gender IN ('M', 'F')),
     Age INT NOT NULL CHECK (Age > 0),
     Contact_Number VARCHAR(15) NOT NULL UNIQUE,
     Email VARCHAR(150) NOT NULL UNIQUE,
     Emergency_Contact VARCHAR(15),
-    Image_Path VARCHAR(255),
+    Image_Path VARCHAR(255) NOT NULL DEFAULT 'uploads/default.png',
     Role_ID INT NOT NULL,
     Status VARCHAR(20) NOT NULL CHECK (Status IN ('Active', 'Inactive')),
     
@@ -48,7 +48,7 @@ CREATE TABLE Members (
 CREATE TABLE Hostels (
     Hostel_ID INT PRIMARY KEY,
     Hostel_Name VARCHAR(150) NOT NULL UNIQUE,
-    Hostel_Type VARCHAR(20) NOT NULL CHECK (Hostel_Type IN ('Boys', 'Girls')),
+    Hostel_Type VARCHAR(5) NOT NULL CHECK (Hostel_Type IN ('Boys', 'Girls')),
     Total_Floors INT NOT NULL CHECK (Total_Floors > 0),
     Warden_ID INT NOT NULL,
 
@@ -128,7 +128,7 @@ CREATE TABLE Furniture_Inventory (
     Item_Name VARCHAR(100) NOT NULL,
     Room_ID INT NOT NULL,
     Purchase_Date DATE NOT NULL,
-    Current_Condition VARCHAR(20) NOT NULL CHECK (Current_Condition IN ('Good', 'Damaged')),
+    Current_Condition VARCHAR(7) NOT NULL CHECK (Current_Condition IN ('Good', 'Damaged')),
 
     CONSTRAINT fk_furniture_room
         FOREIGN KEY (Room_ID)
@@ -146,7 +146,7 @@ CREATE TABLE Furniture_Inventory (
 CREATE TABLE Visitor_Logs (
     Log_ID INT PRIMARY KEY,
     Visitor_Name VARCHAR(150) NOT NULL,
-    Contact_Number VARCHAR(15) NOT NULL UNIQUE,
+    Contact_Number VARCHAR(15) NOT NULL,
     ID_Proof_Type VARCHAR(50) NOT NULL,
     ID_Proof_Number VARCHAR(100) NOT NULL UNIQUE,
     Host_Member_ID INT NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE Payments (
         FOREIGN KEY (Member_ID)
         REFERENCES Members(Member_ID)
         ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     CONSTRAINT fk_payment_fee
         FOREIGN KEY (Fee_Type_ID)
@@ -255,7 +255,7 @@ CREATE TABLE Complaints (
         FOREIGN KEY (Member_ID)
         REFERENCES Members(Member_ID)
         ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     CONSTRAINT fk_complaint_type
         FOREIGN KEY (Complaint_Type_ID)
