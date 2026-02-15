@@ -34,7 +34,7 @@ This leads to inefficiency, poor transparency, and administrative errors.
 
 ---
 
-## ER Diagram
+## 📊 ER Diagram
 
 ![ER Diagram](./Images/ER_SE.png)
 
