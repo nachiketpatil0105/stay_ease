@@ -34,6 +34,13 @@ This leads to inefficiency, poor transparency, and administrative errors.
 
 ---
 
+## ER Diagram
+
+![ER Diagram](./images/ER_SE.png)
+
+
+---
+
 ## 🗂️ Database Design Overview
 
 The system contains **12 strong entities**:
