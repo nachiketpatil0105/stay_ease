@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - StayEase</title>
+      {% else %}
+      <title>Welcome to Stayease</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>StayEase: <a href="/portfolio">Portfolio</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
