@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayEase - Member Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class ="title">
+        <h1 style="text-align: center;">StayEase - Hostel Management System</h1>
+    </div>
+    
+<div class="container">
+    <div id="login-section">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Log In</button>
+        <p id="login-error" style="color: red;"></p>
+    </div>
+
+    <div id="portfolio-section" class="hidden">
+        <h3>Welcome, <span id="display-name"></span>!</h3>
+        <p><strong>Role:</strong> <span id="display-role"></span></p>
+        <button onclick="logout()" style="background-color: #dc3545;">Log Out</button>
+
+        <h4>Your Portfolio Details</h4>
+        <ul>
+            <li><strong>Email:</strong> <span id="port-email"></span></li>
+            <li><strong>Contact:</strong> <span id="port-contact"></span></li>
+            <li><strong>Hostel Block:</strong> <span id="port-hostel"></span></li>
+            <li><strong>Room Number:</strong> <span id="port-room"></span></li>
+        </ul>
+
+        <h4>Your Recent Payments</h4>
+        <div id="port-payments" class="payments"></div>
+
+        <h4>Your Complaints</h4>
+        <div id="port-complaints" class="complaint"></div>
+
+        <div id="admin-section" class="admin-box hidden">
+            <h4>🛡️ Admin Controls</h4>
+            <p>You have administrative access. You can view and edit details of all members.</p>
+            <button onclick="fetchAllMembers()">View All Members</button>
+            <div id="admin-results" style="margin-top: 15px;"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
