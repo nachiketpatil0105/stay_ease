@@ -1,15 +1,27 @@
-<!doctype html>
 <html>
     <head>
-      {% if title %}
-      <title>{{ title }} - StayEase</title>
-      {% else %}
-      <title>Welcome to Stayease</title>
-      {% endif %}
+        {% if title %}
+        <title>{{ title }} - StayEase</title>
+        {% else %}
+        <title>StayEase</title>
+        {% endif %}
     </head>
     <body>
-        <div>StayEase: <a href="/portfolio">Portfolio</a></div>
+        <div>
+            StayEase:
+            <a href="{{ url_for('portfolio') }}">Portfolio</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
         <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
