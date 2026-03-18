@@ -1,3 +1,5 @@
+import math
+
 class BPlusTreeNode:
     """
     Represents a single node in a B+ Tree.
@@ -90,9 +92,6 @@ class BPlusTreeNode:
         kind = "Leaf" if self.is_leaf else "Internal"
         return f"BPlusTreeNode({kind}, keys={self.keys})"
     
-import math
-from database.bplustree_node import BPlusTreeNode  # adjust import as needed
-
 class BPlusTree:
     """
     A B+ Tree implementation supporting insert, delete, search,
