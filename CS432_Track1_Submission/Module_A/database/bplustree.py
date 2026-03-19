@@ -1,524 +1,464 @@
-import math
+from graphviz import Digraph
 
 class BPlusTreeNode:
-    """
-    Represents a single node in a B+ Tree.
-
-    In a B+ Tree:
-      - Internal nodes store only keys and child pointers (no values).
-      - Leaf nodes store keys, their associated values, and a `next`
-        pointer to form a linked list across all leaves.
-
-    Attributes:
-        order      : int  – max number of keys a node can hold (branching factor - 1)
-        is_leaf    : bool – True if this is a leaf node
-        keys       : list – sorted list of keys
-        values     : list – parallel list of values (leaf nodes only; None for internal)
-        children   : list – child node pointers (internal nodes only; [] for leaves)
-        next       : BPlusTreeNode | None – pointer to next leaf (leaf nodes only)
-        parent     : BPlusTreeNode | None – pointer to parent node (optional, useful for deletion)
-    """
-
-    def __init__(self, order: int, is_leaf: bool = False):
-        """
-        Args:
-            order  : The order of the B+ Tree (max keys per node = order - 1).
-            is_leaf: Whether this node is a leaf node.
-        """
-        self.order    = order
-        self.is_leaf  = is_leaf
-        self.keys     = []          # Sorted list of keys
-
-        # Leaf nodes: values[i] is the record associated with keys[i]
-        # Internal nodes: values is unused (None)
-        self.values   = [] if is_leaf else None
-
-        # Internal nodes: len(children) == len(keys) + 1
-        # Leaf nodes: children is unused (empty list)
+    def __init__(self, order, is_leaf=False):
+        # 'order' dictates our maximum capacity (maximum number of children)
+        self.order = order
+        self.is_leaf = is_leaf
+        
+        # Every node, regardless of type, needs keys to maintain sorted order
+        self.keys = []
+        
+        # Leaves store the actual database records/values [cite: 45]
+        self.values = []
+        # Leaves link to their right neighbor for fast range queries [cite: 44, 58, 278]
+        self.next_leaf = None 
+        
+        # Internal nodes don't store data; they store pointers to other nodes
         self.children = []
 
-        # Leaf-level linked list pointer (leaf nodes only)
-        self.next     = None
-
-        # Back-pointer to parent (makes deletion/rebalancing easier)
-        self.parent   = None
-
-    # ------------------------------------------------------------------ #
-    #  Capacity helpers                                                    #
-    # ------------------------------------------------------------------ #
-
-    def is_full(self) -> bool:
-        """Returns True if the node has reached maximum key capacity."""
+    def is_full(self):
+        """Check if this node has hit its key limit."""
+        # By definition, a B+ tree node of a given order 'm' can hold at most 'm - 1' keys
         return len(self.keys) >= self.order - 1
 
-    def is_underflow(self) -> bool:
+    def insert_at_leaf(self, key, value):
         """
-        Returns True if the node has fewer than the minimum required keys.
-        Minimum keys = ceil(order / 2) - 1  (root is exempt).
+        Inserts a key and its corresponding value into a leaf node.
+        We must ensure the keys stay in strictly increasing order.
         """
-        import math
-        return len(self.keys) < math.ceil(self.order / 2) - 1
+        # Safety check: we should only be doing this in a leaf!
+        if not self.is_leaf:
+            raise ValueError("Cannot insert data into an internal routing node.")
+            
+        # Walk through the keys to find the exact right spot
+        idx = 0
+        while idx < len(self.keys) and key > self.keys[idx]:
+            idx += 1
+            
+        # Handle duplicates (Updates)
+        # If the key is already here, we just update the existing record
+        if idx < len(self.keys) and self.keys[idx] == key:
+            self.values[idx] = value
+            return False # Returning False lets our main tree know it was just an update
+            
+        # Insert the brand new key and value at the found index
+        self.keys.insert(idx, key)
+        self.values.insert(idx, value)
+        return True # Returning True means the node grew in size
 
-    def has_excess(self) -> bool:
+    def find_child_index(self, key):
         """
-        Returns True if the node can lend a key to a sibling during
-        redistribution (has more than the minimum required keys).
+        For internal nodes, this acts as a traffic director. 
+        It looks at the keys and figures out which child pointer to follow down the tree.
         """
-        import math
-        return len(self.keys) > math.ceil(self.order / 2) - 1
+        # Safety check: leaves don't have children!
+        if self.is_leaf:
+            raise ValueError("Leaf nodes do not have children to search through.")
+            
+        idx = 0
+        # We move right as long as the target key is greater than or equal to the current key
+        while idx < len(self.keys) and key >= self.keys[idx]:
+            idx += 1
+            
+        # This index perfectly matches the position in the self.children list
+        return idx
 
-    # ------------------------------------------------------------------ #
-    #  Search helper                                                       #
-    # ------------------------------------------------------------------ #
-
-    def find_child_index(self, key) -> int:
+    def split_node(self):
         """
-        For an internal node, returns the index i such that
-        children[i] is the correct subtree to descend into for `key`.
-
-        Uses linear scan; works for small orders.
-        For large orders, replace with bisect.bisect_left for O(log n).
+        Splits a full node into two, returning the key to be promoted 
+        and the newly created right-sibling node.
         """
-        i = 0
-        while i < len(self.keys) and key >= self.keys[i]:
-            i += 1
-        return i
+        mid_index = len(self.keys) // 2
+        
+        # Create the new right-hand buddy node. It shares the same leaf status.
+        right_node = BPlusTreeNode(self.order, is_leaf=self.is_leaf)
+        
+        if self.is_leaf:
+            # LEAF NODE SPLIT
+            # Give the right node the second half of the keys and values
+            right_node.keys = self.keys[mid_index:]
+            right_node.values = self.values[mid_index:]
+            
+            # Keep the first half for the current node
+            self.keys = self.keys[:mid_index]
+            self.values = self.values[:mid_index]
+            
+            # Re-wire the linked list so range queries still work seamlessly
+            right_node.next_leaf = self.next_leaf
+            self.next_leaf = right_node
+            
+            # For leaves, we COPY the first key of the right node to push up
+            promoted_key = right_node.keys[0]
+            
+        else:
+            # INTERNAL NODE SPLIT
+            # The middle key is removed entirely from this level to be pushed up
+            promoted_key = self.keys[mid_index]
+            
+            # Give the right node the keys and children AFTER the middle key
+            right_node.keys = self.keys[mid_index + 1:]
+            right_node.children = self.children[mid_index + 1:]
+            
+            # Keep the keys and children BEFORE the middle key for the current node
+            self.keys = self.keys[:mid_index]
+            self.children = self.children[:mid_index + 1]
+            
+        return promoted_key, right_node
 
-    # ------------------------------------------------------------------ #
-    #  Dunder helpers                                                      #
-    # ------------------------------------------------------------------ #
+    def get_value(self, key):
+        """
+        Searches this leaf node for a specific key and returns its value.
+        """
+        # Safety check: internal nodes don't hold actual data values
+        if not self.is_leaf:
+            return None
+            
+        # Scan through the keys. If we find a match, return the value at the exact same index.
+        for idx, k in enumerate(self.keys):
+            if k == key:
+                return self.values[idx]
+                
+        # If we check all keys and don't find it, it doesn't exist here
+        return None
 
-    def __repr__(self) -> str:
-        kind = "Leaf" if self.is_leaf else "Internal"
-        return f"BPlusTreeNode({kind}, keys={self.keys})"
+    def remove_from_leaf(self, key):
+        """
+        Finds a key in this leaf node and removes both it and its corresponding value.
+        """
+        # Safety check: we only delete raw data from leaves
+        if not self.is_leaf:
+            return False
+            
+        for idx, k in enumerate(self.keys):
+            if k == key:
+                # Pop removes the item at the specific index from the list
+                self.keys.pop(idx)
+                self.values.pop(idx)
+                return True # Deletion successful
+                
+        return False # Key wasn't found
     
 class BPlusTree:
-    """
-    A B+ Tree implementation supporting insert, delete, search,
-    range queries, update, and Graphviz visualisation.
-
-    Properties:
-        - All data lives in leaf nodes only.
-        - Internal nodes hold keys as routing separators.
-        - Leaf nodes are linked via `next` pointers for efficient range scans.
-        - Nodes split when full (on insert) and merge/redistribute on underflow (on delete).
-
-    Args:
-        order : int – max children per internal node (min 3).
-                      Max keys per node = order - 1.
-                      Min keys per node = ceil(order / 2) - 1.
-    """
-
-    def __init__(self, order: int = 4):
-        if order < 3:
-            raise ValueError("Order must be at least 3.")
+    def __init__(self, order=4):
         self.order = order
-        self.root  = BPlusTreeNode(order=order, is_leaf=True)
-        self._min_keys = math.ceil(order / 2) - 1
-
-    # ================================================================== #
-    #  SEARCH                                                              #
-    # ================================================================== #
+        # The tree always starts with a single, empty leaf node acting as the root
+        self.root = BPlusTreeNode(order=self.order, is_leaf=True)
 
     def search(self, key):
         """
-        Search for a key. Returns associated value if found, else None.
-        Traverses from root down to the correct leaf node.
-        Time complexity: O(log n)
+        Exact Search: Returns the value for a given key, or None if not found.
         """
-        leaf = self._find_leaf(key)
-        if key in leaf.keys:
-            return leaf.values[leaf.keys.index(key)]
-        return None
+        current_node = self.root
+        
+        # Drill down through internal nodes until we hit a leaf
+        while not current_node.is_leaf:
+            # Our smart node tells us exactly which child pointer to follow
+            idx = current_node.find_child_index(key)
+            current_node = current_node.children[idx]
+            
+        # Now we are at the correct leaf, just ask the leaf for the value
+        return current_node.get_value(key)
 
-    def _find_leaf(self, key) -> BPlusTreeNode:
-        """Traverse from root to the leaf node where `key` belongs."""
-        node = self.root
-        while not node.is_leaf:
-            i = node.find_child_index(key)
-            node = node.children[i]
-        return node
-
-    # ================================================================== #
-    #  INSERT                                                              #
-    # ================================================================== #
+    def range_query(self, start_key, end_key):
+        """
+        Range Query: Returns a list of (key, value) tuples within the range.
+        This takes advantage of the linked list connecting our leaf nodes!
+        """
+        results = []
+        current_node = self.root
+        
+        # Drill down to find the leaf where the `start_key` belongs
+        while not current_node.is_leaf:
+            idx = current_node.find_child_index(start_key)
+            current_node = current_node.children[idx]
+            
+        # Surf the linked list of leaves!
+        while current_node is not None:
+            # Check every key in the current leaf
+            for i, k in enumerate(current_node.keys):
+                if start_key <= k <= end_key:
+                    results.append((k, current_node.values[i]))
+                elif k > end_key:
+                    # Since keys are sorted, once we pass end_key, we are completely done!
+                    # We don't even need to look at the rest of the tree.
+                    return results
+            
+            # Jump to the right neighbor using the pointer we set up during splits
+            current_node = current_node.next_leaf
+            
+        return results
 
     def insert(self, key, value):
         """
-        Insert a key-value pair into the B+ Tree.
-        - If key already exists, update its value (no duplicates).
-        - Splits nodes bottom-up when full.
-        Time complexity: O(log n)
+        The main entry point for adding new data.
+        It handles the special case where the very top of the tree (the root) is full.
         """
-        # If key exists, just update
-        if self.search(key) is not None:
-            self.update(key, value)
-            return
-
+        # If the root has hit its capacity, the entire tree must grow one level taller
+        if self.root.is_full():
+            # Create a new, empty internal node to become the new root
+            new_root = BPlusTreeNode(self.order, is_leaf=False)
+            
+            # The old root becomes the first child of this new root
+            new_root.children.append(self.root)
+            
+            # Force the old root to split. It gives us a key to pull up and a new right child.
+            promoted_key, right_child = self.root.split_node()
+            
+            # Slot the promoted key and the new right child into our new root
+            new_root.keys.append(promoted_key)
+            new_root.children.append(right_child)
+            
+            # Officially update the tree's root pointer
+            self.root = new_root
+            
+        # Now that we are sure the root has breathing room, we start the descent
         self._insert_non_full(self.root, key, value)
 
-        # If root is now full after insertion, split it
-        if len(self.root.keys) >= self.order:
-            old_root  = self.root
-            new_root  = BPlusTreeNode(order=self.order, is_leaf=False)
-            self.root = new_root
-            new_root.children.append(old_root)
-            old_root.parent = new_root
-            self._split_child(new_root, 0)
-
-    def _insert_non_full(self, node: BPlusTreeNode, key, value):
+    def _insert_non_full(self, current_node, key, value):
         """
-        Recursively descend to the correct leaf and insert.
-        Splits children proactively if they are full before descending.
+        A recursive helper that navigates down the tree.
+        It splits any full child nodes it encounters ON THE WAY DOWN to prevent bottlenecks.
         """
-        if node.is_leaf:
-            # Insert key in sorted position
-            i = 0
-            while i < len(node.keys) and key > node.keys[i]:
-                i += 1
-            node.keys.insert(i, key)
-            node.values.insert(i, value)
+        if current_node.is_leaf:
+            # Base Case: We hit the bottom! Drop the data in.
+            current_node.insert_at_leaf(key, value)
         else:
-            i = node.find_child_index(key)
-            child = node.children[i]
+            # Recursive Case: We are in an internal node. Find which path to take.
+            idx = current_node.find_child_index(key)
+            child_node = current_node.children[idx]
+            
+            # Pre-emptive split: If the child we are about to visit is full, split it FIRST.
+            if child_node.is_full():
+                promoted_key, right_child = child_node.split_node()
+                
+                # Insert the promoted key and new child pointer into the current internal node
+                current_node.keys.insert(idx, promoted_key)
+                current_node.children.insert(idx + 1, right_child)
+                
+                # Because we just split the child, the key we are trying to insert might 
+                # actually belong in the newly created right child. We need to check!
+                if key >= current_node.keys[idx]:
+                    idx += 1
+                    child_node = current_node.children[idx]
+                    
+            # Now safely move down to the (guaranteed not-full) child
+            self._insert_non_full(child_node, key, value)
 
-            # Pre-emptively split a full child before descending
-            if len(child.keys) >= self.order - 1:
-                self._split_child(node, i)
-                # After split, decide which of the two children to descend into
-                if key >= node.keys[i]:
-                    i += 1
-
-            self._insert_non_full(node.children[i], key, value)
-
-    def _split_child(self, parent: BPlusTreeNode, index: int):
+    def get_all(self):
         """
-        Split parent.children[index] into two nodes.
-
-        Leaf split:
-            - Right half stays in original node.
-            - Left half goes into a new node.
-            - Middle key is COPIED up to the parent (stays in leaves too).
-            - Linked list (next pointer) is updated.
-
-        Internal split:
-            - Middle key is PROMOTED up (removed from child).
-            - Left child keeps keys[:mid], right child gets keys[mid+1:].
-        """
-        order    = self.order
-        child    = parent.children[index]
-        mid      = len(child.keys) // 2
-
-        new_node = BPlusTreeNode(order=order, is_leaf=child.is_leaf)
-        new_node.parent = parent
-
-        if child.is_leaf:
-            # --- Leaf split ---
-            # New node gets the right half (including mid key — copy-up)
-            new_node.keys   = child.keys[mid:]
-            new_node.values = child.values[mid:]
-            child.keys      = child.keys[:mid]
-            child.values    = child.values[:mid]
-
-            # Maintain linked list
-            new_node.next = child.next
-            child.next    = new_node
-
-            # Copy the first key of new_node up to the parent
-            promote_key = new_node.keys[0]
-        else:
-            # --- Internal split ---
-            # Middle key is promoted (removed from child)
-            promote_key      = child.keys[mid]
-            new_node.keys    = child.keys[mid + 1:]
-            new_node.children = child.children[mid + 1:]
-            child.keys       = child.keys[:mid]
-            child.children   = child.children[:mid + 1]
-
-            # Re-parent the moved children
-            for c in new_node.children:
-                c.parent = new_node
-
-        # Insert the promoted key and new child into parent
-        parent.keys.insert(index, promote_key)
-        parent.children.insert(index + 1, new_node)
-
-    # ================================================================== #
-    #  DELETE                                                              #
-    # ================================================================== #
-
-    def delete(self, key) -> bool:
-        """
-        Delete a key from the B+ Tree.
-        - Handles underflow by borrowing from siblings or merging nodes.
-        - Shrinks the root if it becomes empty.
-        Returns True if deletion succeeded, False if key not found.
-        Time complexity: O(log n)
-        """
-        if self.search(key) is None:
-            return False
-        self._delete(self.root, key)
-
-        # If root has no keys but has a child, shrink the tree
-        if not self.root.is_leaf and len(self.root.keys) == 0:
-            self.root = self.root.children[0]
-            self.root.parent = None
-
-        return True
-
-    def _delete(self, node: BPlusTreeNode, key):
-        """Recursive deletion handler for both leaf and internal nodes."""
-        if node.is_leaf:
-            if key in node.keys:
-                i = node.keys.index(key)
-                node.keys.pop(i)
-                node.values.pop(i)
-        else:
-            i = node.find_child_index(key)
-            child = node.children[i]
-
-            # Ensure child won't underflow after deletion
-            if len(child.keys) <= self._min_keys:
-                self._fill_child(node, i)
-                # After fill, the tree may have restructured — re-find position
-                i = node.find_child_index(key)
-                if i >= len(node.children):
-                    i = len(node.children) - 1
-
-            self._delete(node.children[i], key)
-
-            # Fix parent key if deleted key was a separator
-            if key in node.keys:
-                idx = node.keys.index(key)
-                # Replace separator with the new smallest key of right subtree
-                node.keys[idx] = self._get_min_leaf_key(node.children[idx + 1])
-
-    def _fill_child(self, node: BPlusTreeNode, index: int):
-        """
-        Ensure node.children[index] has enough keys to allow deletion.
-        Strategy:
-          1. Borrow from left sibling if it has excess.
-          2. Borrow from right sibling if it has excess.
-          3. Otherwise merge with a sibling.
-        """
-        if index > 0 and len(node.children[index - 1].keys) > self._min_keys:
-            self._borrow_from_prev(node, index)
-        elif index < len(node.children) - 1 and len(node.children[index + 1].keys) > self._min_keys:
-            self._borrow_from_next(node, index)
-        else:
-            # Merge: prefer merging with left sibling
-            if index > 0:
-                self._merge(node, index - 1)
-            else:
-                self._merge(node, index)
-
-    def _borrow_from_prev(self, node: BPlusTreeNode, index: int):
-        """
-        Borrow the rightmost key from the left sibling.
-        - Leaf: move key+value directly; update parent separator.
-        - Internal: rotate key through parent.
-        """
-        child  = node.children[index]
-        sibling = node.children[index - 1]
-
-        if child.is_leaf:
-            # Move sibling's last key/value to front of child
-            child.keys.insert(0, sibling.keys.pop())
-            child.values.insert(0, sibling.values.pop())
-            # Update the parent separator to new first key of child
-            node.keys[index - 1] = child.keys[0]
-        else:
-            # Rotate: parent key comes down, sibling's last key goes up
-            child.keys.insert(0, node.keys[index - 1])
-            node.keys[index - 1] = sibling.keys.pop()
-            # Move sibling's last child pointer to child
-            moved_child = sibling.children.pop()
-            moved_child.parent = child
-            child.children.insert(0, moved_child)
-
-    def _borrow_from_next(self, node: BPlusTreeNode, index: int):
-        """
-        Borrow the leftmost key from the right sibling.
-        - Leaf: move key+value directly; update parent separator.
-        - Internal: rotate key through parent.
-        """
-        child   = node.children[index]
-        sibling = node.children[index + 1]
-
-        if child.is_leaf:
-            # Move sibling's first key/value to end of child
-            child.keys.append(sibling.keys.pop(0))
-            child.values.append(sibling.values.pop(0))
-            # Update parent separator to sibling's new first key
-            node.keys[index] = sibling.keys[0]
-        else:
-            # Rotate: parent key comes down, sibling's first key goes up
-            child.keys.append(node.keys[index])
-            node.keys[index] = sibling.keys.pop(0)
-            # Move sibling's first child pointer to child
-            moved_child = sibling.children.pop(0)
-            moved_child.parent = child
-            child.children.append(moved_child)
-
-    def _merge(self, node: BPlusTreeNode, index: int):
-        """
-        Merge node.children[index] with node.children[index + 1].
-        The right child is absorbed into the left, then removed from parent.
-
-        - Leaf merge: simply concatenate keys/values + fix next pointer.
-        - Internal merge: pull down the parent separator key, then concatenate.
-        """
-        left  = node.children[index]
-        right = node.children[index + 1]
-
-        if left.is_leaf:
-            # Concatenate leaf data and fix linked list
-            left.keys   += right.keys
-            left.values += right.values
-            left.next    = right.next
-        else:
-            # Pull the parent separator down into left
-            left.keys.append(node.keys[index])
-            left.keys      += right.keys
-            left.children  += right.children
-            for c in right.children:
-                c.parent = left
-
-        # Remove the separator key and right child from parent
-        node.keys.pop(index)
-        node.children.pop(index + 1)
-
-    def _get_min_leaf_key(self, node: BPlusTreeNode):
-        """Descend to the leftmost leaf and return its smallest key."""
-        while not node.is_leaf:
-            node = node.children[0]
-        return node.keys[0]
-
-    # ================================================================== #
-    #  UPDATE                                                              #
-    # ================================================================== #
-
-    def update(self, key, new_value) -> bool:
-        """
-        Update the value associated with an existing key.
-        Returns True if key was found and updated, False otherwise.
-        Time complexity: O(log n)
-        """
-        leaf = self._find_leaf(key)
-        if key in leaf.keys:
-            leaf.values[leaf.keys.index(key)] = new_value
-            return True
-        return False
-
-    # ================================================================== #
-    #  RANGE QUERY                                                         #
-    # ================================================================== #
-
-    def range_query(self, start_key, end_key) -> list:
-        """
-        Return all (key, value) pairs where start_key <= key <= end_key.
-        Uses the leaf linked list for O(log n + k) performance,
-        where k is the number of results returned.
+        Returns every single (key, value) pair in the database index.
+        This uses an in-order traversal by riding the leaf linked-list.
         """
         results = []
-        leaf    = self._find_leaf(start_key)
-
-        while leaf is not None:
-            for i, k in enumerate(leaf.keys):
-                if k > end_key:
-                    return results
-                if k >= start_key:
-                    results.append((k, leaf.values[i]))
-            leaf = leaf.next
-
+        current_node = self.root
+        
+        # Step 1: Drop straight down the far-left edge of the tree
+        while not current_node.is_leaf:
+            current_node = current_node.children[0]
+            
+        # Step 2: Surf the linked list from left to right!
+        while current_node is not None:
+            for i in range(len(current_node.keys)):
+                results.append((current_node.keys[i], current_node.values[i]))
+            current_node = current_node.next_leaf
+            
         return results
-
-    # ================================================================== #
-    #  GET ALL                                                             #
-    # ================================================================== #
-
-    def get_all(self) -> list:
-        """
-        Return all (key, value) pairs in sorted order.
-        Traverses the leaf linked list from the leftmost leaf.
-        Time complexity: O(n)
-        """
-        results = []
-        node    = self.root
-        # Walk to leftmost leaf
-        while not node.is_leaf:
-            node = node.children[0]
-        # Follow next pointers
-        while node is not None:
-            for k, v in zip(node.keys, node.values):
-                results.append((k, v))
-            node = node.next
-        return results
-
-    # ================================================================== #
-    #  VISUALISATION (Graphviz)                                            #
-    # ================================================================== #
 
     def visualize_tree(self):
         """
-        Generate and return a Graphviz Digraph of the B+ Tree.
-        - Internal nodes: rectangular, purple-filled.
-        - Leaf nodes: rounded, teal-filled.
-        - Leaf next-pointers: dashed blue edges.
-        
-        Usage:
-            dot = tree.visualize_tree()
-            dot.render("bplustree", format="png", view=True)
+        Generates a Graphviz Digraph to visually map out our nodes and pointers.
+        This is explicitly required for the assignment report and video.
         """
-        from graphviz import Digraph
-        dot = Digraph("BPlusTree")
-        dot.attr(rankdir="TB", splines="polyline")
-        dot.attr("node", fontname="Helvetica", fontsize="11")
+        try:
+            from graphviz import Digraph
+            # Create the graph, top-to-bottom layout
+            dot = Digraph()
+            dot.attr(rankdir='TB')
+            
+            if self.root:
+                self._add_nodes(dot, self.root)
+                self._add_edges(dot, self.root)
+                
+            return dot
+        except ImportError:
+            print("Graphviz is not installed. Run: pip install graphviz")
+            return None
 
-        self._add_nodes(dot, self.root)
-        self._add_edges(dot, self.root)
-        return dot
-
-    def _add_nodes(self, dot, node: BPlusTreeNode):
-        """Recursively add all nodes to the Graphviz object."""
+    def _add_nodes(self, dot, node):
+        """Recursive helper to draw the boxes (records) for each node."""
+        # Use Python's built-in id() to give every node a unique identifier
         node_id = str(id(node))
-        label   = " | ".join(str(k) for k in node.keys)
+        
+        # Format the keys as a record shape (looks like a little table/array)
+        label = " | ".join(str(k) for k in node.keys)
+        
+        # If the node is completely empty (can happen to the root initially), just show 'Empty'
+        if not label:
+            label = "Empty"
+            
+        dot.node(node_id, f"<{label}>", shape="record")
+        
+        # Recursively draw all the children
+        if not node.is_leaf:
+            for child in node.children:
+                self._add_nodes(dot, child)
 
-        if node.is_leaf:
-            dot.node(node_id, label=label,
-                     shape="record", style="filled,rounded",
-                     fillcolor="#5DCAA5", fontcolor="white")
+    def _add_edges(self, dot, node):
+        """Recursive helper to draw the solid lines for children and dashed lines for leaves."""
+        node_id = str(id(node))
+        
+        if not node.is_leaf:
+            # Draw solid arrows down to all children
+            for child in node.children:
+                child_id = str(id(child))
+                dot.edge(node_id, child_id)
+                # Recursively add edges for the children
+                self._add_edges(dot, child)
+        elif node.next_leaf:
+            # Draw a dashed arrow pointing to the next leaf in the linked list
+            dot.edge(node_id, str(id(node.next_leaf)), style="dashed", constraint="false")
+
+    def delete(self, key):
+        """
+        Deletes a key from the B+ tree[cite: 232].
+        Updates the root if it becomes empty[cite: 234].
+        Returns True if deletion succeeded, False otherwise[cite: 235].
+        """
+        if len(self.root.keys) == 0:
+            return False
+
+        # Start the recursive deletion process
+        success = self._delete(self.root, key)
+
+        # If the root is completely empty but still has a child, 
+        # the tree shrinks in height! We just make the child the new root.
+        if len(self.root.keys) == 0 and not self.root.is_leaf:
+            self.root = self.root.children[0]
+
+        return success
+
+    def _delete(self, current_node, key):
+        """
+        Recursive helper for deletion[cite: 240].
+        Ensures all nodes maintain minimum keys after deletion[cite: 241].
+        """
+        if current_node.is_leaf:
+            # Base Case: Try to remove the key directly from the leaf
+            return current_node.remove_from_leaf(key)
         else:
-            dot.node(node_id, label=label,
-                     shape="record", style="filled",
-                     fillcolor="#7F77DD", fontcolor="white")
+            # Recursive Case: Find which child should contain the key and go down
+            idx = current_node.find_child_index(key)
+            child_node = current_node.children[idx]
 
-        for child in node.children:
-            self._add_nodes(dot, child)
+            # Recursively delete from that child
+            success = self._delete(child_node, key)
 
-    def _add_edges(self, dot, node: BPlusTreeNode):
-        """Add parent→child edges and dashed leaf→leaf next-pointer edges."""
-        node_id = str(id(node))
+            # UNDERFLOW CHECK: A node must be at least half full.
+            # If our child lost too many keys, we must step in and fix it.
+            min_keys = self.order // 2
+            if len(child_node.keys) < min_keys:
+                self._fill_child(current_node, idx)
 
-        for child in node.children:
-            dot.edge(node_id, str(id(child)), color="#444444")
-            self._add_edges(dot, child)
+            return success
 
-        # Dashed next-pointer between leaf nodes
-        if node.is_leaf and node.next is not None:
-            dot.edge(node_id, str(id(node.next)),
-                     style="dashed", color="#185FA5",
-                     constraint="false", label="next")
+    def _fill_child(self, parent_node, idx):
+        """
+        Ensures child at given index has enough keys by borrowing from siblings or merging[cite: 246, 247].
+        """
+        min_keys = self.order // 2
 
-    # ================================================================== #
-    #  DUNDER                                                              #
-    # ================================================================== #
+        # Strategy 1: Try borrowing from the LEFT sibling [cite: 253]
+        if idx > 0 and len(parent_node.children[idx - 1].keys) > min_keys:
+            self._borrow_from_prev(parent_node, idx)
 
-    def __repr__(self) -> str:
-        return f"BPlusTree(order={self.order}, size={len(self.get_all())})"
+        # Strategy 2: Try borrowing from the RIGHT sibling [cite: 258]
+        elif idx < len(parent_node.children) - 1 and len(parent_node.children[idx + 1].keys) > min_keys:
+            self._borrow_from_next(parent_node, idx)
 
-    def __len__(self) -> int:
-        return len(self.get_all())
+        # Strategy 3: If siblings are also poor, we must MERGE them together [cite: 263]
+        else:
+            if idx < len(parent_node.children) - 1:
+                # Merge the child with its right sibling
+                self._merge(parent_node, idx)
+            else:
+                # If it's the very last child, merge it with its left sibling
+                self._merge(parent_node, idx - 1)
 
-    def __contains__(self, key) -> bool:
-        return self.search(key) is not None
+    def _borrow_from_prev(self, parent_node, idx):
+        """Borrow a key from the left sibling to prevent underflow[cite: 252, 253]."""
+        child = parent_node.children[idx]
+        left_sibling = parent_node.children[idx - 1]
+
+        if child.is_leaf:
+            # Slide the sibling's last piece of data into the front of our child
+            child.keys.insert(0, left_sibling.keys.pop())
+            child.values.insert(0, left_sibling.values.pop())
+            # Update the parent's routing key
+            parent_node.keys[idx - 1] = child.keys[0]
+        else:
+            # For internal nodes, we pull a key DOWN from the parent, 
+            # and push the sibling's last key UP to the parent.
+            child.keys.insert(0, parent_node.keys[idx - 1])
+            parent_node.keys[idx - 1] = left_sibling.keys.pop()
+            child.children.insert(0, left_sibling.children.pop())
+
+    def _borrow_from_next(self, parent_node, idx):
+        """Borrow a key from the right sibling to prevent underflow[cite: 257, 258]."""
+        child = parent_node.children[idx]
+        right_sibling = parent_node.children[idx + 1]
+
+        if child.is_leaf:
+            # Pull the sibling's first piece of data into the end of our child
+            child.keys.append(right_sibling.keys.pop(0))
+            child.values.append(right_sibling.values.pop(0))
+            # Update the parent's routing key
+            parent_node.keys[idx] = right_sibling.keys[0]
+        else:
+            # Pull parent key DOWN, push sibling's first key UP
+            child.keys.append(parent_node.keys[idx])
+            parent_node.keys[idx] = right_sibling.keys.pop(0)
+            child.children.append(right_sibling.children.pop(0))
+
+    def _merge(self, parent_node, idx):
+        """Merge child at index with its right sibling. Update parent keys[cite: 262, 263]."""
+        left_child = parent_node.children[idx]
+        right_child = parent_node.children[idx + 1]
+
+        if left_child.is_leaf:
+            # Combine all keys and values
+            left_child.keys.extend(right_child.keys)
+            left_child.values.extend(right_child.values)
+            # Crucial step: Re-wire the linked list past the deleted node!
+            left_child.next_leaf = right_child.next_leaf 
+        else:
+            # Internal merge requires pulling the routing key DOWN from the parent
+            left_child.keys.append(parent_node.keys[idx])
+            left_child.keys.extend(right_child.keys)
+            left_child.children.extend(right_child.children)
+
+        # Finally, remove the stale routing key and the defunct right child from the parent
+        parent_node.keys.pop(idx)
+        parent_node.children.pop(idx + 1)
+
+    def update(self, key, new_value):
+        """
+        Updates the value associated with an existing key.
+        Returns True if successful, False if the key doesn't exist.
+        """
+        current_node = self.root
+        
+        # Step 1: Drill down through internal nodes until we hit the correct leaf
+        while not current_node.is_leaf:
+            idx = current_node.find_child_index(key)
+            current_node = current_node.children[idx]
+            
+        # Step 2: Scan the leaf for the exact key
+        for i, k in enumerate(current_node.keys):
+            if k == key:
+                # Key found! Overwrite the old value with the new one.
+                current_node.values[i] = new_value
+                return True
+                
+        # If we loop through the whole leaf and don't find it, the key isn't in our database
+        return False
