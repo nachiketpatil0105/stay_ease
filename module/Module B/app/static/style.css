@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 40px; 
-    background-color: wheat;
+    background-color: whitesmoke;
 }
 
 .title {
@@ -16,16 +16,41 @@ body {
 }
 
 .container { 
-    max-width: 600px; 
+    max-width: 1200px; 
     margin: auto; 
-    background: white; 
+    background: transparent; 
     padding: 20px; 
-    border-radius: 8px; 
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1); 
 }
 
+/* Login Page */
+#login-section {
+    max-width: 400px;
+    margin: 60px auto; /* Centers the box perfectly on the screen */
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+#login-section h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#login-section input {
+    width: 100%;
+    box-sizing: border-box; /* Keeps inputs inside the box */
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 .hidden { 
-    display: none;
+    display: none !important;
 }
 
 .admin-box { 
@@ -68,3 +93,135 @@ button:hover {
     margin-bottom: 10px;
 }
 
+.complaint-title{
+  color: #d35400;
+  display: flex;              
+  justify-content: center;    
+  align-items: center;      
+}
+
+
+#raise-complaint-box{
+    margin-top: 20px; 
+    background: #fff3e0; 
+    padding: 15px; 
+    border-radius: 8px; 
+    border: 1px solid #ffb74d;
+}
+
+#new-complaint-desc{ 
+    width: 100%; 
+    max-width: 550px; 
+    margin: 5px 0; 
+    padding: 5px;
+}
+
+#new-complaint-type{
+    margin: 5px; 
+    padding: 5px; 
+    width: 100%; 
+    max-width: 300px;
+}
+
+#comp{
+    background: #e67e22; 
+    color: white; 
+    padding: 8px 12px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer;
+}
+
+
+.dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.dash-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+}
+
+
+.dash-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+
+.dash-card h4 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Makes it responsive: */
+@media (max-width: 800px) {
+    .dash-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Admin Dashboard Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; 
+}
+
+.admin-tab-btn {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    border: 1px solid #dee2e6;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+    flex: 1; 
+}
+
+.admin-tab-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+
+.admin-tab-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px 10px;
+    color: #7f8c8d; 
+    font-size: 14px;
+    border-top: 1px solid rgba(0,0,0,0.05); 
+}
+
+.site-footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}

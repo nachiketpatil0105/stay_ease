@@ -1,10 +1,10 @@
-# app.py
 from flask import Flask, jsonify, render_template
 
-# Import your custom blueprints
+# Importing custom blueprints
 from routes_auth import auth_bp
 from routes_portfolio import portfolio_bp
 from routes_admin import admin_bp
+from routes_security import security_bp
 
 app = Flask(__name__)
 
@@ -12,8 +12,9 @@ app = Flask(__name__)
 app.register_blueprint(auth_bp)
 app.register_blueprint(portfolio_bp)
 app.register_blueprint(admin_bp)
+app.register_blueprint(security_bp)
 
-# --- Frontend & Base Routes ---
+# Frontend & Base Routes
 @app.route('/', methods=['GET'])
 def welcome():
     return jsonify({"message": "Welcome to test APIs"}), 200

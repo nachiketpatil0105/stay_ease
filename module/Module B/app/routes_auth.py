@@ -1,4 +1,3 @@
-# routes_auth.py
 from flask import Blueprint, request, jsonify
 import jwt
 import datetime

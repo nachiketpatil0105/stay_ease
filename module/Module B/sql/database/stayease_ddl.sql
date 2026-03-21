@@ -16,15 +16,9 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Creating database
---
-CREATE DATABASE IF NOT EXISTS stayease;
-USE stayease;
-
-
---
 -- Table structure for table `complaint_types`
 --
+
 DROP TABLE IF EXISTS `complaint_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -37,15 +31,6 @@ CREATE TABLE `complaint_types` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `complaint_types`
---
-
-LOCK TABLES `complaint_types` WRITE;
-/*!40000 ALTER TABLE `complaint_types` DISABLE KEYS */;
-/*!40000 ALTER TABLE `complaint_types` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `complaints`
 --
 
@@ -53,7 +38,7 @@ DROP TABLE IF EXISTS `complaints`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complaints` (
-  `Complaint_ID` int NOT NULL,
+  `Complaint_ID` int NOT NULL AUTO_INCREMENT,
   `Member_ID` int NOT NULL,
   `Complaint_Type_ID` int NOT NULL,
   `Description` text NOT NULL,
@@ -63,21 +48,13 @@ CREATE TABLE `complaints` (
   PRIMARY KEY (`Complaint_ID`),
   KEY `fk_complaint_member` (`Member_ID`),
   KEY `fk_complaint_type` (`Complaint_Type_ID`),
+  KEY `idx_complaints_member_date` (`Member_ID`,`Submission_Date`),
   CONSTRAINT `fk_complaint_member` FOREIGN KEY (`Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_complaint_type` FOREIGN KEY (`Complaint_Type_ID`) REFERENCES `complaint_types` (`Complaint_Type_ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `chk_resolution_logic` CHECK ((((`Status` = _utf8mb4'Resolved') and (`Resolved_Date` is not null)) or (`Status` in (_utf8mb4'Pending',_utf8mb4'In Progress')))),
   CONSTRAINT `complaints_chk_1` CHECK ((`Status` in (_utf8mb4'Pending',_utf8mb4'In Progress',_utf8mb4'Resolved')))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `complaints`
---
-
-LOCK TABLES `complaints` WRITE;
-/*!40000 ALTER TABLE `complaints` DISABLE KEYS */;
-/*!40000 ALTER TABLE `complaints` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `fee_structures`
@@ -97,15 +74,6 @@ CREATE TABLE `fee_structures` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `fee_structures`
---
-
-LOCK TABLES `fee_structures` WRITE;
-/*!40000 ALTER TABLE `fee_structures` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fee_structures` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `furniture_inventory`
 --
 
@@ -113,7 +81,7 @@ DROP TABLE IF EXISTS `furniture_inventory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `furniture_inventory` (
-  `Furniture_ID` int NOT NULL,
+  `Furniture_ID` int NOT NULL AUTO_INCREMENT,
   `Item_Name` varchar(100) NOT NULL,
   `Room_ID` int NOT NULL,
   `Purchase_Date` date NOT NULL,
@@ -122,17 +90,8 @@ CREATE TABLE `furniture_inventory` (
   KEY `fk_furniture_room` (`Room_ID`),
   CONSTRAINT `fk_furniture_room` FOREIGN KEY (`Room_ID`) REFERENCES `rooms` (`Room_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `furniture_inventory_chk_1` CHECK ((`Current_Condition` in (_utf8mb4'Good',_utf8mb4'Damaged')))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `furniture_inventory`
---
-
-LOCK TABLES `furniture_inventory` WRITE;
-/*!40000 ALTER TABLE `furniture_inventory` DISABLE KEYS */;
-/*!40000 ALTER TABLE `furniture_inventory` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `hostels`
@@ -147,23 +106,17 @@ CREATE TABLE `hostels` (
   `Hostel_Type` varchar(5) NOT NULL,
   `Total_Floors` int NOT NULL,
   `Warden_ID` int NOT NULL,
+  `Security_ID` int DEFAULT NULL,
   PRIMARY KEY (`Hostel_ID`),
   UNIQUE KEY `Hostel_Name` (`Hostel_Name`),
   KEY `fk_hostel_warden` (`Warden_ID`),
+  KEY `fk_hostel_security` (`Security_ID`),
+  CONSTRAINT `fk_hostel_security` FOREIGN KEY (`Security_ID`) REFERENCES `members` (`Member_ID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_hostel_warden` FOREIGN KEY (`Warden_ID`) REFERENCES `members` (`Member_ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `hostels_chk_1` CHECK ((`Hostel_Type` in (_utf8mb4'Boys',_utf8mb4'Girls'))),
   CONSTRAINT `hostels_chk_2` CHECK ((`Total_Floors` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hostels`
---
-
-LOCK TABLES `hostels` WRITE;
-/*!40000 ALTER TABLE `hostels` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hostels` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `member_movement_logs`
@@ -173,7 +126,7 @@ DROP TABLE IF EXISTS `member_movement_logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `member_movement_logs` (
-  `Movement_ID` int NOT NULL,
+  `Movement_ID` int NOT NULL AUTO_INCREMENT,
   `Member_ID` int NOT NULL,
   `Exit_Time` timestamp NOT NULL,
   `Entry_Time` timestamp NULL DEFAULT NULL,
@@ -182,17 +135,8 @@ CREATE TABLE `member_movement_logs` (
   KEY `fk_movement_member` (`Member_ID`),
   CONSTRAINT `fk_movement_member` FOREIGN KEY (`Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chk_movement_time` CHECK (((`Entry_Time` > `Exit_Time`) or (`Entry_Time` is null)))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `member_movement_logs`
---
-
-LOCK TABLES `member_movement_logs` WRITE;
-/*!40000 ALTER TABLE `member_movement_logs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `member_movement_logs` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `members`
@@ -202,7 +146,7 @@ DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `members` (
-  `Member_ID` int NOT NULL,
+  `Member_ID` int NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(100) NOT NULL,
   `Last_Name` varchar(100) DEFAULT NULL,
   `Gender` char(1) NOT NULL,
@@ -221,17 +165,8 @@ CREATE TABLE `members` (
   CONSTRAINT `members_chk_1` CHECK ((`Gender` in (_utf8mb4'M',_utf8mb4'F'))),
   CONSTRAINT `members_chk_2` CHECK ((`Age` > 0)),
   CONSTRAINT `members_chk_3` CHECK ((`Status` in (_utf8mb4'Active',_utf8mb4'Inactive')))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `members`
---
-
-LOCK TABLES `members` WRITE;
-/*!40000 ALTER TABLE `members` DISABLE KEYS */;
-/*!40000 ALTER TABLE `members` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `payments`
@@ -252,21 +187,13 @@ CREATE TABLE `payments` (
   UNIQUE KEY `Transaction_Reference` (`Transaction_Reference`),
   KEY `fk_payment_member` (`Member_ID`),
   KEY `fk_payment_fee` (`Fee_Type_ID`),
+  KEY `idx_payments_member_date` (`Member_ID`,`Payment_Date`),
   CONSTRAINT `fk_payment_fee` FOREIGN KEY (`Fee_Type_ID`) REFERENCES `fee_structures` (`Fee_Type_ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_payment_member` FOREIGN KEY (`Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `payments_chk_1` CHECK ((`Amount_Paid` > 0)),
   CONSTRAINT `payments_chk_2` CHECK ((`Payment_Status` in (_utf8mb4'Success',_utf8mb4'Failed')))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `payments`
---
-
-LOCK TABLES `payments` WRITE;
-/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roles`
@@ -285,15 +212,6 @@ CREATE TABLE `roles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
---
-
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `room_allocations`
 --
 
@@ -301,7 +219,7 @@ DROP TABLE IF EXISTS `room_allocations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room_allocations` (
-  `Allocation_ID` int NOT NULL,
+  `Allocation_ID` int NOT NULL AUTO_INCREMENT,
   `Member_ID` int NOT NULL,
   `Room_ID` int NOT NULL,
   `Allocation_Date` date NOT NULL,
@@ -310,21 +228,13 @@ CREATE TABLE `room_allocations` (
   PRIMARY KEY (`Allocation_ID`),
   KEY `fk_allocation_member` (`Member_ID`),
   KEY `fk_allocation_room` (`Room_ID`),
+  KEY `idx_room_allocations_member_status` (`Member_ID`,`Status`),
   CONSTRAINT `fk_allocation_member` FOREIGN KEY (`Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_allocation_room` FOREIGN KEY (`Room_ID`) REFERENCES `rooms` (`Room_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `chk_checkout_date` CHECK (((`Check_Out_Date` > `Allocation_Date`) or (`Check_Out_Date` is null))),
   CONSTRAINT `room_allocations_chk_1` CHECK ((`Status` in (_utf8mb4'Active',_utf8mb4'Inactive')))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `room_allocations`
---
-
-LOCK TABLES `room_allocations` WRITE;
-/*!40000 ALTER TABLE `room_allocations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `room_allocations` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `rooms`
@@ -347,13 +257,21 @@ CREATE TABLE `rooms` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `rooms`
+-- Table structure for table `user_credentials`
 --
 
-LOCK TABLES `rooms` WRITE;
-/*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `user_credentials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_credentials` (
+  `Member_ID` int NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Password_Hash` varchar(255) NOT NULL,
+  PRIMARY KEY (`Member_ID`),
+  UNIQUE KEY `Username` (`Username`),
+  CONSTRAINT `fk_credentials_member` FOREIGN KEY (`Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `visitor_logs`
@@ -363,29 +281,20 @@ DROP TABLE IF EXISTS `visitor_logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `visitor_logs` (
-  `Log_ID` int NOT NULL,
+  `Log_ID` int NOT NULL AUTO_INCREMENT,
   `Visitor_Name` varchar(150) NOT NULL,
   `Contact_Number` varchar(15) NOT NULL,
   `ID_Proof_Type` varchar(50) NOT NULL,
   `ID_Proof_Number` varchar(100) NOT NULL,
   `Host_Member_ID` int NOT NULL,
   `Entry_Time` timestamp NOT NULL,
+  `Exit_Time` timestamp NULL DEFAULT NULL,
   `Purpose` varchar(255) NOT NULL,
   PRIMARY KEY (`Log_ID`),
-  UNIQUE KEY `ID_Proof_Number` (`ID_Proof_Number`),
   KEY `fk_visitor_host` (`Host_Member_ID`),
   CONSTRAINT `fk_visitor_host` FOREIGN KEY (`Host_Member_ID`) REFERENCES `members` (`Member_ID`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `visitor_logs`
---
-
-LOCK TABLES `visitor_logs` WRITE;
-/*!40000 ALTER TABLE `visitor_logs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `visitor_logs` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -396,4 +305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-14 20:55:34
+-- Dump completed on 2026-03-21 18:39:52
