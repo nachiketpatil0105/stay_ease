@@ -1,4 +1,3 @@
-# utils.py
 import mysql.connector
 import jwt
 import logging
@@ -8,7 +7,7 @@ from flask import request, jsonify
 
 SECRET_KEY = 'stayease_super_secret_key_2026'
 
-# --- Logger Setup ---
+# Logger Setup
 LOG_DIR = '../logs'
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
@@ -28,7 +27,7 @@ def log_audit(username, role, action, status="SUCCESS"):
     else:
         logging.warning(message)
 
-# --- Database Connection ---
+# Database Connection
 def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
@@ -37,7 +36,7 @@ def get_db_connection():
         database='stayease'
     )
 
-# --- Security Token Decorator ---
+# Security Token Decorator 
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
