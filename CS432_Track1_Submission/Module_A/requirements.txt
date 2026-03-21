@@ -1,0 +1,4 @@
+graphviz
+matplotlib
+notebook
+jupyter
