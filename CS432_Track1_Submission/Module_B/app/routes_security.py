@@ -1,4 +1,3 @@
-# ADDED 'request' to the import list here:
 from flask import Blueprint, jsonify, request
 from utils import get_db_connection, token_required, log_audit
 
@@ -7,7 +6,7 @@ security_bp = Blueprint('security_bp', __name__)
 @security_bp.route('/api/security/dashboard', methods=['GET'])
 @token_required
 def api_security_dashboard(current_user):
-    # 1. Check Role
+    #Check Role
     if current_user['role'].lower() != 'security':
         return jsonify({"error": "Security access required."}), 403
 
@@ -16,7 +15,7 @@ def api_security_dashboard(current_user):
     cursor = conn.cursor(dictionary=True)
 
     try:
-        # 2. Find Guard's Hostel
+        # Find Guard's Hostel
         cursor.execute("SELECT Hostel_ID, Hostel_Name FROM hostels WHERE Security_ID = %s", (guard_id,))
         hostel = cursor.fetchone()
 
@@ -25,7 +24,7 @@ def api_security_dashboard(current_user):
 
         hostel_id = hostel['Hostel_ID']
 
-        # 3. Fetch Inside Visitors
+        # Fetch Inside Visitors
         cursor.execute("""
             SELECT v.Log_ID, v.Visitor_Name, v.Purpose, m.First_Name as Visiting_Student, r.Room_Number, v.Entry_Time
             FROM visitor_logs v
@@ -36,7 +35,7 @@ def api_security_dashboard(current_user):
         """, (hostel_id,))
         active_visitors = cursor.fetchall()
 
-        # 4. Fetch Outside Students
+        # Fetch Outside Students
         cursor.execute("""
             SELECT mov.Movement_ID, m.First_Name, m.Last_Name, m.Contact_Number, mov.Exit_Time, mov.Purpose
             FROM member_movement_logs mov
@@ -47,7 +46,7 @@ def api_security_dashboard(current_user):
         """, (hostel_id,))
         outside_students = cursor.fetchall()
 
-        # 5. Log the action using your custom audit logger
+    
         log_audit(current_user['username'], current_user['role'], f"Security Guard viewed dashboard for Hostel {hostel_id}")
 
         return jsonify({
@@ -62,11 +61,12 @@ def api_security_dashboard(current_user):
         cursor.close()
         conn.close()
 
-# CHANGED @app.route to @security_bp.route here:
+
+#Visitors
 @security_bp.route('/api/security/visitors', methods=['POST'])
 @token_required
 def add_new_visitor(current_user):
-    # Ensure only security guards (or admins) can add visitors
+    # Only security guards can add visitors
     if current_user['role'].lower() not in ['security', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -75,7 +75,6 @@ def add_new_visitor(current_user):
     cursor = conn.cursor()
 
     try:
-        # We use NOW() for Entry_Time, and Exit_Time remains NULL until they leave
         query = """
             INSERT INTO visitor_logs 
             (Visitor_Name, Contact_Number, ID_Proof_Type, ID_Proof_Number, Host_Member_ID, Entry_Time, Purpose)
@@ -106,10 +105,11 @@ def add_new_visitor(current_user):
         conn.close()
 
 
+# Visitors Sign Out
 @security_bp.route('/api/security/visitors/<int:log_id>/exit', methods=['PUT'])
 @token_required
 def mark_visitor_exited(current_user, log_id):
-    # Only security guards and admins can sign visitors out
+    # Only security guards/admins can sign visitors out
     if current_user['role'].lower() not in ['security', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -117,7 +117,6 @@ def mark_visitor_exited(current_user, log_id):
     cursor = conn.cursor()
 
     try:
-        # Update the Exit_Time to the exact current timestamp
         query = """
             UPDATE visitor_logs 
             SET Exit_Time = NOW() 
@@ -139,10 +138,11 @@ def mark_visitor_exited(current_user, log_id):
         cursor.close()
         conn.close()
 
+
+# Student Sign-In
 @security_bp.route('/api/movement/<int:log_id>/return', methods=['PUT'])
 @token_required
 def mark_student_returned(current_user, log_id):
-    # Allow Security, Wardens, and Admins to mark a student as returned
     if current_user['role'].lower() not in ['security', 'warden', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -150,7 +150,6 @@ def mark_student_returned(current_user, log_id):
     cursor = conn.cursor()
 
     try:
-        # Update the Entry_Time to the current timestamp
         query = """
             UPDATE member_movement_logs 
             SET Entry_Time = NOW() 
@@ -170,11 +169,12 @@ def mark_student_returned(current_user, log_id):
     finally:
         cursor.close()
         conn.close()
+    
 
+# Finding Host for Adding Visitor
 @security_bp.route('/api/security/search-student', methods=['GET'])
 @token_required
 def search_student(current_user):
-    # Ensure they are authorized
     if current_user['role'].lower() not in ['security', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -195,7 +195,6 @@ def search_student(current_user):
             
         hostel_id = hostel['Hostel_ID']
 
-        # Secure query using LIKE operator for Name, Room, or Phone
         query = """
             SELECT m.Member_ID, m.First_Name, m.Last_Name, m.Contact_Number, r.Room_Number
             FROM members m
@@ -207,10 +206,10 @@ def search_student(current_user):
             LIMIT 10
         """
         
-        # Add wildcards to the search term
+    
         like_q = f"%{search_query}%"
         
-        # Execute with parameters
+        
         cursor.execute(query, (hostel_id, like_q, like_q, like_q, like_q))
         results = cursor.fetchall()
         
@@ -221,3 +220,4 @@ def search_student(current_user):
     finally:
         cursor.close()
         conn.close()
+

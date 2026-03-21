@@ -99,16 +99,15 @@ def manage_portfolio(current_user, target_member_id):
 
 
 
-# Raise a New Complaint (STUDENT ONLY)
+# Raise a New Complaint (Student Only)
 @portfolio_bp.route('/portfolio/complaints', methods=['POST'])
 @token_required
 def raise_complaint(current_user):
-    # Only students should be raising complaints from their dashboard
     if current_user['role'].lower() != 'student':
         return jsonify({"error": "Only students can raise complaints here."}), 403
 
     data = request.get_json()
-    member_id = current_user['member_id'] # Secured from the JWT token!
+    member_id = current_user['member_id'] # Secured from the JWT token
     
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -119,7 +118,6 @@ def raise_complaint(current_user):
             VALUES (%s, %s, %s, %s, 'Pending')
         """
         current_date = datetime.date.today()
-        # Ensuring the frontend sends the correct type_id matching your complaint_types table
         cursor.execute(query, (member_id, data['type_id'], data['description'], current_date))
         conn.commit()
         
