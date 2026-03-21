@@ -4475,3 +4475,257 @@
 [2026-03-21 21:53:39] - INFO - 127.0.0.1 - - [21/Mar/2026 21:53:39] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
 [2026-03-21 21:53:39] - INFO - 127.0.0.1 - - [21/Mar/2026 21:53:39] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
 [2026-03-21 21:53:39] - INFO - 127.0.0.1 - - [21/Mar/2026 21:53:39] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 01:20:55] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:20:55] - INFO -  * Restarting with stat
+[2026-03-22 01:20:56] - WARNING -  * Debugger is active!
+[2026-03-22 01:20:56] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:02] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:02] - INFO -  * Restarting with stat
+[2026-03-22 01:21:03] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:03] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:11] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:11] - INFO -  * Restarting with stat
+[2026-03-22 01:21:12] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:12] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:14] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:14] - INFO -  * Restarting with stat
+[2026-03-22 01:21:15] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:15] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:24] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:24] - INFO -  * Restarting with stat
+[2026-03-22 01:21:25] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:25] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:44] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:44] - INFO -  * Restarting with stat
+[2026-03-22 01:21:45] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:45] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:47] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:47] - INFO -  * Restarting with stat
+[2026-03-22 01:21:48] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:48] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:21:54] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:21:54] - INFO -  * Restarting with stat
+[2026-03-22 01:21:55] - WARNING -  * Debugger is active!
+[2026-03-22 01:21:55] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:02] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:02] - INFO -  * Restarting with stat
+[2026-03-22 01:22:03] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:03] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:08] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:08] - INFO -  * Restarting with stat
+[2026-03-22 01:22:09] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:09] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:12] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:12] - INFO -  * Restarting with stat
+[2026-03-22 01:22:13] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:13] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:23] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:23] - INFO -  * Restarting with stat
+[2026-03-22 01:22:24] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:24] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:26] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:26] - INFO -  * Restarting with stat
+[2026-03-22 01:22:27] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:27] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:38] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:38] - INFO -  * Restarting with stat
+[2026-03-22 01:22:38] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:38] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:40] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:40] - INFO -  * Restarting with stat
+[2026-03-22 01:22:41] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:41] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:22:47] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:22:47] - INFO -  * Restarting with stat
+[2026-03-22 01:22:48] - WARNING -  * Debugger is active!
+[2026-03-22 01:22:48] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:00] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:00] - INFO -  * Restarting with stat
+[2026-03-22 01:23:01] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:01] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:05] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:05] - INFO -  * Restarting with stat
+[2026-03-22 01:23:06] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:06] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:07] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:08] - INFO -  * Restarting with stat
+[2026-03-22 01:23:08] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:08] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:16] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:16] - INFO -  * Restarting with stat
+[2026-03-22 01:23:17] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:17] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:19] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:19] - INFO -  * Restarting with stat
+[2026-03-22 01:23:20] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:20] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:20] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:20] - INFO -  * Restarting with stat
+[2026-03-22 01:23:21] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:21] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:42] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:42] - INFO -  * Restarting with stat
+[2026-03-22 01:23:43] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:43] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:49] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:49] - INFO -  * Restarting with stat
+[2026-03-22 01:23:50] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:50] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:23:52] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:23:52] - INFO -  * Restarting with stat
+[2026-03-22 01:23:53] - WARNING -  * Debugger is active!
+[2026-03-22 01:23:53] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:03] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:03] - INFO -  * Restarting with stat
+[2026-03-22 01:24:03] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:03] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:12] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:12] - INFO -  * Restarting with stat
+[2026-03-22 01:24:12] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:12] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:18] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:18] - INFO -  * Restarting with stat
+[2026-03-22 01:24:19] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:19] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:24] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:24] - INFO -  * Restarting with stat
+[2026-03-22 01:24:25] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:25] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:27] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:27] - INFO -  * Restarting with stat
+[2026-03-22 01:24:28] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:28] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:31] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:31] - INFO -  * Restarting with stat
+[2026-03-22 01:24:32] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:32] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:33] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:33] - INFO -  * Restarting with stat
+[2026-03-22 01:24:34] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:34] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:39] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:39] - INFO -  * Restarting with stat
+[2026-03-22 01:24:40] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:40] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:50] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:50] - INFO -  * Restarting with stat
+[2026-03-22 01:24:51] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:51] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:54] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:54] - INFO -  * Restarting with stat
+[2026-03-22 01:24:55] - WARNING -  * Debugger is active!
+[2026-03-22 01:24:55] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:24:59] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:24:59] - INFO -  * Restarting with stat
+[2026-03-22 01:25:00] - WARNING -  * Debugger is active!
+[2026-03-22 01:25:00] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:25:02] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:25:02] - INFO -  * Restarting with stat
+[2026-03-22 01:25:02] - WARNING -  * Debugger is active!
+[2026-03-22 01:25:02] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:25:19] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:25:19] - INFO -  * Restarting with stat
+[2026-03-22 01:25:19] - WARNING -  * Debugger is active!
+[2026-03-22 01:25:19] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:25:23] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_admin.py', reloading
+[2026-03-22 01:25:23] - INFO -  * Restarting with stat
+[2026-03-22 01:25:24] - WARNING -  * Debugger is active!
+[2026-03-22 01:25:24] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:25:56] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_portfolio.py', reloading
+[2026-03-22 01:25:56] - INFO -  * Restarting with stat
+[2026-03-22 01:25:57] - WARNING -  * Debugger is active!
+[2026-03-22 01:25:57] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:02] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_portfolio.py', reloading
+[2026-03-22 01:26:02] - INFO -  * Restarting with stat
+[2026-03-22 01:26:03] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:03] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:06] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_portfolio.py', reloading
+[2026-03-22 01:26:06] - INFO -  * Restarting with stat
+[2026-03-22 01:26:07] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:07] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:16] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_portfolio.py', reloading
+[2026-03-22 01:26:16] - INFO -  * Restarting with stat
+[2026-03-22 01:26:17] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:17] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:21] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_portfolio.py', reloading
+[2026-03-22 01:26:21] - INFO -  * Restarting with stat
+[2026-03-22 01:26:22] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:22] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:29] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:29] - INFO -  * Restarting with stat
+[2026-03-22 01:26:30] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:30] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:34] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:34] - INFO -  * Restarting with stat
+[2026-03-22 01:26:34] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:34] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:37] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:37] - INFO -  * Restarting with stat
+[2026-03-22 01:26:38] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:38] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:44] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:44] - INFO -  * Restarting with stat
+[2026-03-22 01:26:44] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:44] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:46] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:46] - INFO -  * Restarting with stat
+[2026-03-22 01:26:47] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:47] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:53] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:53] - INFO -  * Restarting with stat
+[2026-03-22 01:26:54] - WARNING -  * Debugger is active!
+[2026-03-22 01:26:54] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:26:59] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:26:59] - INFO -  * Restarting with stat
+[2026-03-22 01:27:00] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:00] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:04] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:04] - INFO -  * Restarting with stat
+[2026-03-22 01:27:05] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:05] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:08] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:08] - INFO -  * Restarting with stat
+[2026-03-22 01:27:09] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:09] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:10] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:10] - INFO -  * Restarting with stat
+[2026-03-22 01:27:11] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:11] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:12] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:12] - INFO -  * Restarting with stat
+[2026-03-22 01:27:13] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:13] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:19] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:19] - INFO -  * Restarting with stat
+[2026-03-22 01:27:20] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:20] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:25] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:25] - INFO -  * Restarting with stat
+[2026-03-22 01:27:26] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:26] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:32] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:32] - INFO -  * Restarting with stat
+[2026-03-22 01:27:33] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:33] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:27:44] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:27:44] - INFO -  * Restarting with stat
+[2026-03-22 01:27:45] - WARNING -  * Debugger is active!
+[2026-03-22 01:27:45] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:28:04] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:28:04] - INFO -  * Restarting with stat
+[2026-03-22 01:28:05] - WARNING -  * Debugger is active!
+[2026-03-22 01:28:05] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:28:15] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:28:15] - INFO -  * Restarting with stat
+[2026-03-22 01:28:16] - WARNING -  * Debugger is active!
+[2026-03-22 01:28:16] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:28:38] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:28:38] - INFO -  * Restarting with stat
+[2026-03-22 01:28:39] - WARNING -  * Debugger is active!
+[2026-03-22 01:28:39] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:28:45] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:28:45] - INFO -  * Restarting with stat
+[2026-03-22 01:28:46] - WARNING -  * Debugger is active!
+[2026-03-22 01:28:46] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 01:28:51] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
+[2026-03-22 01:28:51] - INFO -  * Restarting with stat

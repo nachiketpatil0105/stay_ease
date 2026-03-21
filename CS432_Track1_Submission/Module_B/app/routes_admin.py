@@ -4,7 +4,7 @@ import datetime
 
 admin_bp = Blueprint('admin_routes', __name__)
 
-# 1.View Members (Role-Based Filtering)
+# View Members (Role-Based Filtering)
 @admin_bp.route('/admin/members', methods=['GET'])
 @token_required
 def get_all_members(current_user):
@@ -18,7 +18,6 @@ def get_all_members(current_user):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
-    # Base query: Get student details
     query = """
         SELECT m.Member_ID, m.First_Name, m.Last_Name, m.Email, m.Contact_Number, m.Status,
                h.Hostel_ID,h.Hostel_Name, r.Room_Number, ro.Role_Name
@@ -46,7 +45,8 @@ def get_all_members(current_user):
     
     return jsonify({"members": all_members}), 200
 
-# 2. View Complaints (Role-Based Filtering)
+
+# View Complaints (Role-Based Filtering)
 @admin_bp.route('/admin/complaints', methods=['GET'])
 @token_required
 def get_all_complaints(current_user):
@@ -87,7 +87,8 @@ def get_all_complaints(current_user):
     
     return jsonify({"complaints": complaints}), 200
 
-# 3. Add New Member & Allocate Room
+
+# Add New Member & Allocate Room
 @admin_bp.route('/admin/members', methods=['POST'])
 @token_required
 def add_member(current_user):
@@ -102,7 +103,7 @@ def add_member(current_user):
         # Starting the ACID Transaction
         conn.start_transaction() 
 
-        # 1. Verify the Room Exists and Check Capacity
+        # Verify the Room Exists and Check Capacity
         # also find the internal Room_ID using Hostel_ID and Room_Number
         room_number = data.get('room_number')
         hostel_id = data.get('hostel_id')
@@ -124,11 +125,10 @@ def add_member(current_user):
             conn.rollback() 
             return jsonify({"error": f"Room {room_number} is full (Max Capacity: {room_info['Capacity']})."}), 400
         
-        # Found the Room_ID!
         actual_room_id = room_info['Room_ID']
 
 
-        # 2. Insert the New Member
+        # Insert the New Member
         member_query = """
             INSERT INTO members 
             (First_Name, Last_Name, Gender, Age, Contact_Number, Email, Emergency_Contact, Image_Path, Role_ID, Status) 
@@ -139,7 +139,6 @@ def add_member(current_user):
     data.get('last_name', ''), 
     data.get('gender'), 
     data.get('age'), 
-    # Using .get() here prevents the 'contact' error!
     data.get('contact'), 
     data.get('email'), 
     data.get('emergency_contact', ''), 
@@ -149,10 +148,10 @@ def add_member(current_user):
 )
         cursor.execute(member_query, member_values)
         
-        # Grab the newly generated Auto-Incremented Member ID
+
         new_member_id = cursor.lastrowid 
 
-        # 3. Create the Room Allocation
+        # Create the Room Allocation
         allocation_query = """
             INSERT INTO room_allocations (Member_ID, Room_ID, Allocation_Date, Status)
             VALUES (%s, %s, %s, %s)
@@ -166,14 +165,15 @@ def add_member(current_user):
         return jsonify({"message": "Member added and room allocated successfully!"}), 201
 
     except Exception as e:
-        conn.rollback() # Safety net: Undo on any unexpected SQL error
+        conn.rollback() # Undo on any unexpected SQL error
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
         conn.close()
 
 
-# 4. Update Member Details
+
+# Update Member Details
 @admin_bp.route('/admin/members/<int:member_id>', methods=['PUT'])
 @token_required
 def update_member(current_user, member_id):
@@ -199,7 +199,8 @@ def update_member(current_user, member_id):
         conn.close()
 
 
-# 5. Update Complaint Status
+
+# Update Complaint Status
 @admin_bp.route('/admin/complaints/<int:complaint_id>', methods=['PUT'])
 @token_required
 def update_complaint_status(current_user, complaint_id):
@@ -209,7 +210,6 @@ def update_complaint_status(current_user, complaint_id):
     data = request.get_json()
     new_status = data.get('status')
     
-    # Basic validation
     if new_status not in ['Pending', 'In Progress', 'Resolved']:
         return jsonify({"error": "Invalid status value."}), 400
 
@@ -221,7 +221,7 @@ def update_complaint_status(current_user, complaint_id):
         if new_status == 'Resolved':
             query = "UPDATE complaints SET Status = %s, Resolved_Date = CURRENT_DATE() WHERE Complaint_ID = %s"
         else:
-            # If reverting to Pending/In Progress, we must clear the date!
+            # If reverting to Pending/In Progress, then clear the date!
             query = "UPDATE complaints SET Status = %s, Resolved_Date = NULL WHERE Complaint_ID = %s"
             
         cursor.execute(query, (new_status, complaint_id))
@@ -238,7 +238,8 @@ def update_complaint_status(current_user, complaint_id):
         conn.close()
 
 
-# 6. Delete a Complaint
+
+# Delete a Complaint
 @admin_bp.route('/admin/complaints/<int:complaint_id>', methods=['DELETE'])
 @token_required
 def delete_complaint(current_user, complaint_id):
@@ -249,7 +250,6 @@ def delete_complaint(current_user, complaint_id):
     cursor = conn.cursor()
 
     try:
-        # Delete the complaint from the database
         query = "DELETE FROM complaints WHERE Complaint_ID = %s"
         cursor.execute(query, (complaint_id,))
         conn.commit()
@@ -264,7 +264,8 @@ def delete_complaint(current_user, complaint_id):
         cursor.close()
         conn.close()
 
-# 7. Get Admin Stats
+
+# Get Admin Stats
 @admin_bp.route('/admin/stats', methods=['GET'])
 @token_required
 def get_admin_stats(current_user):
@@ -282,7 +283,7 @@ def get_admin_stats(current_user):
             warden_filter = " AND h.Warden_ID = %s"
             params = (current_user['member_id'], current_user['member_id'], current_user['member_id'])
 
-        # Query 1: Total Active Residents in their hostel
+        # Total Active Residents in their hostel
         cursor.execute(f"""
             SELECT COUNT(*) AS total_residents 
             FROM room_allocations ra
@@ -292,7 +293,7 @@ def get_admin_stats(current_user):
         """, params[:1] if warden_filter else ())
         total_residents = cursor.fetchone()['total_residents']
 
-        # Query 2: Pending Complaints in their hostel
+        # Pending Complaints in their hostel
         cursor.execute(f"""
             SELECT COUNT(*) AS pending_complaints 
             FROM complaints c
@@ -303,7 +304,7 @@ def get_admin_stats(current_user):
         """, params[:1] if warden_filter else ())
         pending_complaints = cursor.fetchone()['pending_complaints']
 
-        # Query 3: Total Bed Capacity in their hostel
+        # Total Bed Capacity in their hostel
         cursor.execute(f"""
             SELECT SUM(Capacity) AS total_capacity 
             FROM rooms r
@@ -311,11 +312,11 @@ def get_admin_stats(current_user):
             WHERE 1=1 {warden_filter}
         """, params[:1] if warden_filter else ())
         
-        # Grab the capacity (default to 0 if there are no rooms yet)
+
         capacity_result = cursor.fetchone()['total_capacity']
         total_capacity = int(capacity_result) if capacity_result else 0
         
-        # Calculate available beds (Capacity - Residents)
+    
         available_beds = total_capacity - total_residents
 
         return jsonify({
@@ -331,9 +332,8 @@ def get_admin_stats(current_user):
         conn.close()
 
 
-# ==========================================
-# 8. NEW: WARDEN APIs (Furniture & Movement)
-# ==========================================
+
+# Warden APIs (Furniture & Movement)
 @admin_bp.route('/api/warden/furniture', methods=['GET'])
 @token_required
 def api_warden_furniture(current_user):
@@ -400,9 +400,8 @@ def api_warden_movement(current_user):
         cursor.close()
         conn.close()
 
-# ==========================================
-# 9. NEW: ADMIN APIs (Global Views)
-# ==========================================
+
+# Admin APIs (Global Views)
 @admin_bp.route('/api/admin/all_furniture', methods=['GET'])
 @token_required
 def api_admin_all_furniture(current_user):
@@ -483,7 +482,7 @@ def get_available_rooms(current_user, hostel_id):
     cursor = conn.cursor(dictionary=True)
     
     try:
-        # Query: Select rooms where Capacity > current Active allocations
+        # Select rooms where Capacity > current Active allocations
         query = """
             SELECT r.Room_Number, r.Capacity,
                    (SELECT COUNT(*) FROM room_allocations ra 
