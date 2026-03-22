@@ -110,8 +110,9 @@ CS432_Track1_Submission/
        └── stayease.sql              # DUmp file to create everything
 ```
 
-## 🔒 Default Logins (For Testing)
+## Default Logins (For Testing)
 *(Note: Ensure these users exist in your `members` and credentials tables before testing)*
+* We have added these members already in the .sql file but you can recheck your tables to confirm.
 * **Admin:** `admin` / `admin123`
 * **Warden:** `riya` / `admin123`
 * **Security:** `security` / `admin123`
@@ -119,6 +120,6 @@ CS432_Track1_Submission/
 
 * You can see user_credentials table to get member details, password for everyone is 'admin123'
 
-## 👨‍💻 Developer Notes
+##  Developer Notes
 * **Frontend Architecture:** This application uses a Single Page Application (SPA) paradigm. The HTML is statically loaded once, and JavaScript dynamically manipulates the DOM to hide/show specific sections (`class="hidden"`) based on the authenticated user's role.
 * **Cache Clearing:** If you make updates to `script.js` or `style.css` and do not see the changes reflected in your browser, press `Ctrl + F5` (Windows) or `Cmd + Shift + R` (Mac) to hard refresh and clear the browser cache.
