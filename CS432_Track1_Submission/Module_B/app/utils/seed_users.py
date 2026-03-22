@@ -8,7 +8,7 @@ def seed_first_time_users():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',          
-            password='password',  # Write your MySQL password here
+            password='password',  #ensure this matches you MySQL password
             database='stayease'
         )
         cursor = conn.cursor()
