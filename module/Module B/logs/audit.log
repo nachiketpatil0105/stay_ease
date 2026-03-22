@@ -294,3 +294,54 @@
 [2026-03-17 21:47:34] - INFO - 127.0.0.1 - - [17/Mar/2026 21:47:34] "GET /portfolio/102 HTTP/1.1" 200 -
 [2026-03-17 21:48:19] - INFO - User: 'warden_login' (Role: Warden) | Action: Successfully viewed all members list | Status: SUCCESS
 [2026-03-17 21:48:19] - INFO - 127.0.0.1 - - [17/Mar/2026 21:48:19] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-17 23:14:58] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-03-17 23:14:58] - INFO - [33mPress CTRL+C to quit[0m
+[2026-03-17 23:14:58] - INFO -  * Restarting with stat
+[2026-03-17 23:14:58] - WARNING -  * Debugger is active!
+[2026-03-17 23:14:58] - INFO -  * Debugger PIN: 899-932-095
+[2026-03-17 23:16:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:16:15] "GET / HTTP/1.1" 200 -
+[2026-03-17 23:16:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:16:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2026-03-17 23:16:34] - INFO - 127.0.0.1 - - [17/Mar/2026 23:16:34] "[31m[1mGET /login HTTP/1.1[0m" 405 -
+[2026-03-17 23:17:04] - INFO - 127.0.0.1 - - [17/Mar/2026 23:17:04] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-17 23:17:04] - INFO - 127.0.0.1 - - [17/Mar/2026 23:17:04] "GET /static/style.css HTTP/1.1" 200 -
+[2026-03-17 23:17:04] - INFO - 127.0.0.1 - - [17/Mar/2026 23:17:04] "GET /static/script.js HTTP/1.1" 200 -
+[2026-03-17 23:19:23] - INFO - 127.0.0.1 - - [17/Mar/2026 23:19:23] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:19:25] - INFO - 127.0.0.1 - - [17/Mar/2026 23:19:25] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:19:25] - INFO - 127.0.0.1 - - [17/Mar/2026 23:19:25] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:19:25] - INFO - 127.0.0.1 - - [17/Mar/2026 23:19:25] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:19:26] - INFO - 127.0.0.1 - - [17/Mar/2026 23:19:26] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:20:29] - INFO - 127.0.0.1 - - [17/Mar/2026 23:20:29] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-17 23:20:29] - INFO - 127.0.0.1 - - [17/Mar/2026 23:20:29] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+[2026-03-17 23:21:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:21:15] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-17 23:21:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:21:15] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+[2026-03-17 23:21:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:21:15] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-17 23:21:15] - INFO - 127.0.0.1 - - [17/Mar/2026 23:21:15] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-17 23:28:09] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-03-17 23:28:09] - INFO - [33mPress CTRL+C to quit[0m
+[2026-03-17 23:28:09] - INFO -  * Restarting with stat
+[2026-03-17 23:28:09] - WARNING -  * Debugger is active!
+[2026-03-17 23:28:09] - INFO -  * Debugger PIN: 130-037-489
+[2026-03-17 23:28:25] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:25] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-17 23:28:36] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:36] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:36] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:36] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:36] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:36] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:36] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:36] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:37] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:37] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:37] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:37] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:47] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:47] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:48] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:48] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:48] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:48] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:28:57] - INFO - 127.0.0.1 - - [17/Mar/2026 23:28:57] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+[2026-03-17 23:29:05] - INFO - 127.0.0.1 - - [17/Mar/2026 23:29:05] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:31:22] - INFO - 127.0.0.1 - - [17/Mar/2026 23:31:22] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:31:23] - INFO - 127.0.0.1 - - [17/Mar/2026 23:31:23] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-03-17 23:33:33] - INFO -  * Detected change in '/Users/nitya/Programming/Databases/stay_ease/module/Module B/app/utils.py', reloading
+[2026-03-17 23:33:33] - INFO -  * Restarting with stat
+[2026-03-17 23:33:33] - WARNING -  * Debugger is active!
+[2026-03-17 23:33:33] - INFO -  * Debugger PIN: 130-037-489
+[2026-03-17 23:36:42] - INFO -  * Detected change in '/Users/nitya/Programming/Databases/stay_ease/module/Module B/app/utils.py', reloading
+[2026-03-17 23:36:42] - INFO -  * Restarting with stat
+[2026-03-17 23:36:43] - WARNING -  * Debugger is active!
+[2026-03-17 23:36:43] - INFO -  * Debugger PIN: 130-037-489

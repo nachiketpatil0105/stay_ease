@@ -33,7 +33,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
         user='root',
-        password='Niraj@1607',  # Ensure this matches your MySQL password!
+        password='0Onetwothree',  # Ensure this matches your MySQL password!
         database='stayease'
     )
 
