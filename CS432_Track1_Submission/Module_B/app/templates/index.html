@@ -11,7 +11,7 @@
 <body>
 
     <div class="title">
-        <h1 style="text-align: center;">StayEase - Hostel Management System</h1>
+        <h1>StayEase - Hostel Management System</h1>
     </div>
 
     <div class="container">
@@ -20,30 +20,26 @@
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
             <button onclick="login()">Log In</button>
-            <p id="login-error" style="color: red;"></p>
+            <p id="login-error"></p>
         </div>
 
         <div id="portfolio-section" class="hidden dashboard-layout">
 
-            <div
-                style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <div class="header-card">
                 <div>
-                    <h2 style="margin: 0; color: #2c3e50;">Welcome, <span id="display-name"></span>!</h2>
-                    <p style="margin: 5px 0 0 0;"><strong>Role:</strong> <span id="display-role"></span></p>
+                    <h2>Welcome, <span id="display-name"></span>!</h2>
+                    <p><strong>Role:</strong> <span id="display-role"></span></p>
                 </div>
-                <button onclick="logout()"
-                    style="background-color: #e74c3c; width: auto; padding: 10px 20px; border-radius: 8px;">Log
-                    Out</button>
+                <button onclick="logout()" class="btn-logout">Log Out</button>
             </div>
 
             <div class="dash-row">
                 <div class="dash-card">
                     <h4>Your Profile Details</h4>
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <img id="port-profile-pic" src="/static/images/default-avatar.png" alt="User"
-                            style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
+                    <div class="profile-img-container">
+                        <img id="port-profile-pic" src="/static/images/default-avatar.png" alt="User" class="profile-img">
                     </div>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <ul class="profile-list">
                         <li><strong>Email:</strong> <span id="port-email"></span></li>
                         <li><strong>Contact:</strong> <span id="port-contact"></span></li>
                         <li id="li-hostel-id"><strong>Hostel ID:</strong> <span id="port-hostel-id"></span></li>
@@ -56,53 +52,40 @@
                     <h4 id="overview-title">Security Gate Management</h4>
                     <p><strong>Hostel:</strong> <span id="sec-hostel-name-stat">Loading...</span></p>
 
-                    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px;">
-                        <div
-                            style="background: #fdf2f2; border: 1px solid #f5c6cb; padding: 20px; border-radius: 8px; text-align: center;">
-                            <h2 id="stat-sec-visitors" style="margin: 0; font-size: 32px; color: #721c24;">0</h2>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #721c24; font-weight: bold;">Visitors
-                                Currently Inside</p>
+                    <div class="stat-grid-1">
+                        <div class="stat-box stat-danger">
+                            <h2 id="stat-sec-visitors">0</h2>
+                            <p>Visitors Currently Inside</p>
                         </div>
-
-                        <div
-                            style="background: #fff3cd; border: 1px solid #ffeeba; padding: 20px; border-radius: 8px; text-align: center;">
-                            <h2 id="stat-sec-outside" style="margin: 0; font-size: 32px; color: #856404;">0</h2>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #856404; font-weight: bold;">Students
-                                Outside Campus</p>
+                        <div class="stat-box stat-warning">
+                            <h2 id="stat-sec-outside">0</h2>
+                            <p>Students Outside Campus</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="admin-stats-card" class="dash-card hidden">
-                    <h4 id="overview-title">Warden Overview</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                        <div
-                            style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <h2 id="stat-complaints" style="margin: 0; font-size: 28px; color: #2c3e50;">0</h2>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #555; font-weight: bold;">Pending
-                                Complaints</p>
+                    <h4 id="admin-overview-title">Warden Overview</h4>
+                    <div class="stat-grid-2">
+                        <div class="stat-box stat-neutral">
+                            <h2 id="stat-complaints">0</h2>
+                            <p>Pending Complaints</p>
                         </div>
-                        <div
-                            style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <h2 id="stat-residents" style="margin: 0; font-size: 28px; color: #2c3e50;">0</h2>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #555; font-weight: bold;">Total
-                                Residents</p>
+                        <div class="stat-box stat-neutral">
+                            <h2 id="stat-residents">0</h2>
+                            <p>Total Residents</p>
                         </div>
-                        <div
-                            style="background: #f8f9fa; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; text-align: center; grid-column: span 2;">
-                            <h2 id="stat-rooms" style="margin: 0; font-size: 28px; color: #2c3e50;">0</h2>
-                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #555; font-weight: bold;">Available
-                                Beds</p>
+                        <div class="stat-box stat-neutral stat-span-2">
+                            <h2 id="stat-rooms">0</h2>
+                            <p>Available Beds</p>
                         </div>
                     </div>
                 </div>
 
-                <div id="raise-complaint-box" class="dash-card"
-                    style="margin-top: 0; background: white; border: 1px solid #e0e0e0;">
-                    <h4 style="color: #d35400; border-bottom: 2px solid #e67e22;">Raise a Complaint</h4>
-                    <label style="display: block; margin-bottom: 5px;"><strong>Category:</strong></label>
-                    <select id="complaint-category" onchange="updateSubcategories()"
-                        style="margin-bottom: 15px; padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ccc;">
+                <div id="raise-complaint-box" class="dash-card complaint-form-card">
+                    <h4>Raise a Complaint</h4>
+                    <label class="form-label"><strong>Category:</strong></label>
+                    <select id="complaint-category" onchange="updateSubcategories()" class="form-select">
                         <option value="">Select Category</option>
                         <option value="Electrical">Electrical</option>
                         <option value="Plumbing">Plumbing</option>
@@ -110,335 +93,232 @@
                         <option value="Mechanical">Mechanical</option>
                         <option value="Other">Other</option>
                     </select>
-                    <label style="display: block; margin-bottom: 5px;"><strong>Subcategory:</strong></label>
-                    <select id="new-complaint-type"
-                        style="margin-bottom: 15px; padding: 10px; width: 100%; border-radius: 4px; border: 1px solid #ccc;">
+                    
+                    <label class="form-label"><strong>Subcategory:</strong></label>
+                    <select id="new-complaint-type" class="form-select">
                         <option value="">Select Subcategory</option>
                     </select>
-                    <label style="display: block; margin-bottom: 5px;"><strong>Description:</strong></label>
-                    <textarea id="new-complaint-desc" placeholder="Please describe the issue in detail..." rows="4"
-                        style="width: 100%; box-sizing: border-box; padding: 10px; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 15px; resize: vertical;"></textarea>
-                    <button id="comp" onclick="submitComplaint()"
-                        style="width: 100%; padding: 12px; font-weight: bold; background-color: #e67e22; border-radius: 5px;">Submit
-                        Complaint</button>
+                    
+                    <label class="form-label"><strong>Description:</strong></label>
+                    <textarea id="new-complaint-desc" placeholder="Please describe the issue in detail..." rows="4" class="form-textarea"></textarea>
+                    
+                    <button id="comp" onclick="submitComplaint()" class="btn-submit">Submit Complaint</button>
                 </div>
             </div>
+            
             <div id="student-only-sections" class="dash-row">
                 <div class="dash-card">
                     <h4>Your Recent Payments</h4>
-                    <div id="port-payments" class="payments" style="background: transparent; padding: 0;"></div>
+                    <div id="port-payments" class="payments"></div>
                 </div>
                 <div class="dash-card">
                     <h4>Your Complaints</h4>
-                    <div id="port-complaints" class="complaint" style="background: transparent; padding: 0;"></div>
+                    <div id="port-complaints" class="complaint"></div>
                 </div>
             </div>
 
-            <div id="security-tabs" style="display: flex; gap: 15px; margin-bottom: 20px; width: 100%;">
-
-                <button class="admin-tab-btn"
-                    style="background-color: #2c3e50; color: white; flex: 1; border-radius: 5px; font-weight: bold;"
-                    onclick="openSecurityModal('visitors')">
-                    View Visitor Logs
-                </button>
-
-                <button class="admin-tab-btn"
-                    style="background-color: #34495e; color: white; flex: 1; border-radius: 5px; font-weight: bold;"
-                    onclick="openSecurityModal('students')">
-                    View Student Movements
-                </button>
-
-                <button class="admin-tab-btn"
-                    style="background-color: #27ae60; color: white; flex: 1; border-radius: 5px; font-weight: bold; border: none;"
-                    onclick="openAddVisitorModal()">
-                    Log New Visitor
-                </button>
-
+            <div id="security-tabs" class="security-tabs-container">
+                <button class="sec-tab-btn-dark" onclick="openSecurityModal('visitors')"> View Visitor Logs </button>
+                <button class="sec-tab-btn-slate" onclick="openSecurityModal('students')"> View Student Movements </button>
+                <button class="sec-tab-btn-green" onclick="openAddVisitorModal()"> Log New Visitor </button>
             </div>
 
-            <div id="modal-add-visitor" class="hidden"
-                style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 10000; justify-content: center; align-items: center; margin: 0;">
+            <div id="modal-add-visitor" class="hidden modal-overlay">
+                <div class="modal-container modal-md">
+                    <h3 class="modal-title modal-header-border">Add New Visitor</h3>
 
-                <div
-                    style="background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 15px;">
-                    <h3 style="margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px;">Add New Visitor
-                    </h3>
+                    <input type="text" id="vis-name" placeholder="Visitor Full Name" required class="form-input">
+                    <input type="text" id="vis-contact" placeholder="Contact Number" required class="form-input">
 
-                    <input type="text" id="vis-name" placeholder="Visitor Full Name" required
-                        style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                    <input type="text" id="vis-contact" placeholder="Contact Number" required
-                        style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <select id="vis-id-type" required
-                            style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <div class="form-grid-2">
+                        <select id="vis-id-type" required class="form-select" style="margin-bottom:0;">
                             <option value="">Select ID Type</option>
                             <option value="Aadhar Card">Aadhar Card</option>
                             <option value="PAN Card">PAN Card</option>
                             <option value="Driving License">Driving License</option>
                             <option value="Voter ID">Voter ID</option>
                         </select>
-                        <input type="text" id="vis-id-num" placeholder="ID Number" required
-                            style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <input type="text" id="vis-id-num" placeholder="ID Number" required class="form-input" style="margin-bottom:0;">
                     </div>
 
                     <div style="position: relative; width: 100%;">
                         <input type="text" id="vis-student-search" placeholder="Search Student Name, Room, or Phone..."
-                            autocomplete="off" onkeyup="searchStudent()" required
-                            style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box;">
-
+                            autocomplete="off" onkeyup="searchStudent()" required class="form-input">
                         <input type="hidden" id="vis-host-id">
-
-                        <div id="student-search-results"
-                            style="position: absolute; top: 100%; left: 0; width: 100%; background: white; border: 1px solid #ccc; border-top: none; max-height: 200px; overflow-y: auto; z-index: 1001; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0 0 4px 4px;">
-                        </div>
+                        <div id="student-search-results" style="position: absolute; top: 100%; left: 0; width: 100%; background: white; border: 1px solid #ccc; border-top: none; max-height: 200px; overflow-y: auto; z-index: 1001; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 0 0 4px 4px;"></div>
                     </div>
-                    <input type="text" id="vis-purpose" placeholder="Purpose of Visit" required
-                        style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    
+                    <input type="text" id="vis-purpose" placeholder="Purpose of Visit" required class="form-input" style="margin-bottom:0;">
 
-                    <div style="display: flex; justify-content: space-between; margin-top: 15px;">
-                        <button onclick="closeAddVisitorModal()"
-                            style="padding: 10px 20px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer;">Cancel</button>
-                        <button onclick="submitNewVisitor()"
-                            style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Save
-                            Visitor</button>
+                    <div class="btn-row">
+                        <button onclick="closeAddVisitorModal()" class="btn-cancel">Cancel</button>
+                        <button onclick="submitNewVisitor()" class="btn-save">Save Visitor</button>
                     </div>
                 </div>
             </div>
-            <div id="sec-modal-visitors" class="hidden admin-tab-content"
-                style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                <div
-                    style="background: white; padding: 30px; border-radius: 12px; width: 95%; max-width: 1000px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
-                    <div
-                        style="display: flex; width: 100%; margin-bottom: 15px; align-items: center; border-bottom: 2px solid #2c3e50; padding-bottom: 10px;">
-                        <div style="flex-grow: 1; text-align: left;">
-                            <h3 style="color: #2c3e50; margin: 0; display: flex; align-items: center; gap: 10px;">
-                                Gate Visitor Logs</h3>
+            
+            <div id="sec-modal-visitors" class="hidden admin-tab-content modal-overlay">
+                <div class="modal-container modal-xl">
+                    <div class="modal-header modal-header-border-dark">
+                        <div class="modal-title-left">
+                            <h3 class="modal-title modal-title-flex"> Gate Visitor Logs</h3>
                         </div>
                         <div>
-                            <button onclick="document.getElementById('sec-modal-visitors').classList.add('hidden')"
-                                style="background: transparent; color: #e74c3c; border: none; font-size: 24px; font-weight: bold; cursor: pointer;">✖</button>
+                            <button onclick="document.getElementById('sec-modal-visitors').classList.add('hidden')" class="btn-close-icon">✖</button>
                         </div>
                     </div>
-                    <div id="sec-visitors-table" style="overflow-y: auto; flex-grow: 1;">
-                    </div>
-                    <button onclick="document.getElementById('sec-modal-visitors').classList.add('hidden')"
-                        style="background: #95a5a6; color: white; margin-top: 20px; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Close
-                        Visitors Log</button>
+                    <div id="sec-visitors-table" class="modal-body-scroll"></div>
+                    <button onclick="document.getElementById('sec-modal-visitors').classList.add('hidden')" class="btn-close-full">Close Visitors Log</button>
                 </div>
             </div>
 
-            <div id="sec-modal-students" class="hidden admin-tab-content"
-                style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                <div
-                    style="background: white; padding: 30px; border-radius: 12px; width: 95%; max-width: 1000px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
-                    <div
-                        style="display: flex; width: 100%; margin-bottom: 15px; align-items: center; border-bottom: 2px solid #34495e; padding-bottom: 10px;">
-                        <div style="flex-grow: 1; text-align: left;">
-                            <h3 style="color: #2c3e50; margin: 0; display: flex; align-items: center; gap: 10px;">
-                                Student Movement Register</h3>
+            <div id="sec-modal-students" class="hidden admin-tab-content modal-overlay">
+                <div class="modal-container modal-xl">
+                    <div class="modal-header modal-header-border-slate">
+                        <div class="modal-title-left">
+                            <h3 class="modal-title modal-title-flex"> Student Movement Register</h3>
                         </div>
                         <div>
-                            <button onclick="document.getElementById('sec-modal-students').classList.add('hidden')"
-                                style="background: transparent; color: #e74c3c; border: none; font-size: 24px; font-weight: bold; cursor: pointer;">✖</button>
+                            <button onclick="document.getElementById('sec-modal-students').classList.add('hidden')" class="btn-close-icon">✖</button>
                         </div>
                     </div>
-                    <div id="sec-students-table" style="overflow-y: auto; flex-grow: 1;">
-                    </div>
-                    <button onclick="document.getElementById('sec-modal-students').classList.add('hidden')"
-                        style="background: #95a5a6; color: white; margin-top: 20px; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Close
-                        Movement Log</button>
+                    <div id="sec-students-table" class="modal-body-scroll"></div>
+                    <button onclick="document.getElementById('sec-modal-students').classList.add('hidden')" class="btn-close-full">Close Movement Log</button>
                 </div>
             </div>
 
-            <div id="admin-section" class="hidden dash-card"
-                style="margin-top: 20px; border-top: 4px solid #e74c3c; width: 100%; box-sizing: border-box;">
-                <h3 style="color: #c0392b; margin-top: 0;">Admin Dashboard</h3>
+            <div id="admin-section" class="hidden dash-card admin-section-box">
+                <h3>Admin Dashboard</h3>
                 <div class="admin-tabs">
-                    <button class="admin-tab-btn shared-btn" onclick="openAdminTab('members'); fetchAllMembers();">
-                        View Members</button>
-                    <button class="admin-tab-btn shared-btn" onclick="openAdminTab('complaints'); fetchComplaints();">
-                        View Complaints</button>
+                    <button class="admin-tab-btn shared-btn" onclick="openAdminTab('members'); fetchAllMembers();"> View Members</button>
+                    <button class="admin-tab-btn shared-btn" onclick="openAdminTab('complaints'); fetchComplaints();"> View Complaints</button>
                     <button class="admin-tab-btn shared-btn" onclick="openAdminTab('add-member');">Add Member</button>
 
-                    <button class="admin-tab-btn warden-only" onclick="openAdminTab('furniture'); fetchFurniture();">
-                        View Furniture</button>
-                    <button class="admin-tab-btn warden-only"
-                        onclick="openAdminTab('warden-movements'); fetchWardenMovement();">Student Movements</button>
+                    <button class="admin-tab-btn warden-only" onclick="openAdminTab('furniture'); fetchFurniture();"> View Furniture</button>
+                    <button class="admin-tab-btn warden-only" onclick="openAdminTab('warden-movements'); fetchWardenMovement();">Student Movements</button>
 
-                    <button class="admin-tab-btn admin-only"
-                        onclick="openAdminTab('admin-global'); fetchAdminGlobal('furniture');">Global
-                        Furniture</button>
-                    <button class="admin-tab-btn admin-only"
-                        onclick="openAdminTab('admin-global'); fetchAdminGlobal('visitors');">Global
-                        Visitors</button>
-                    <button class="admin-tab-btn admin-only"
-                        onclick="openAdminTab('admin-global'); fetchAdminGlobal('movement');">Global
-                        Movement</button>
+                    <button class="admin-tab-btn admin-only" onclick="openAdminTab('admin-global'); fetchAdminGlobal('furniture');">Global Furniture</button>
+                    <button class="admin-tab-btn admin-only" onclick="openAdminTab('admin-global'); fetchAdminGlobal('visitors');">Global Visitors</button>
+                    <button class="admin-tab-btn admin-only" onclick="openAdminTab('admin-global'); fetchAdminGlobal('movement');">Global Movement</button>
                 </div>
 
                 <div id="admin-content-area">
-                    <div id="tab-members" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
-                            <div style="display: flex; width: 100%; margin-bottom: 15px; align-items: center;">
-                                <div style="flex-grow: 1; text-align: left;">
-                                    <h4 style="margin: 0; color: #2c3e50;">Resident Directory</h4>
+                    <div id="tab-members" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-lg">
+                            <div class="modal-header">
+                                <div class="modal-title-left">
+                                    <h4 class="modal-title">Resident Directory</h4>
                                 </div>
-                                <div><button onclick="document.getElementById('tab-members').classList.add('hidden')"
-                                        style="background: transparent; color: #e74c3c; border: none; font-size: 24px; font-weight: bold; cursor: pointer;">✖</button>
-                                </div>
+                                <div><button onclick="document.getElementById('tab-members').classList.add('hidden')" class="btn-close-icon">✖</button></div>
                             </div>
-                            <div id="admin-results" style="overflow-y: auto; overflow-x: auto; flex-grow: 1;"></div>
-                            <button onclick="document.getElementById('tab-members').classList.add('hidden')"
-                                style="background: #95a5a6; color: white; margin-top: 20px; width: 100%; padding: 10px; font-weight: bold; border-radius: 5px; border: none;">Close
-                                Directory</button>
+                            <div id="admin-results" class="modal-body-scroll"></div>
+                            <button onclick="document.getElementById('tab-members').classList.add('hidden')" class="btn-close-full">Close Directory</button>
                         </div>
                     </div>
 
-                    <div id="tab-complaints" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
-                            <div style="display: flex; width: 100%; margin-bottom: 15px; align-items: center;">
-                                <div style="flex-grow: 1; text-align: left;">
-                                    <h4 style="margin: 0; color: #2c3e50;">Active Complaints</h4>
+                    <div id="tab-complaints" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-lg">
+                            <div class="modal-header">
+                                <div class="modal-title-left">
+                                    <h4 class="modal-title">Active Complaints</h4>
                                 </div>
-                                <div><button onclick="document.getElementById('tab-complaints').classList.add('hidden')"
-                                        style="background: transparent; color: #e74c3c; border: none; font-size: 24px; font-weight: bold; cursor: pointer;">✖</button>
-                                </div>
+                                <div><button onclick="document.getElementById('tab-complaints').classList.add('hidden')" class="btn-close-icon">✖</button></div>
                             </div>
-                            <div id="admin-complaints-results"
-                                style="overflow-y: auto; overflow-x: auto; flex-grow: 1;"></div>
-                            <button onclick="document.getElementById('tab-complaints').classList.add('hidden')"
-                                style="background: #95a5a6; color: white; margin-top: 20px; width: 100%; padding: 10px; font-weight: bold; border-radius: 5px; border: none;">Close
-                                Complaints</button>
+                            <div id="admin-complaints-results" class="modal-body-scroll"></div>
+                            <button onclick="document.getElementById('tab-complaints').classList.add('hidden')" class="btn-close-full">Close Complaints</button>
                         </div>
                     </div>
 
-                    <div id="tab-add-member" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
-                            <div style="display: flex; width: 100%; margin-bottom: 20px; align-items: center;">
-                                <div style="flex-grow: 1; text-align: left;">
-                                    <h4 style="margin: 0; color: #2c3e50;">Register New Member</h4>
+                    <div id="tab-add-member" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-md" style="overflow-y: auto;">
+                            <div class="modal-header">
+                                <div class="modal-title-left">
+                                    <h4 class="modal-title">Register New Member</h4>
                                 </div>
-                                <div><button onclick="document.getElementById('tab-add-member').classList.add('hidden')"
-                                        style="background: transparent; color: #e74c3c; border: none; font-size: 24px; font-weight: bold; cursor: pointer;">✖</button>
-                                </div>
+                                <div><button onclick="document.getElementById('tab-add-member').classList.add('hidden')" class="btn-close-icon">✖</button></div>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <input type="text" id="new-fname" placeholder="First Name" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="text" id="new-lname" placeholder="Last Name"
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <select id="new-gender"
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            
+                            <div class="form-grid-2-wide">
+                                <input type="text" id="new-fname" placeholder="First Name" required class="form-input" style="margin-bottom:0;">
+                                <input type="text" id="new-lname" placeholder="Last Name" class="form-input" style="margin-bottom:0;">
+                                <select id="new-gender" class="form-select" style="margin-bottom:0;">
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                 </select>
-                                <input type="number" id="new-age" placeholder="Age" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="text" id="new-contact" placeholder="Contact Number" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="email" id="new-email" placeholder="Email Address" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="text" id="emergency-contact" placeholder="Emergency Contact No." required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="number" id="new-role" placeholder="Role ID (e.g., 1=Student)" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                                <input type="number" id="new-age" placeholder="Age" required class="form-input" style="margin-bottom:0;">
+                                <input type="text" id="new-contact" placeholder="Contact Number" required class="form-input" style="margin-bottom:0;">
+                                <input type="email" id="new-email" placeholder="Email Address" required class="form-input" style="margin-bottom:0;">
+                                <input type="text" id="emergency-contact" placeholder="Emergency Contact No." required class="form-input" style="margin-bottom:0;">
+                                <input type="number" id="new-role" placeholder="Role ID (e.g., 1=Student)" required class="form-input" style="margin-bottom:0;">
                             </div>
-                            <h6 style="margin-top: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Room
-                                Allocation</h6>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px;">
-                                <input type="number" id="new-hostel-id" placeholder="Hostel ID" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <button type="button" onclick="checkAvailableRooms()"
-                                    style="background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">🔍
-                                    Check Available Rooms</button>
+                            
+                            <h6 class="add-member-subtitle">Room Allocation</h6>
+                            
+                            <div class="form-grid-2-wide" style="margin-bottom: 10px;">
+                                <input type="number" id="new-hostel-id" placeholder="Hostel ID" required class="form-input" style="margin-bottom:0;">
+                                <button type="button" onclick="checkAvailableRooms()" class="btn-save" style="margin:0; width:100%;">🔍 Check Available Rooms</button>
                             </div>
 
-                            <div id="available-rooms-list"
-                                style="font-size: 13px; color: #555; margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-radius: 4px; display: none;">
+                            <div id="available-rooms-list" class="rooms-data-text" style="display: none;">
                                 <strong>Available in this Hostel:</strong> <span id="rooms-data"></span>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <input type="text" id="new-room-number" placeholder="Room Number" required
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                                <input type="number" id="new-room-capacity" placeholder="Capacity (e.g. 2)" value="2"
-                                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            <div class="form-grid-2-wide">
+                                <input type="text" id="new-room-number" placeholder="Room Number" required class="form-input" style="margin-bottom:0;">
+                                <input type="number" id="new-room-capacity" placeholder="Capacity (e.g. 2)" value="2" class="form-input" style="margin-bottom:0;">
                             </div>
-                            <div style="display: flex; gap: 15px; margin-top: 25px;">
-                                <button onclick="submitNewMember()"
-                                    style="background: #27ae60; color: white; flex: 1; padding: 12px; font-weight: bold; border-radius: 5px; border: none; cursor: pointer;">Save
-                                    Member</button>
-                                <button onclick="document.getElementById('tab-add-member').classList.add('hidden')"
-                                    style="background: #e74c3c; color: white; flex: 1; padding: 12px; font-weight: bold; border-radius: 5px; border: none; cursor: pointer;">Cancel</button>
+                            
+                            <div class="btn-row">
+                                <button onclick="submitNewMember()" class="btn-save btn-save-green">Save Member</button>
+                                <button onclick="document.getElementById('tab-add-member').classList.add('hidden')" class="btn-cancel btn-cancel-red">Cancel</button>
                             </div>
                         </div>
                     </div>
 
-                    <div id="tab-furniture" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
+                    <div id="tab-furniture" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-lg">
                             <h4 style="margin-top: 0;">Hostel Furniture Inventory</h4>
-                            <div id="warden-furniture-results" style="overflow-y: auto; flex-grow: 1;"></div>
-                            <button onclick="document.getElementById('tab-furniture').classList.add('hidden')"
-                                style="background: #95a5a6; color: white; margin-top: 15px; padding: 10px; border: none; border-radius: 5px;">Close</button>
+                            <div id="warden-furniture-results" class="modal-body-scroll"></div>
+                            <button onclick="document.getElementById('tab-furniture').classList.add('hidden')" class="btn-close-full" style="margin-top: 15px; padding: 10px;">Close</button>
                         </div>
                     </div>
 
-                    <div id="tab-warden-movements" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
+                    <div id="tab-warden-movements" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-lg">
                             <h4 style="margin-top: 0;"> Hostel In/Out Register</h4>
-                            <div id="warden-movement-results" style="overflow-y: auto; flex-grow: 1;"></div>
-                            <button onclick="document.getElementById('tab-warden-movements').classList.add('hidden')"
-                                style="background: #95a5a6; color: white; margin-top: 15px; padding: 10px; border: none; border-radius: 5px;">Close</button>
+                            <div id="warden-movement-results" class="modal-body-scroll"></div>
+                            <button onclick="document.getElementById('tab-warden-movements').classList.add('hidden')" class="btn-close-full" style="margin-top: 15px; padding: 10px;">Close</button>
                         </div>
                     </div>
 
-                    <div id="tab-admin-global" class="admin-tab-content hidden"
-                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                        <div
-                            style="background: white; padding: 30px; border-radius: 12px; width: 95%; max-width: 1000px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; display: flex; flex-direction: column;">
+                    <div id="tab-admin-global" class="admin-tab-content hidden modal-overlay">
+                        <div class="modal-container modal-xl">
                             <h4 id="admin-global-title" style="margin-top: 0;"> Global View</h4>
-                            <div id="admin-global-results" style="overflow-y: auto; flex-grow: 1;"></div>
-                            <button onclick="document.getElementById('tab-admin-global').classList.add('hidden')"
-                                style="background: #95a5a6; color: white; margin-top: 15px; padding: 10px; border: none; border-radius: 5px;">Close</button>
+                            <div id="admin-global-results" class="modal-body-scroll"></div>
+                            <button onclick="document.getElementById('tab-admin-global').classList.add('hidden')" class="btn-close-full" style="margin-top: 15px; padding: 10px;">Close</button>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div id="update-member-form" class="hidden"
-                style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999; display: flex; justify-content: center; align-items: center; margin: 0;">
-                <div
-                    style="background: white; padding: 30px; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    <h5
-                        style="margin-top: 0; font-size: 20px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
-                        Edit Student Details</h5>
+            
+            <div id="update-member-form" class="hidden modal-overlay">
+                <div class="modal-container modal-sm">
+                    <h5 class="modal-title modal-header-border" style="font-size: 20px;"> Edit Student Details</h5>
                     <input type="hidden" id="update-id">
-                    <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333;">Contact
-                        Number:</label>
-                    <input type="text" id="update-contact" required
-                        style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                    <label style="display: block; font-weight: bold; margin-bottom: 5px; color: #333;">Status:</label>
-                    <select id="update-status"
-                        style="width: 100%; padding: 10px; margin-bottom: 25px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                    
+                    <label class="form-label">Contact Number:</label>
+                    <input type="text" id="update-contact" required class="form-input">
+                    
+                    <label class="form-label">Status:</label>
+                    <select id="update-status" class="form-select" style="margin-bottom: 25px;">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                     </select>
-                    <div style="display: flex; gap: 15px;">
-                        <button onclick="submitUpdateMember()"
-                            style="background: #27ae60; color: white; flex: 1; padding: 12px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer;">Save</button>
-                        <button onclick="document.getElementById('update-member-form').classList.add('hidden')"
-                            style="background: #e74c3c; color: white; flex: 1; padding: 12px; border-radius: 5px; font-weight: bold; border: none; cursor: pointer;">Cancel</button>
+                    
+                    <div class="btn-row" style="margin-top:0;">
+                        <button onclick="submitUpdateMember()" class="btn-save btn-save-green">Save</button>
+                        <button onclick="document.getElementById('update-member-form').classList.add('hidden')" class="btn-cancel btn-cancel-red">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -446,9 +326,8 @@
         </div>
     </div>
     <footer class="site-footer">
-        <p style="margin: 0;">&copy; 2026 StayEase Hostel Management System. All rights reserved.</p>
-        <p style="margin: 5px 0 0 0; font-size: 12px;">Developed for CS 432- Databases Project Evaluation | <a
-                href="#">Help & Support</a></p>
+        <p>&copy; 2026 StayEase Hostel Management System. All rights reserved.</p>
+        <p class="sub-text">Developed for CS 432- Databases Project Evaluation | <a href="#">Help & Support</a></p>
     </footer>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

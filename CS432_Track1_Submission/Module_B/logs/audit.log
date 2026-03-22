@@ -4729,3 +4729,407 @@
 [2026-03-22 01:28:46] - INFO -  * Debugger PIN: 111-122-564
 [2026-03-22 01:28:51] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\routes_security.py', reloading
 [2026-03-22 01:28:51] - INFO -  * Restarting with stat
+[2026-03-22 02:01:33] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-03-22 02:01:33] - INFO - [33mPress CTRL+C to quit[0m
+[2026-03-22 02:01:33] - INFO -  * Restarting with stat
+[2026-03-22 02:01:34] - WARNING -  * Debugger is active!
+[2026-03-22 02:01:34] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 02:01:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:38] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:01:39] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:39] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:01:39] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:39] "GET /static/script.js HTTP/1.1" 200 -
+[2026-03-22 02:01:39] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:39] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:01:48] - INFO - User: 'priya' (Role: Student) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:01:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:48] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:01:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:48] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:01:48] - INFO - User: 'priya' (Role: Student) | Action: Viewed FULL portfolio of Member ID 110 | Status: SUCCESS
+[2026-03-22 02:01:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:48] "GET /portfolio/110 HTTP/1.1" 200 -
+[2026-03-22 02:01:56] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:56] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:01:56] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:56] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:01:56] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:56] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:01:56] - INFO - 127.0.0.1 - - [22/Mar/2026 02:01:56] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 02:02:03] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:02:03] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:03] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:02:03] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:03] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:02:04] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 02:02:04] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:04] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 02:02:04] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:04] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 02:02:10] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:10] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 02:02:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:13] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 02:02:31] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed furniture inventory for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:02:31] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:31] "GET /api/warden/furniture HTTP/1.1" 200 -
+[2026-03-22 02:02:33] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed movement logs for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:02:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:33] "GET /api/warden/movement HTTP/1.1" 200 -
+[2026-03-22 02:02:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:38] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:02:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:38] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:02:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:38] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:02:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:38] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 02:02:48] - INFO - User: 'rakesh' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:02:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:48] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:02:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:48] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:02:48] - INFO - User: 'rakesh' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 106 | Status: SUCCESS
+[2026-03-22 02:02:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:48] "GET /portfolio/106 HTTP/1.1" 200 -
+[2026-03-22 02:02:48] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:48] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 02:02:50] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:50] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 02:02:52] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:52] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 02:02:57] - INFO - User: 'rakesh' (Role: Warden) | Action: Warden viewed furniture inventory for Hostel 2 | Status: SUCCESS
+[2026-03-22 02:02:57] - INFO - 127.0.0.1 - - [22/Mar/2026 02:02:57] "GET /api/warden/furniture HTTP/1.1" 200 -
+[2026-03-22 02:03:00] - INFO - User: 'rakesh' (Role: Warden) | Action: Warden viewed movement logs for Hostel 2 | Status: SUCCESS
+[2026-03-22 02:03:00] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:00] "GET /api/warden/movement HTTP/1.1" 200 -
+[2026-03-22 02:03:05] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:05] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:03:05] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:05] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:03:05] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:05] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:03:05] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:05] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 02:03:13] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:03:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:13] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:03:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:13] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:03:13] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 02:03:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:13] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 02:03:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:13] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 02:03:15] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:15] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 02:03:19] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:19] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 02:03:30] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global furniture inventory | Status: SUCCESS
+[2026-03-22 02:03:30] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:30] "GET /api/admin/all_furniture HTTP/1.1" 200 -
+[2026-03-22 02:03:33] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global visitor logs | Status: SUCCESS
+[2026-03-22 02:03:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:33] "GET /api/admin/all_visitors HTTP/1.1" 200 -
+[2026-03-22 02:03:38] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global student movement logs | Status: SUCCESS
+[2026-03-22 02:03:38] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:38] "GET /api/admin/all_movement HTTP/1.1" 200 -
+[2026-03-22 02:03:44] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:44] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:03:44] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:44] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:03:44] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:44] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:03:44] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:44] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 02:03:53] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:03:53] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:53] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:03:53] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:53] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:03:53] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 02:03:53] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:53] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 02:03:53] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:03:53] - INFO - 127.0.0.1 - - [22/Mar/2026 02:03:53] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:00] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:04:00] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:00] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:03] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:04:03] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:03] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:05] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 02:04:05] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:05] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:12] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:12] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:13] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:04:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:13] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:04:13] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:13] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 02:04:21] - INFO - User: 'security_h1' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 02:04:21] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:21] "POST /login HTTP/1.1" 200 -
+[2026-03-22 02:04:21] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:21] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 02:04:21] - INFO - User: 'security_h1' (Role: Security) | Action: Viewed FULL portfolio of Member ID 122 | Status: SUCCESS
+[2026-03-22 02:04:21] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:21] "GET /portfolio/122 HTTP/1.1" 200 -
+[2026-03-22 02:04:21] - INFO - User: 'security_h1' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 2 | Status: SUCCESS
+[2026-03-22 02:04:21] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:21] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:23] - INFO - User: 'security_h1' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 2 | Status: SUCCESS
+[2026-03-22 02:04:23] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:23] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:25] - INFO - User: 'security_h1' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 2 | Status: SUCCESS
+[2026-03-22 02:04:25] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:25] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:33] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 02:04:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:33] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 02:04:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:33] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 02:04:33] - INFO - 127.0.0.1 - - [22/Mar/2026 02:04:33] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:21:34] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-03-22 13:21:34] - INFO - [33mPress CTRL+C to quit[0m
+[2026-03-22 13:21:34] - INFO -  * Restarting with stat
+[2026-03-22 13:21:34] - WARNING -  * Debugger is active!
+[2026-03-22 13:21:34] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 13:29:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:29:08] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:29:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:29:08] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:29:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:29:08] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:29:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:29:08] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:29:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:29:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2026-03-22 13:39:34] - INFO - User: 'priya' (Role: Student) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:39:34] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:34] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:39:34] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:34] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:39:34] - INFO - User: 'priya' (Role: Student) | Action: Viewed FULL portfolio of Member ID 110 | Status: SUCCESS
+[2026-03-22 13:39:34] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:34] "GET /portfolio/110 HTTP/1.1" 200 -
+[2026-03-22 13:39:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:47] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:39:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:39:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:47] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:39:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:47] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:39:55] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:39:55] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:55] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:39:55] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:55] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:39:55] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 13:39:55] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:55] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 13:39:55] - INFO - 127.0.0.1 - - [22/Mar/2026 13:39:55] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:40:03] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:03] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 13:40:06] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:06] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 13:40:11] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed furniture inventory for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:40:11] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:11] "GET /api/warden/furniture HTTP/1.1" 200 -
+[2026-03-22 13:40:14] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed movement logs for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:40:14] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:14] "GET /api/warden/movement HTTP/1.1" 200 -
+[2026-03-22 13:40:19] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:19] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:40:19] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:19] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:40:19] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:19] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:40:19] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:19] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:40:26] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:40:26] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:26] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:40:26] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:26] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:40:26] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 13:40:26] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:26] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 13:40:26] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:26] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:40:31] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global furniture inventory | Status: SUCCESS
+[2026-03-22 13:40:31] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:31] "GET /api/admin/all_furniture HTTP/1.1" 200 -
+[2026-03-22 13:40:34] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:34] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 13:40:37] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:37] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 13:40:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:47] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:40:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:47] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:40:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:47] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:40:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:47] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:40:57] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:40:57] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:57] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:40:57] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:57] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:40:57] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 13:40:57] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:57] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 13:40:57] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:40:57] - INFO - 127.0.0.1 - - [22/Mar/2026 13:40:57] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:41:06] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:41:06] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:06] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:41:10] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:41:10] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:10] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:41:17] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:17] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:41:17] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:17] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:41:17] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:17] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:41:17] - INFO - 127.0.0.1 - - [22/Mar/2026 13:41:17] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:42:29] - INFO - User: 'priya' (Role: Student) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:42:29] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:29] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:42:29] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:29] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:42:29] - INFO - User: 'priya' (Role: Student) | Action: Viewed FULL portfolio of Member ID 110 | Status: SUCCESS
+[2026-03-22 13:42:29] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:29] "GET /portfolio/110 HTTP/1.1" 200 -
+[2026-03-22 13:42:33] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:33] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:42:33] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:33] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:42:33] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:33] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:42:33] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:33] "GET /static/style.css HTTP/1.1" 200 -
+[2026-03-22 13:42:41] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:42:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:41] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:42:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:41] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:42:41] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 13:42:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:41] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 13:42:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:41] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:42:45] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:45] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 13:42:47] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:47] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 13:42:53] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed furniture inventory for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:42:53] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:53] "GET /api/warden/furniture HTTP/1.1" 200 -
+[2026-03-22 13:42:56] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed movement logs for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:42:56] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:56] "GET /api/warden/movement HTTP/1.1" 200 -
+[2026-03-22 13:42:59] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:59] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:42:59] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:59] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:42:59] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:59] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:42:59] - INFO - 127.0.0.1 - - [22/Mar/2026 13:42:59] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:43:08] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:43:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:08] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:43:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:08] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:43:08] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 13:43:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:08] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 13:43:08] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:08] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:43:12] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global furniture inventory | Status: SUCCESS
+[2026-03-22 13:43:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:12] "GET /api/admin/all_furniture HTTP/1.1" 200 -
+[2026-03-22 13:43:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:16] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:43:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:16] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:43:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:16] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:43:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:16] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:43:25] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:43:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:25] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:43:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:25] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:43:25] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 13:43:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:25] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 13:43:25] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:43:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:25] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:43:28] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:43:28] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:28] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:43:30] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:43:30] - INFO - 127.0.0.1 - - [22/Mar/2026 13:43:30] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:46:04] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:04] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:46:04] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:04] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:46:04] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:04] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:46:04] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:04] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:46:11] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:46:11] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:11] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:46:11] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:11] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:46:11] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 13:46:11] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:11] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 13:46:11] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:11] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:46:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:12] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:46:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:12] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:46:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:12] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:46:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:12] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:46:13] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:13] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:46:13] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 13:46:13] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:13] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 13:46:13] - INFO - 127.0.0.1 - - [22/Mar/2026 13:46:13] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "GET /static/script.js HTTP/1.1" 200 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:57:12] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 13:57:12] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:12] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:57:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:16] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:57:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:16] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:16] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:57:16] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:16] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:25] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:57:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:25] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:57:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:25] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:57:25] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 13:57:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:25] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 13:57:25] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:25] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 13:57:28] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:28] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:57:28] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:28] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:28] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:28] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:57:28] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:28] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:39] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 13:57:39] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:39] "POST /login HTTP/1.1" 200 -
+[2026-03-22 13:57:39] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:39] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 13:57:39] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 13:57:39] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:39] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 13:57:39] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 13:57:39] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:39] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 13:57:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:41] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 13:57:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:41] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 13:57:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:41] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 13:57:41] - INFO - 127.0.0.1 - - [22/Mar/2026 13:57:41] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:09:51] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:09:51] - INFO - 127.0.0.1 - - [22/Mar/2026 14:09:51] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:09:51] - INFO - 127.0.0.1 - - [22/Mar/2026 14:09:51] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:09:51] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 14:09:51] - INFO - 127.0.0.1 - - [22/Mar/2026 14:09:51] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 14:09:51] - INFO - 127.0.0.1 - - [22/Mar/2026 14:09:51] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:46:21] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:21] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:46:21] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:21] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:46:21] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:21] "GET /static/style.css HTTP/1.1" 200 -
+[2026-03-22 14:46:21] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:21] "GET /static/script.js HTTP/1.1" 200 -
+[2026-03-22 14:46:22] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:22] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:46:22] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 14:46:22] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:22] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 14:46:22] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:22] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:46:25] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:25] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:46:25] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:25] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:46:25] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:25] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:46:25] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:25] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:46:32] - INFO - User: 'priya' (Role: Student) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:46:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:32] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:46:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:32] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:46:32] - INFO - User: 'priya' (Role: Student) | Action: Viewed FULL portfolio of Member ID 110 | Status: SUCCESS
+[2026-03-22 14:46:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:32] "GET /portfolio/110 HTTP/1.1" 200 -
+[2026-03-22 14:46:37] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:37] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:46:37] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:37] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:46:37] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:37] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:46:37] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:37] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:46:43] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:46:43] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:43] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:46:43] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:43] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:46:43] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 14:46:43] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:43] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 14:46:43] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:43] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:46:46] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:46] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 14:46:48] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:48] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 14:46:54] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed furniture inventory for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:46:54] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:54] "GET /api/warden/furniture HTTP/1.1" 200 -
+[2026-03-22 14:46:56] - INFO - User: 'riya' (Role: Warden) | Action: Warden viewed movement logs for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:46:56] - INFO - 127.0.0.1 - - [22/Mar/2026 14:46:56] "GET /api/warden/movement HTTP/1.1" 200 -
+[2026-03-22 14:47:00] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:00] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:47:00] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:00] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:47:00] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:00] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:47:00] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:00] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:47:07] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:47:07] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:07] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:47:07] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:07] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:47:07] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 14:47:07] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:07] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 14:47:07] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:07] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:47:10] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:10] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 14:47:12] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:12] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-03-22 14:47:16] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global furniture inventory | Status: SUCCESS
+[2026-03-22 14:47:16] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:16] "GET /api/admin/all_furniture HTTP/1.1" 200 -
+[2026-03-22 14:47:18] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global visitor logs | Status: SUCCESS
+[2026-03-22 14:47:18] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:18] "GET /api/admin/all_visitors HTTP/1.1" 200 -
+[2026-03-22 14:47:21] - INFO - User: 'admin' (Role: Admin) | Action: Admin viewed global student movement logs | Status: SUCCESS
+[2026-03-22 14:47:21] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:21] "GET /api/admin/all_movement HTTP/1.1" 200 -
+[2026-03-22 14:47:24] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:24] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:47:24] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:24] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:47:24] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:24] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:47:24] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:24] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:47:31] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:47:31] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:31] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:47:31] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:31] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:47:31] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 14:47:31] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:31] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 14:47:31] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:47:31] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:31] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 14:47:33] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:47:33] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:33] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 14:47:35] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:47:35] - INFO - 127.0.0.1 - - [22/Mar/2026 14:47:35] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 14:49:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:32] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:49:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:32] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:49:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:32] "GET /static/style.css HTTP/1.1" 200 -
+[2026-03-22 14:49:32] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:32] "GET /static/script.js HTTP/1.1" 200 -
+[2026-03-22 14:49:39] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:49:39] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:39] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:49:39] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:39] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:49:40] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 14:49:40] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:40] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 14:49:40] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:40] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:49:42] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:42] "GET /admin/members HTTP/1.1" 200 -
+[2026-03-22 14:49:46] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:46] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:49:46] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:46] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:49:46] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:46] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:49:46] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:46] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:49:55] - INFO - User: 'priya' (Role: Student) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:49:55] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:55] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:49:55] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:55] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:49:55] - INFO - User: 'priya' (Role: Student) | Action: Viewed FULL portfolio of Member ID 110 | Status: SUCCESS
+[2026-03-22 14:49:55] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:55] "GET /portfolio/110 HTTP/1.1" 200 -
+[2026-03-22 14:49:58] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:58] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:49:58] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:58] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:49:58] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:58] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:49:58] - INFO - 127.0.0.1 - - [22/Mar/2026 14:49:58] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:50:06] - INFO - User: 'riya' (Role: Warden) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:50:06] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:06] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:50:06] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:06] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:50:06] - INFO - User: 'riya' (Role: Warden) | Action: Viewed FULL portfolio of Member ID 102 | Status: SUCCESS
+[2026-03-22 14:50:06] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:06] "GET /portfolio/102 HTTP/1.1" 200 -
+[2026-03-22 14:50:06] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:06] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 14:50:09] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:09] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 14:50:09] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 14:50:09] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:09] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 14:50:09] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:09] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 14:50:16] - INFO - User: 'security' (Role: Security) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 14:50:16] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:16] "POST /login HTTP/1.1" 200 -
+[2026-03-22 14:50:16] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:16] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 14:50:16] - INFO - User: 'security' (Role: Security) | Action: Viewed FULL portfolio of Member ID 120 | Status: SUCCESS
+[2026-03-22 14:50:16] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:16] "GET /portfolio/120 HTTP/1.1" 200 -
+[2026-03-22 14:50:16] - INFO - User: 'security' (Role: Security) | Action: Security Guard viewed dashboard for Hostel 1 | Status: SUCCESS
+[2026-03-22 14:50:16] - INFO - 127.0.0.1 - - [22/Mar/2026 14:50:16] "GET /api/security/dashboard HTTP/1.1" 200 -
+[2026-03-22 15:20:56] - INFO - 127.0.0.1 - - [22/Mar/2026 15:20:56] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 15:20:56] - INFO - 127.0.0.1 - - [22/Mar/2026 15:20:56] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 15:20:56] - INFO - 127.0.0.1 - - [22/Mar/2026 15:20:56] "GET /static/style.css HTTP/1.1" 200 -
+[2026-03-22 15:20:56] - INFO - 127.0.0.1 - - [22/Mar/2026 15:20:56] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 15:21:48] - INFO - 127.0.0.1 - - [22/Mar/2026 15:21:48] "GET / HTTP/1.1" 200 -
+[2026-03-22 15:22:11] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:11] "[31m[1mGET /isAuth HTTP/1.1[0m" 401 -
+[2026-03-22 15:22:23] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:23] "GET /dashboard HTTP/1.1" 200 -
+[2026-03-22 15:22:23] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:23] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-03-22 15:22:23] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-03-22 15:22:23] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:23] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-03-22 15:22:32] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-03-22 15:22:32] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:32] "POST /login HTTP/1.1" 200 -
+[2026-03-22 15:22:32] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:32] "GET /isAuth HTTP/1.1" 200 -
+[2026-03-22 15:22:32] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-03-22 15:22:32] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:32] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-03-22 15:22:32] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:32] "GET /admin/stats HTTP/1.1" 200 -
+[2026-03-22 15:22:39] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:39] "[31m[1mGET /isAuth HTTP/1.1[0m" 401 -
+[2026-03-22 15:22:41] - INFO - 127.0.0.1 - - [22/Mar/2026 15:22:41] "[31m[1mGET /isAuth HTTP/1.1[0m" 401 -
+[2026-03-22 15:24:19] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\utils.py', reloading
+[2026-03-22 15:24:20] - INFO -  * Restarting with stat
+[2026-03-22 15:24:21] - WARNING -  * Debugger is active!
+[2026-03-22 15:24:21] - INFO -  * Debugger PIN: 111-122-564
+[2026-03-22 15:24:34] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Module B\\app\\utils.py', reloading
+[2026-03-22 15:24:34] - INFO -  * Restarting with stat
+[2026-03-22 15:24:35] - WARNING -  * Debugger is active!
+[2026-03-22 15:24:35] - INFO -  * Debugger PIN: 111-122-564

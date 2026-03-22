@@ -12,7 +12,6 @@ async function login() {
   const data = await response.json();
 
   if (response.ok) {
-    // Save the JWT token to local storage
     localStorage.setItem("session_token", data["session token"]);
     document.getElementById("login-error").innerText = "";
     loadPortfolio();
@@ -26,7 +25,6 @@ async function loadPortfolio() {
   const token = localStorage.getItem("session_token");
   if (!token) return;
 
-  // Check Authentication
   const authResponse = await fetch("/isAuth", {
     headers: { Authorization: "Bearer " + token },
   });
@@ -40,7 +38,6 @@ async function loadPortfolio() {
   const memberId = tokenPayload.member_id;
   const role = tokenPayload.role ? tokenPayload.role.trim().toLowerCase() : "";
 
-  // Fetch Data
   const portResponse = await fetch(`/portfolio/${memberId}`, {
     headers: { Authorization: "Bearer " + token },
   });
@@ -54,7 +51,6 @@ async function loadPortfolio() {
       return;
     }
 
-    // Dashboard
     document.getElementById("login-section").classList.add("hidden");
     document.getElementById("portfolio-section").classList.remove("hidden");
 
@@ -66,7 +62,6 @@ async function loadPortfolio() {
     if (document.getElementById("admin-complaints-results"))
       document.getElementById("admin-complaints-results").innerHTML = "";
 
-    // Populate Header and Details
     if (document.getElementById("display-name"))
       document.getElementById("display-name").innerText =
         profile.First_Name || "User";
@@ -85,7 +80,6 @@ async function loadPortfolio() {
     if (eH) eH.innerText = profile.Hostel_Name || "Unassigned";
     if (eR) eR.innerText = profile.Room_Number || "N/A";
 
-    // Handle Image
     const profileImg = document.getElementById("port-profile-pic");
     if (profileImg) {
       const path = profile.Image_Path || "";
@@ -98,7 +92,6 @@ async function loadPortfolio() {
       }
     }
 
-    // Populate Payments
     let payHtml =
       portData.payments.length > 0 ? "<ul>" : "<p>No payments found.</p>";
     portData.payments.forEach((p) => {
@@ -107,7 +100,6 @@ async function loadPortfolio() {
     if (portData.payments.length > 0) payHtml += "</ul>";
     document.getElementById("port-payments").innerHTML = payHtml;
 
-    // Populate Complaints
     let compHtml =
       portData.complaints.length > 0 ? "<ul>" : "<p>No complaints found.</p>";
     portData.complaints.forEach((c) => {
@@ -129,6 +121,7 @@ async function loadPortfolio() {
     const liHostelName = document.getElementById("li-hostel-name");
     const liRoom = document.getElementById("li-room");
     const overviewTitle = document.getElementById("overview-title");
+    const adminOverviewTitle = document.getElementById("admin-overview-title");
 
     const allSections = [
       studentSections,
@@ -139,6 +132,7 @@ async function loadPortfolio() {
       securityTabs,
       securityStatsCard,
     ];
+
     allSections.forEach((el) => {
       if (el) {
         el.classList.add("hidden");
@@ -150,20 +144,20 @@ async function loadPortfolio() {
       if (li) li.style.setProperty("display", "list-item", "important");
     });
 
-    // Hide All action buttons globally first
     document
       .querySelectorAll(".shared-btn, .admin-only, .warden-only")
       .forEach((btn) => {
         btn.style.setProperty("display", "none", "important");
       });
 
-    // Role Specific Logic
     if (role === "admin") {
       if (adminStatsCard) {
         adminStatsCard.classList.remove("hidden");
         adminStatsCard.style.setProperty("display", "block", "important");
       }
-      if (overviewTitle) overviewTitle.innerText = " Overall System Overview";
+      if (adminOverviewTitle)
+        adminOverviewTitle.innerText = "Overall System Overview";
+
       if (liHostelId)
         liHostelId.style.setProperty("display", "none", "important");
       if (liHostelName)
@@ -175,7 +169,6 @@ async function loadPortfolio() {
         adminSection.style.setProperty("display", "block", "important");
       }
 
-      // Show Admin & Shared, Hide Warden
       document
         .querySelectorAll(".shared-btn")
         .forEach((btn) =>
@@ -193,7 +186,8 @@ async function loadPortfolio() {
         adminStatsCard.classList.remove("hidden");
         adminStatsCard.style.setProperty("display", "block", "important");
       }
-      if (overviewTitle) overviewTitle.innerText = "Warden Overview";
+      if (adminOverviewTitle)
+        adminOverviewTitle.innerText = " Warden Overview";
       if (liRoom) liRoom.style.setProperty("display", "none", "important");
 
       if (adminSection) {
@@ -201,7 +195,6 @@ async function loadPortfolio() {
         adminSection.style.setProperty("display", "block", "important");
       }
 
-      // Show Warden & Shared, Hide Admin
       document
         .querySelectorAll(".shared-btn")
         .forEach((btn) =>
@@ -219,7 +212,8 @@ async function loadPortfolio() {
         securitySection.classList.remove("hidden");
         securitySection.style.setProperty("display", "block", "important");
       }
-      if (overviewTitle) overviewTitle.innerText = "Security Gate Management";
+      if (overviewTitle)
+        overviewTitle.innerText = "Security Gate Management";
 
       if (securityTabs) {
         securityTabs.classList.remove("hidden");
@@ -235,8 +229,7 @@ async function loadPortfolio() {
 
       fetchSecurityDashboard();
     } else {
-      // Student logic
-      if (overviewTitle) overviewTitle.innerText = "🏠 Student Dashboard";
+      if (overviewTitle) overviewTitle.innerText = "Student Dashboard";
       if (studentSections) {
         studentSections.classList.remove("hidden");
         studentSections.style.setProperty("display", "block", "important");
@@ -252,35 +245,31 @@ async function loadPortfolio() {
 // Admin Fetch All Members
 async function fetchAllMembers() {
   const token = localStorage.getItem("session_token");
-
   const response = await fetch("/admin/members", {
     headers: { Authorization: "Bearer " + token },
   });
-
   const data = await response.json();
 
   if (response.ok) {
-    let html =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'>";
-
+    let html = "<table class='data-table'>";
     html +=
-      "<tr style='background-color: #f2f2f2;'><th>ID</th><th>Name</th><th>Email</th><th>Hostel</th><th>Room</th><th>Status</th><th>Action</th></tr>";
+      "<tr class='table-header'><th>ID</th><th>Name</th><th>Email</th><th>Hostel</th><th>Room</th><th>Status</th><th>Action</th></tr>";
 
     data.members.forEach((m) => {
-      let statusColor = m.Status === "Active" ? "green" : "red";
+      let statusClass =
+        m.Status === "Active" ? "status-active" : "status-inactive";
 
       html += `<tr>
-                            <td>${m.Member_ID}</td>
-                            <td>${m.First_Name} ${m.Last_Name || ""}</td>
-                            <td>${m.Email}</td>
-                            <td><strong>${m.Hostel_Name || '<span style="color:gray;">Unassigned</span>'}</strong></td>
-                            <td><strong>${m.Room_Number || '<span style="color:gray;">N/A</span>'}</strong></td>
-                            
-                            <td style="color: ${statusColor}; font-weight: bold;">${m.Status}</td>
-                            <td>
-                                <button onclick="openEditForm(${m.Member_ID}, '${m.Contact_Number}', '${m.Status}')" style="background: #f39c12; color: white; padding: 4px 8px; font-size: 12px; border: none; cursor: pointer; border-radius: 3px;">Edit</button>
-                            </td>
-                         </tr>`;
+                <td>${m.Member_ID}</td>
+                <td>${m.First_Name} ${m.Last_Name || ""}</td>
+                <td>${m.Email}</td>
+                <td><strong>${m.Hostel_Name || '<span class="text-muted">Unassigned</span>'}</strong></td>
+                <td><strong>${m.Room_Number || '<span class="text-muted">N/A</span>'}</strong></td>
+                <td class="${statusClass}">${m.Status}</td>
+                <td style="text-align: center;">
+                    <button class="btn-edit" onclick="openEditForm(${m.Member_ID}, '${m.Contact_Number}', '${m.Status}')">Edit</button>
+                </td>
+             </tr>`;
     });
     html += "</table>";
     document.getElementById("admin-results").innerHTML = html;
@@ -292,14 +281,11 @@ async function fetchAllMembers() {
 // Admin: Edit Form
 function openEditForm(id, contact, status) {
   document.getElementById("update-member-form").classList.remove("hidden");
-
-  document.getElementById("add-member-form").classList.add("hidden");
+  document.getElementById("tab-add-member").classList.add("hidden");
 
   document.getElementById("update-id").value = id;
   document.getElementById("update-contact").value = contact;
   document.getElementById("update-status").value = status;
-
-  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 }
 
 // Admin: Submit the Update
@@ -339,44 +325,40 @@ async function fetchComplaints() {
   const data = await response.json();
 
   if (response.ok) {
-    let html =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'>";
-
+    let html = "<table class='data-table'>";
     html +=
-      "<tr style='background-color: #f2f2f2;'><th>Date</th><th>Submitted By</th><th>Hostel</th><th>Room</th><th>Type</th><th>Description</th><th>Status</th><th>Action</th></tr>";
+      "<tr class='table-header'><th>Date</th><th>Submitted By</th><th>Hostel</th><th>Room</th><th>Type</th><th>Description</th><th>Status</th><th>Action</th></tr>";
 
     data.complaints.forEach((c) => {
-      // Safely format the date
       let formattedDate = new Date(c.Submission_Date).toLocaleDateString(
         "en-GB",
       );
+      let textStatusClass =
+        c.Status === "Pending" ? "text-danger" : "text-success";
 
-      // Create the Status Dropdown
       let statusDropdown = `
-                    <select onchange="updateComplaintStatus(${c.Complaint_ID}, this.value)" style="color: ${c.Status === "Pending" ? "red" : "green"}; font-weight: bold; padding: 4px;">
-                        <option value="Pending" ${c.Status === "Pending" ? "selected" : ""}>Pending</option>
-                        <option value="In Progress" ${c.Status === "In Progress" ? "selected" : ""}>In Progress</option>
-                        <option value="Resolved" ${c.Status === "Resolved" ? "selected" : ""}>Resolved</option>
-                    </select>
-                `;
+        <select class="status-select ${textStatusClass}" onchange="updateComplaintStatus(${c.Complaint_ID}, this.value)">
+            <option value="Pending" ${c.Status === "Pending" ? "selected" : ""}>Pending</option>
+            <option value="In Progress" ${c.Status === "In Progress" ? "selected" : ""}>In Progress</option>
+            <option value="Resolved" ${c.Status === "Resolved" ? "selected" : ""}>Resolved</option>
+        </select>
+      `;
 
-      // The Data Rows
       html += `<tr>
-                            <td>${formattedDate}</td>
-                            <td>${c.First_Name} ${c.Last_Name || ""}</td>
-                            <td><strong>${c.Hostel_Name || '<span style="color:gray;">Unassigned</span>'}</strong></td>
-                            <td><strong>${c.Room_Number || '<span style="color:gray;">N/A</span>'}</strong></td>
-                            <td>${c.Type_Name}</td>
-                            <td>${c.Description}</td>
-                            <td>${statusDropdown}</td>
-                            <td>
-                                <button onclick="deleteComplaint(${c.Complaint_ID})" style="background: #e74c3c; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Delete</button>
-                            </td>
-                         </tr>`;
+                <td>${formattedDate}</td>
+                <td>${c.First_Name} ${c.Last_Name || ""}</td>
+                <td><strong>${c.Hostel_Name || '<span class="text-muted">Unassigned</span>'}</strong></td>
+                <td><strong>${c.Room_Number || '<span class="text-muted">N/A</span>'}</strong></td>
+                <td>${c.Type_Name}</td>
+                <td>${c.Description}</td>
+                <td>${statusDropdown}</td>
+                <td style="text-align: center;">
+                    <button class="btn-delete" onclick="deleteComplaint(${c.Complaint_ID})">Delete</button>
+                </td>
+             </tr>`;
     });
 
     html += "</table>";
-
     document.getElementById("admin-complaints-results").innerHTML = html;
   } else {
     alert("Error loading complaints: " + data.error);
@@ -425,10 +407,8 @@ async function submitNewMember() {
 
     if (response.ok) {
       alert("Success! The member has been added to the database.");
-
       document.getElementById("tab-add-member").classList.add("hidden");
 
-      // Clear the form fields
       document.getElementById("new-fname").value = "";
       document.getElementById("new-lname").value = "";
       document.getElementById("new-email").value = "";
@@ -445,14 +425,12 @@ async function submitNewMember() {
   }
 }
 
-// Student: Submit a New Complaint
 function updateSubcategories() {
   const category = document.getElementById("complaint-category").value;
   const subSelect = document.getElementById("new-complaint-type");
 
   subSelect.innerHTML = '<option value="">Select Subcategory</option>';
 
-  // Mapping based on the SQL table we have created
   const subTypeMap = {
     Electrical: [
       { id: 1, label: "Fan/Light" },
@@ -480,30 +458,25 @@ function updateSubcategories() {
   }
 }
 
-// Student: Submit a New Complaint
 async function submitComplaint() {
   const typeId = document.getElementById("new-complaint-type").value;
   const description = document.getElementById("new-complaint-desc").value;
 
-  // Validate Subcategory
   if (!typeId) {
     alert("Please select a valid Category and Subcategory.");
     return;
   }
 
-  // Validate Description
   if (!description.trim()) {
     alert("Please provide a description for your complaint.");
     return;
   }
 
-  // Prepare the Data
   const payload = {
     type_id: typeId,
     description: description,
   };
 
-  // Send to Python Backend
   const token = localStorage.getItem("session_token");
   try {
     const response = await fetch("/portfolio/complaints", {
@@ -519,8 +492,8 @@ async function submitComplaint() {
 
     if (response.ok) {
       alert("Success! Your complaint has been submitted.");
-      document.getElementById("new-complaint-desc").value = ""; // Clear the text box
-      window.location.reload(); // Refresh to show the new complaint!
+      document.getElementById("new-complaint-desc").value = "";
+      window.location.reload();
     } else {
       alert("Backend Error: " + data.error);
     }
@@ -530,7 +503,6 @@ async function submitComplaint() {
   }
 }
 
-// Admin: Delete a Complaint
 async function deleteComplaint(complaintId) {
   if (
     !confirm(
@@ -539,18 +511,13 @@ async function deleteComplaint(complaintId) {
   ) {
     return;
   }
-
   const token = localStorage.getItem("session_token");
-
   const response = await fetch("/admin/complaints/" + complaintId, {
     method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
+    headers: { Authorization: "Bearer " + token },
   });
 
   const data = await response.json();
-
   if (response.ok) {
     alert("Success! The complaint has been deleted.");
     fetchComplaints();
@@ -559,10 +526,8 @@ async function deleteComplaint(complaintId) {
   }
 }
 
-// Admin: Update Complaint Status
 async function updateComplaintStatus(complaintId, newStatus) {
   const token = localStorage.getItem("session_token");
-
   const response = await fetch("/admin/complaints/" + complaintId, {
     method: "PUT",
     headers: {
@@ -573,7 +538,6 @@ async function updateComplaintStatus(complaintId, newStatus) {
   });
 
   const data = await response.json();
-
   if (response.ok) {
     fetchComplaints();
   } else {
@@ -582,10 +546,8 @@ async function updateComplaintStatus(complaintId, newStatus) {
   }
 }
 
-// Admin Tab Switcher
 function openAdminTab(tabName) {
   const targetTab = document.getElementById("tab-" + tabName);
-
   const isAlreadyOpen = !targetTab.classList.contains("hidden");
 
   const allTabs = document.querySelectorAll(".admin-tab-content");
@@ -594,16 +556,11 @@ function openAdminTab(tabName) {
   });
 
   const updateForm = document.getElementById("update-member-form");
-  if (updateForm) {
-    updateForm.classList.add("hidden");
-  }
+  if (updateForm) updateForm.classList.add("hidden");
 
-  if (!isAlreadyOpen) {
-    targetTab.classList.remove("hidden");
-  }
+  if (!isAlreadyOpen) targetTab.classList.remove("hidden");
 }
 
-// Fetc Admin StatsBoard
 async function fetchAdminStats() {
   const token = localStorage.getItem("session_token");
   if (!token) return;
@@ -613,7 +570,6 @@ async function fetchAdminStats() {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
     });
-
     const data = await response.json();
 
     if (response.ok) {
@@ -628,7 +584,6 @@ async function fetchAdminStats() {
   }
 }
 
-// Fetch Security Dashboard
 async function fetchSecurityDashboard() {
   const token = localStorage.getItem("session_token");
   const response = await fetch("/api/security/dashboard", {
@@ -637,7 +592,6 @@ async function fetchSecurityDashboard() {
   const data = await response.json();
 
   if (response.ok) {
-    // Update Hostel Name and Stats
     document.getElementById("sec-hostel-name-stat").innerText =
       data.hostel_name;
     document.getElementById("stat-sec-visitors").innerText =
@@ -645,49 +599,41 @@ async function fetchSecurityDashboard() {
     document.getElementById("stat-sec-outside").innerText =
       data.outside_students.length;
 
-    // Build Visitors Table
     let visHtml =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'><tr style='background-color: #f2f2f2;'><th>Visitor</th><th>Visiting</th><th>Room</th><th>Purpose</th><th>Entry Time</th><th>Action</th></tr>";
+      "<table class='data-table'><tr class='table-header'><th>Visitor</th><th>Visiting</th><th>Room</th><th>Purpose</th><th>Entry Time</th><th>Action</th></tr>";
 
     data.active_visitors.forEach((v) => {
       visHtml += `<tr>
-                <td style="padding:8px;">${v.Visitor_Name}</td>
-                <td style="padding:8px;">${v.Visiting_Student}</td>
-                <td style="padding:8px;">${v.Room_Number}</td>
-                <td style="padding:8px;">${v.Purpose}</td>
-                <td style="padding:8px;">${new Date(v.Entry_Time).toLocaleString("en-GB")}</td>
-                <td style="padding:8px; text-align:center;">
-                    <button onclick="markVisitorExited(${v.Log_ID})" style="background: #e74c3c; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">
-                        Sign Out
-                    </button>
+                <td>${v.Visitor_Name}</td>
+                <td>${v.Visiting_Student}</td>
+                <td>${v.Room_Number}</td>
+                <td>${v.Purpose}</td>
+                <td>${new Date(v.Entry_Time).toLocaleString("en-GB")}</td>
+                <td style="text-align:center;">
+                    <button class="btn-action-red" onclick="markVisitorExited(${v.Log_ID})">Sign Out</button>
                 </td>
             </tr>`;
     });
-
     visHtml += "</table>";
     document.getElementById("sec-visitors-table").innerHTML =
       data.active_visitors.length > 0
         ? visHtml
         : "<p>No visitors currently inside.</p>";
 
-    //Build Students Outside Table
     let outHtml =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'><tr style='background-color: #f2f2f2;'><th>Student Name</th><th>Contact</th><th>Exit Time</th><th>Purpose</th><th>Action</th></tr>";
+      "<table class='data-table'><tr class='table-header'><th>Student Name</th><th>Contact</th><th>Exit Time</th><th>Purpose</th><th>Action</th></tr>";
 
     data.outside_students.forEach((s) => {
       outHtml += `<tr>
-                <td style="padding:8px;">${s.First_Name} ${s.Last_Name || ""}</td>
-                <td style="padding:8px;">${s.Contact_Number}</td>
-                <td style="padding:8px;">${new Date(s.Exit_Time).toLocaleString("en-GB")}</td>
-                <td style="padding:8px;">${s.Purpose}</td>
-                <td style="padding:8px; text-align:center;">
-                    <button onclick="markStudentReturned(${s.Log_ID})" style="background: #27ae60; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">
-                        Sign In
-                    </button>
+                <td>${s.First_Name} ${s.Last_Name || ""}</td>
+                <td>${s.Contact_Number}</td>
+                <td>${new Date(s.Exit_Time).toLocaleString("en-GB")}</td>
+                <td>${s.Purpose}</td>
+                <td style="text-align:center;">
+                    <button class="btn-action-green" onclick="markStudentReturned(${s.Log_ID})">Sign In</button>
                 </td>
             </tr>`;
     });
-
     outHtml += "</table>";
     document.getElementById("sec-students-table").innerHTML =
       data.outside_students.length > 0
@@ -698,7 +644,6 @@ async function fetchSecurityDashboard() {
   }
 }
 
-// Fetch Furniture Details
 async function fetchFurniture() {
   const token = localStorage.getItem("session_token");
   const response = await fetch("/api/warden/furniture", {
@@ -708,27 +653,23 @@ async function fetchFurniture() {
 
   if (response.ok) {
     let html =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'><tr style='background-color: #f2f2f2;'><th>Asset Type</th><th>Total Quantity</th><th>Status</th></tr>";
+      "<table class='data-table'><tr class='table-header'><th>Asset Type</th><th>Total Quantity</th><th>Status</th></tr>";
     data.forEach((item) => {
       let status =
         item.Needs_Repair > 0
-          ? `<span style="color:red; font-weight:bold;">${item.Needs_Repair} Damaged</span>`
-          : `<span style="color:green; font-weight:bold;">Good</span>`;
-      html += `<tr><td style="padding:8px;"><strong>${item.Item_Name}</strong></td><td style="padding:8px;">${item.Total_Quantity} units</td><td style="padding:8px;">${status}</td></tr>`;
+          ? `<span class="text-danger">${item.Needs_Repair} Damaged</span>`
+          : `<span class="text-success">Good</span>`;
+      html += `<tr><td><strong>${item.Item_Name}</strong></td><td>${item.Total_Quantity} units</td><td>${status}</td></tr>`;
     });
     html += `</table>`;
     document.getElementById("warden-furniture-results").innerHTML = html;
   }
 }
 
-// Mark Visitor Exited
 async function markVisitorExited(logId) {
-  if (!confirm("Are you sure you want to sign this visitor out?")) {
-    return;
-  }
+  if (!confirm("Are you sure you want to sign this visitor out?")) return;
 
   const token = localStorage.getItem("session_token");
-
   try {
     const response = await fetch(`/api/security/visitors/${logId}/exit`, {
       method: "PUT",
@@ -739,7 +680,6 @@ async function markVisitorExited(logId) {
     });
 
     const data = await response.json();
-
     if (response.ok) {
       fetchSecurityDashboard();
     } else {
@@ -751,7 +691,6 @@ async function markVisitorExited(logId) {
   }
 }
 
-// Warden's hostel Movement details
 async function fetchWardenMovement() {
   const token = localStorage.getItem("session_token");
   const response = await fetch("/api/warden/movement", {
@@ -761,27 +700,27 @@ async function fetchWardenMovement() {
 
   if (response.ok) {
     let html =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'><tr style='background-color: #f2f2f2;'><th>Student</th><th>Room</th><th>Exit Time</th><th>Return Time</th><th>Purpose</th><th>Action</th></tr>";
+      "<table class='data-table'><tr class='table-header'><th>Student</th><th>Room</th><th>Exit Time</th><th>Return Time</th><th>Purpose</th><th>Action</th></tr>";
 
     data.forEach((log) => {
       let returnTime = log.Entry_Time
         ? new Date(log.Entry_Time).toLocaleString("en-GB")
-        : '<span style="color:red; font-weight:bold;">Currently Outside</span>';
+        : '<span class="text-danger">Currently Outside</span>';
 
       let actionBtn = "";
       if (!log.Entry_Time) {
-        actionBtn = `<button onclick="markStudentReturned(${log.Log_ID})" style="background: #27ae60; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">Sign In</button>`;
+        actionBtn = `<button class="btn-action-green" onclick="markStudentReturned(${log.Log_ID})">Sign In</button>`;
       } else {
-        actionBtn = `<span style="color: gray; font-size: 12px;">Returned</span>`;
+        actionBtn = `<span class="text-muted text-sm">Returned</span>`;
       }
 
       html += `<tr>
-        <td style="padding:8px;">${log.First_Name} ${log.Last_Name || ""}</td>
-        <td style="padding:8px;">${log.Room_Number}</td>
-        <td style="padding:8px;">${new Date(log.Exit_Time).toLocaleString("en-GB")}</td>
-        <td style="padding:8px;">${returnTime}</td>
-        <td style="padding:8px;">${log.Purpose}</td>
-        <td style="padding:8px; text-align:center;">${actionBtn}</td>
+        <td>${log.First_Name} ${log.Last_Name || ""}</td>
+        <td>${log.Room_Number}</td>
+        <td>${new Date(log.Exit_Time).toLocaleString("en-GB")}</td>
+        <td>${returnTime}</td>
+        <td>${log.Purpose}</td>
+        <td style="text-align:center;">${actionBtn}</td>
       </tr>`;
     });
 
@@ -790,14 +729,10 @@ async function fetchWardenMovement() {
   }
 }
 
-// Mark Student Returned
 async function markStudentReturned(logId) {
-  if (!confirm("Confirm this student has returned to the hostel?")) {
-    return;
-  }
+  if (!confirm("Confirm this student has returned to the hostel?")) return;
 
   const token = localStorage.getItem("session_token");
-
   try {
     const response = await fetch(`/api/movement/${logId}/return`, {
       method: "PUT",
@@ -808,12 +743,16 @@ async function markStudentReturned(logId) {
     });
 
     const data = await response.json();
-
     if (response.ok) {
-      const role = localStorage.getItem("user_role");
-      if (role === "security") {
+      const role = localStorage.getItem("user_role"); // Warning: this role lookup might be undefined depending on your login logic, consider pulling from tokenPayload instead
+      if (
+        document.getElementById("security-section") &&
+        !document
+          .getElementById("security-section")
+          .classList.contains("hidden")
+      ) {
         fetchSecurityDashboard();
-      } else if (role === "warden" || role === "admin") {
+      } else {
         if (typeof fetchWardenMovement === "function") fetchWardenMovement();
       }
     } else {
@@ -825,7 +764,6 @@ async function markStudentReturned(logId) {
   }
 }
 
-// Fetch Global Details for Admin
 async function fetchAdminGlobal(type) {
   let url = "";
   let title = "";
@@ -851,13 +789,11 @@ async function fetchAdminGlobal(type) {
   const data = await response.json();
 
   if (response.ok) {
-    let html =
-      "<table border='1' width='100%' style='border-collapse: collapse; text-align: left; background: white;'>";
+    let html = "<table class='data-table'>";
     if (data.length > 0) {
-      html += `<tr style='background-color: #f2f2f2;'>`;
+      html += `<tr class='table-header'>`;
       Object.keys(data[0]).forEach(
-        (key) =>
-          (html += `<th style="padding:8px;">${key.replace(/_/g, " ")}</th>`),
+        (key) => (html += `<th>${key.replace(/_/g, " ")}</th>`),
       );
       html += `</tr>`;
       data.forEach((row) => {
@@ -865,12 +801,12 @@ async function fetchAdminGlobal(type) {
         Object.values(row).forEach((val) => {
           let displayVal =
             val === null
-              ? '<span style="color:red; font-weight:bold;">Pending / Inside</span>'
+              ? '<span class="text-danger">Pending / Inside</span>'
               : val;
           if (typeof val === "string" && val.includes("GMT")) {
             displayVal = new Date(val).toLocaleString("en-GB");
           }
-          html += `<td style="padding:8px;">${displayVal}</td>`;
+          html += `<td>${displayVal}</td>`;
         });
         html += `</tr>`;
       });
@@ -882,7 +818,6 @@ async function fetchAdminGlobal(type) {
   }
 }
 
-// Security Page Buttons
 function openSecurityModal(type) {
   document.getElementById("sec-modal-visitors").classList.add("hidden");
   document.getElementById("sec-modal-students").classList.add("hidden");
@@ -896,7 +831,6 @@ function openSecurityModal(type) {
   fetchSecurityDashboard();
 }
 
-// Check Available Rooms to add members
 async function checkAvailableRooms() {
   const hostelId = document.getElementById("new-hostel-id").value;
   const roomsListDiv = document.getElementById("available-rooms-list");
@@ -935,7 +869,6 @@ async function checkAvailableRooms() {
   }
 }
 
-// Modal Controls
 function openAddVisitorModal() {
   const modal = document.getElementById("modal-add-visitor");
   modal.classList.remove("hidden");
@@ -948,32 +881,26 @@ function closeAddVisitorModal() {
   modal.style.setProperty("display", "none", "important");
 }
 
-// Live Student Search to get details for Visitor Log
 let searchTimeout = null;
 
 async function searchStudent() {
   const query = document.getElementById("vis-student-search").value;
   const resultsDiv = document.getElementById("student-search-results");
 
-  // Clear the hidden ID if they start typing something new
   document.getElementById("vis-host-id").value = "";
 
-  // Only search if they typed at least 2 characters
   if (query.length < 2) {
     resultsDiv.style.display = "none";
     return;
   }
 
-  // Delay the search by 300ms to avoid overloading the database
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(async () => {
     const token = localStorage.getItem("session_token");
     try {
       const response = await fetch(
         `/api/security/search-student?q=${encodeURIComponent(query)}`,
-        {
-          headers: { Authorization: "Bearer " + token },
-        },
+        { headers: { Authorization: "Bearer " + token } },
       );
       const data = await response.json();
 
@@ -985,23 +912,15 @@ async function searchStudent() {
             `${student.First_Name} ${student.Last_Name || ""}`.trim();
           const div = document.createElement("div");
 
-          // Style the dropdown row
-          div.style.padding = "10px";
-          div.style.cursor = "pointer";
-          div.style.borderBottom = "1px solid #eee";
-          div.style.transition = "background 0.2s";
-          div.innerHTML = `<strong style="color:#2c3e50;">${fullName}</strong> (Room: ${student.Room_Number}) <br><small style="color:#7f8c8d;">📞 ${student.Contact_Number}</small>`;
+          // Using our new clean CSS class!
+          div.className = "search-result-item";
+          div.innerHTML = `<strong class="text-dark-blue">${fullName}</strong> (Room: ${student.Room_Number}) <br><small class="text-muted">📞 ${student.Contact_Number}</small>`;
 
-          // Add Hover Effect
-          div.onmouseover = () => (div.style.background = "#f2f9ff");
-          div.onmouseout = () => (div.style.background = "white");
-
-          // Fill the input and save the ID
           div.onclick = () => {
             document.getElementById("vis-student-search").value =
               `${fullName} (Room ${student.Room_Number})`;
             document.getElementById("vis-host-id").value = student.Member_ID;
-            resultsDiv.style.display = "none"; // Hide dropdown
+            resultsDiv.style.display = "none";
           };
 
           resultsDiv.appendChild(div);
@@ -1009,7 +928,7 @@ async function searchStudent() {
         resultsDiv.style.display = "block";
       } else {
         resultsDiv.innerHTML =
-          '<div style="padding:10px; color:#e74c3c; text-align:center;">No active students found.</div>';
+          '<div class="search-no-results">No active students found.</div>';
         resultsDiv.style.display = "block";
       }
     } catch (err) {
@@ -1018,7 +937,6 @@ async function searchStudent() {
   }, 300);
 }
 
-// Submit Function
 async function submitNewVisitor() {
   const payload = {
     visitor_name: document.getElementById("vis-name").value,
@@ -1029,13 +947,11 @@ async function submitNewVisitor() {
     purpose: document.getElementById("vis-purpose").value,
   };
 
-  // Simple Validation
   if (!payload.visitor_name || !payload.id_number || !payload.host_id) {
     alert("Please fill in all required fields.");
     return;
   }
 
-  // Send to Python Backend
   const token = localStorage.getItem("session_token");
   try {
     const response = await fetch("/api/security/visitors", {
@@ -1071,12 +987,8 @@ async function submitNewVisitor() {
   }
 }
 
-// LogOut Function
 function logout() {
-  // Delete the security token
   localStorage.removeItem("session_token");
-
-  // Force a full page reload
   window.location.reload();
 }
 
