@@ -1,65 +1,88 @@
+# db_manager.py
 from table import Table
 
+
 class DatabaseManager:
-    """
-    The central registry for your DBMS.
-    It manages multiple tables, ensuring they are easily accessible and organized.
-    """
-    
-    def __init__(self, db_name="module_a_db"):
-        """Initializes the database environment."""
-        self.db_name = db_name
-        # Dictionary to store our active tables in memory. 
-        # Format: { 'table_name': Table_Object }
-        self.tables = {}
+    def __init__(self):
+        self.databases = {}  # Dictionary to store databases as {db_name: {table_name: Table instance}}
 
-    def create_table(self, table_name, columns, primary_key, btree_order=4):
+    def create_database(self, db_name):
         """
-        Creates a new Table abstraction and registers it in the manager.
-        
-        Args:
-            table_name (str): The name of the table.
-            columns (list): A list of column names (e.g., ['id', 'name', 'age']).
-            primary_key (str): The column to be used as the B+ Tree index key.
-            btree_order (int): The order of the B+ Tree for this table.
-            
-        Returns:
-            Table: The newly created Table object.
+        Create a new database with the given name.
+        Returns (True, message) on success, (False, message) if already exists.
         """
-        if table_name in self.tables:
-            raise ValueError(f"Error: Table '{table_name}' already exists in database '{self.db_name}'.")
-        
-        # Initialize the Table (which internally initializes the BPlusTree)
-        new_table = Table(
-            name=table_name, 
-            columns=columns, 
-            primary_key=primary_key, 
-            btree_order=btree_order
+        if db_name in self.databases:
+            return (False, f"Database '{db_name}' already exists.")
+        self.databases[db_name] = {}
+        return (True, f"Database '{db_name}' created successfully")
+
+    def delete_database(self, db_name):
+        """
+        Delete an existing database and all its tables.
+        Returns (True, message) on success, (False, message) if not found.
+        """
+        if db_name not in self.databases:
+            return (False, f"Database '{db_name}' does not exist.")
+        del self.databases[db_name]
+        return (True, f"Database '{db_name}' deleted successfully.")
+
+    def list_databases(self):
+        """
+        Return a list of all database names currently managed.
+        """
+        return list(self.databases.keys())
+
+    def create_table(self, db_name, table_name, schema, order=8, search_key=None):
+        """
+        Create a new table within a specified database.
+        Returns (True, message) on success, (False, message) on failure.
+        """
+        if db_name not in self.databases:
+            return (False, f"Database '{db_name}' does not exist. Create it first.")
+        if table_name in self.databases[db_name]:
+            return (False, f"Table '{table_name}' already exists in database '{db_name}'.")
+        self.databases[db_name][table_name] = Table(
+            name=table_name,
+            schema=schema,
+            order=order,
+            search_key=search_key
         )
-        
-        self.tables[table_name] = new_table
-        return new_table
+        return (True, f"Table '{table_name}' created successfully in database '{db_name}'")
 
-    def get_table(self, table_name):
+    def delete_table(self, db_name, table_name):
         """
-        Retrieves an existing table instance so you can run queries on it.
+        Delete a table from the specified database.
+        Returns (True, message) on success, (False, message) on failure.
         """
-        if table_name not in self.tables:
-            raise ValueError(f"Error: Table '{table_name}' does not exist.")
-            
-        return self.tables[table_name]
+        if db_name not in self.databases:
+            return (False, f"Database '{db_name}' does not exist.")
+        if table_name not in self.databases[db_name]:
+            return (False, f"Table '{table_name}' does not exist in database '{db_name}'.")
+        del self.databases[db_name][table_name]
+        return (True, f"Table '{table_name}' deleted from database '{db_name}'.")
 
-    def drop_table(self, table_name):
+    def list_tables(self, db_name):
         """
-        Deletes a table and all its associated data/indexes from the database.
+        List all tables within a given database.
+        Returns (table_names_list, message).
         """
-        if table_name in self.tables:
-            del self.tables[table_name]
-            return True
-        return False
+        if db_name not in self.databases:
+            return ([], f"Database '{db_name}' does not exist.")
+        tables = list(self.databases[db_name].keys())
+        return (tables, f"Tables in '{db_name}': {tables}")
 
-    def show_tables(self):
+    def get_table(self, db_name, table_name):
         """
-        Returns a list of all table names currently in the database.
+        Retrieve a Table instance from a given database.
+        Returns (Table, message) on success, (None, message) on failure.
         """
-        return list(self.tables.keys())
+        if db_name not in self.databases:
+            return (None, f"Database '{db_name}' does not exist.")
+        if table_name not in self.databases[db_name]:
+            return (None, f"Table '{table_name}' does not exist in database '{db_name}'.")
+        table = self.databases[db_name][table_name]
+        return (table, f"Table '{table_name}' retrieved successfully.")
+
+    def __repr__(self):
+        db_summary = {db: list(tables.keys()) for db, tables in self.databases.items()}
+        return f"DatabaseManager(databases={db_summary})"

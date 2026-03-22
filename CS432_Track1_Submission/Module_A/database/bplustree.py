@@ -265,59 +265,109 @@ class BPlusTree:
             
         return results
 
-    def visualize_tree(self):
+    def visualize_tree(self, title="Binary Tree"):
         """
         Generates a Graphviz Digraph to visually map out our nodes and pointers.
         This is explicitly required for the assignment report and video.
         """
         try:
             from graphviz import Digraph
-            # Create the graph, top-to-bottom layout
-            dot = Digraph()
-            dot.attr(rankdir='TB')
-            
-            if self.root:
-                self._add_nodes(dot, self.root)
-                self._add_edges(dot, self.root)
-                
-            return dot
         except ImportError:
-            print("Graphviz is not installed. Run: pip install graphviz")
+            print("Run: pip install graphviz")
             return None
 
+        dot = Digraph()
+        dot.attr(rankdir='TB')
+        # FIX 1: Changed 'ortho' to 'polyline' to respect HTML ports
+        dot.attr('graph', splines='polyline', nodesep='0.8', ranksep='1.2',
+                label=title, labelloc='t', labeljust='c', fontsize='16', fontname='Helvetica-Bold')
+        dot.attr('node', fontname='Helvetica', fontsize='12')
+
+        if self.root:
+            self._add_nodes(dot, self.root)
+            self._add_edges(dot, self.root)
+
+        return dot
+
     def _add_nodes(self, dot, node):
-        """Recursive helper to draw the boxes (records) for each node."""
-        # Use Python's built-in id() to give every node a unique identifier
-        node_id = str(id(node))
-        
-        # Format the keys as a record shape (looks like a little table/array)
-        label = " | ".join(str(k) for k in node.keys)
-        
-        # If the node is completely empty (can happen to the root initially), just show 'Empty'
-        if not label:
-            label = "Empty"
-            
-        dot.node(node_id, f"<{label}>", shape="record")
-        
-        # Recursively draw all the children
+        # FIX 2: Prefixing with "node_" so Graphviz properly parses the ports
+        node_id = f"node_{id(node)}"
+
+        if node.is_leaf:
+            if node.keys:
+                cells = "".join(
+                    f'<TD BORDER="1" PORT="k{i}" CELLPADDING="6" STYLE="ROUNDED">'
+                    f'<FONT COLOR="#1A5276"><B>{k}</B></FONT></TD>'
+                    for i, k in enumerate(node.keys)
+                )
+            else:
+                cells = '<TD BORDER="1" CELLPADDING="6"><I>empty</I></TD>'
+
+            table = (
+                '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="3" CELLPADDING="0">'
+                f'<TR>{cells}</TR>'
+                '</TABLE>>'
+            )
+            dot.node(node_id, label=table, shape='none', margin='0')
+
+        else:
+            num_keys = len(node.keys)
+            cells = ""
+
+            for i in range(num_keys):
+                cells += (
+                    f'<TD BORDER="1" PORT="p{i}" CELLPADDING="6" WIDTH="18" '
+                    f'BGCOLOR="#F0E6D3"> </TD>'
+                )
+                cells += (
+                    f'<TD BORDER="1" CELLPADDING="6" BGCOLOR="#FAD7A0">'
+                    f'<FONT COLOR="#784212"><B>{node.keys[i]}</B></FONT></TD>'
+                )
+
+            cells += (
+                f'<TD BORDER="1" PORT="p{num_keys}" CELLPADDING="6" WIDTH="18" '
+                f'BGCOLOR="#F0E6D3"> </TD>'
+            )
+
+            table = (
+                '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="0">'
+                f'<TR>{cells}</TR>'
+                '</TABLE>>'
+            )
+            dot.node(node_id, label=table, shape='none', margin='0')
+
         if not node.is_leaf:
             for child in node.children:
                 self._add_nodes(dot, child)
 
+
     def _add_edges(self, dot, node):
-        """Recursive helper to draw the solid lines for children and dashed lines for leaves."""
-        node_id = str(id(node))
-        
+        # FIX 2: Apply the exact same prefix here
+        node_id = f"node_{id(node)}"
+
         if not node.is_leaf:
-            # Draw solid arrows down to all children
-            for child in node.children:
-                child_id = str(id(child))
-                dot.edge(node_id, child_id)
-                # Recursively add edges for the children
+            for i, child in enumerate(node.children):
+                child_id = f"node_{id(child)}"
+                dot.edge(
+                    f'{node_id}:p{i}:s',
+                    f'{child_id}:n',
+                    color="#2C3E50",
+                    penwidth="1.5",
+                    arrowsize="0.7"
+                )
                 self._add_edges(dot, child)
+
         elif node.next_leaf:
-            # Draw a dashed arrow pointing to the next leaf in the linked list
-            dot.edge(node_id, str(id(node.next_leaf)), style="dashed", constraint="false")
+            last_port = f'k{len(node.keys) - 1}'
+            next_leaf_id = f"node_{id(node.next_leaf)}"
+            dot.edge(
+                f'{node_id}:{last_port}:e',
+                f'{next_leaf_id}:k0:w',
+                style="dashed",
+                color="#1D8348",
+                constraint="false",
+                arrowsize="0.7"
+            )
 
     def delete(self, key):
         """

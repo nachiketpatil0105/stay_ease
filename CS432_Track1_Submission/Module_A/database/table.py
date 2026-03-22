@@ -1,88 +1,102 @@
+# table.py
 from bplustree import BPlusTree
 
+
 class Table:
-    """
-    Represents a single database table. 
-    It manages the schema (columns) and uses a B+ Tree as its primary storage engine.
-    """
-    def __init__(self, name, columns, primary_key, btree_order=4):
-        self.name = name
-        self.columns = columns  # A list of expected column names, e.g., ['id', 'name', 'role']
-        self.primary_key = primary_key
-        
-        if primary_key not in columns:
-            raise ValueError(f"Primary key '{primary_key}' must be one of the defined columns.")
-            
-        # Initialize the core indexing engine for this specific table
-        self.index = BPlusTree(order=btree_order)
+    def __init__(self, name, schema, order=8, search_key=None):
+        self.name = name                        # Name of the table
+        self.schema = schema                    # Table schema: dict of {column_name: data_type}
+        self.order = order                      # Order of the B+ Tree (max number of children)
+        self.data = BPlusTree(order=order)      # Underlying B+ Tree to store the data
+        self.search_key = search_key            # Primary or search key used for indexing (must be in schema)
+
+    def validate_record(self, record):
+        """
+        Validate that the given record matches the table schema:
+        - All required columns are present
+        - Data types are correct
+        """
+        for col, dtype in self.schema.items():
+            if col not in record:
+                raise ValueError(f"Missing column '{col}' in record.")
+            if not isinstance(record[col], dtype):
+                raise TypeError(
+                    f"Column '{col}' expects {dtype.__name__}, "
+                    f"got {type(record[col]).__name__}."
+                )
+        return True
 
     def insert(self, record):
         """
-        Inserts a new record (dictionary) into the table.
+        Insert a new record into the table.
+        The record should be a dictionary matching the schema.
+        The key used for insertion should be the value of the `search_key` field.
+        Returns (True, key) on success, (False, error_message) on failure.
         """
-        # Validate the record structure
-        if self.primary_key not in record:
-            raise ValueError(f"Record is missing the primary key '{self.primary_key}'.")
-            
-        pk_value = record[self.primary_key]
-        
-        # Enforce Primary Key uniqueness (like a real SQL database)
-        if self.index.search(pk_value) is not None:
-            print(f"Insert Error: Record with {self.primary_key} = {pk_value} already exists.")
-            return False
-            
-        # Store the entire record dictionary as the "value" in the B+ Tree
-        self.index.insert(pk_value, record)
-        return True
+        try:
+            self.validate_record(record)
+            key = record[self.search_key]
+            self.data.insert(key, record)
+            return (True, key)
+        except (ValueError, TypeError) as e:
+            return (False, str(e))
 
-    def select(self, pk_value):
+    def get(self, record_id):
         """
-        Retrieves a single record by its primary key using an exact match search.
+        Retrieve a single record by its ID (i.e., the value of the `search_key`).
+        Returns (True, record) on success, (False, error_message) if not found.
         """
-        return self.index.search(pk_value)
+        result = self.data.search(record_id)
+        if result is not None:
+            return (True, result)
+        return (False, f"Record with id '{record_id}' not found.")
 
-    def update(self, pk_value, updated_fields):
+    def get_all(self):
         """
-        Updates specific fields in an existing record.
+        Retrieve all records stored in the table in sorted order by search key.
+        Returns a list of (key, record) tuples.
         """
-        # Fetch the existing record
-        existing_record = self.index.search(pk_value)
-        if existing_record is None:
-            print(f"Update Error: No record found with {self.primary_key} = {pk_value}.")
-            return False
-            
-        # Apply the updates to the dictionary
-        for column, new_val in updated_fields.items():
-            if column in self.columns:
-                existing_record[column] = new_val
-            else:
-                print(f"Warning: Column '{column}' does not exist in table schema. Ignoring.")
-                
-        # Save it back to the tree
-        return self.index.update(pk_value, existing_record)
+        return self.data.get_all()
 
-    def delete(self, pk_value):
+    def update(self, record_id, new_record):
         """
-        Removes a record from the table based on its primary key.
+        Update a record identified by `record_id` with `new_record` data.
+        Returns (True, 'Record updated') on success, (False, error_message) on failure.
         """
-        success = self.index.delete(pk_value)
-        if not success:
-            print(f"Delete Error: No record found with {self.primary_key} = {pk_value}.")
-        return success
+        try:
+            self.validate_record(new_record)
+            success = self.data.update(record_id, new_record)
+            if success:
+                return (True, "Record updated")
+            return (False, f"Record with id '{record_id}' not found.")
+        except (ValueError, TypeError) as e:
+            return (False, str(e))
 
-    def range_query(self, start_pk, end_pk):
+    def delete(self, record_id):
         """
-        Retrieves all records where the primary key falls within the specified range.
-        Takes advantage of the B+ tree's efficient leaf-node linked list.
+        Delete the record from the table by its `record_id`.
+        Returns (True, 'Record deleted') on success, (False, error_message) on failure.
         """
-        # The B+ tree returns a list of tuples: [(key, value), (key, value)]
-        # We only want to return the actual record dictionaries (the values)
-        results = self.index.range_query(start_pk, end_pk)
-        return [record for key, record in results]
+        success = self.data.delete(record_id)
+        if success:
+            return (True, "Record deleted")
+        return (False, f"Record with id '{record_id}' not found.")
 
-    def select_all(self):
+    def range_query(self, start_value, end_value):
         """
-        Retrieves every record currently stored in the table.
+        Perform a range query using the search key.
+        Returns records where start_value <= key <= end_value.
+        Returns a list of (key, record) tuples.
         """
-        results = self.index.get_all()
-        return [record for key, record in results]
+        return self.data.range_query(start_value, end_value)
+
+    def visualize(self):
+        """Visualize the underlying B+ Tree structure using Graphviz."""
+        return self.data.visualize_tree()
+
+    def __repr__(self):
+        return (
+            f"Table(name={self.name!r}, "
+            f"schema={self.schema}, "
+            f"search_key={self.search_key!r})"
+        )
