@@ -81,11 +81,11 @@ python app/app.py
 CS432_Track1_Submission/
 └── Module_B/
     ├── app/
-    │   ├── static/                   # Frontend assets (style.css, script.js)
-    │   ├── templates/                # HTML templates (index.html)
-    │   ├── utils/                    # Helper modules
-    │   ├── app.py                    # Main Flask application entry point
-    │   ├── README.md                 # Project internal documentation
+        ├── static/                   # Frontend assets (style.css, script.js)
+        ├── templates/                # HTML templates (index.html)
+        ├── utils/                    # Helper modules
+        ├── app.py                    # Main Flask application entry point
+        ├── README.md                 # Project internal documentation
         ├── routes_admin.py           # API routes for Admin dashboard & operations
         ├── routes_auth.py            # Login, authentication, and session validation
         ├── routes_portfolio.py       # API routes for dynamic student dashboards
@@ -95,12 +95,12 @@ CS432_Track1_Submission/
     ├── benchmark_results.ipynb       # Raw output from the performance benchmarking
     ├── report.pdf                    # Final Optimization Implementation Report (LaTeX output)
     ├── requirements.txt              # Requirements file
-    │
+    
     ├── logs/                 
-    │   └── audit.log             # System audit, login tracking, and security logs
-    │
+          └── audit.log             # System audit, login tracking, and security logs
+    
     ├── sql/                      # Database schema, indexes, and mock data scripts
-    └── stayease.sql              # DUmp file to create everything
+       └── stayease.sql              # DUmp file to create everything
 ```
 
 ## 🔒 Default Logins (For Testing)
