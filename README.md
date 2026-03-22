@@ -81,21 +81,20 @@ python app/app.py
 CS432_Track1_Submission/
 └── Module_B/
     ├── app/
-    │   ├── static/               # Frontend assets (style.css, script.js)
-    │   ├── templates/            # HTML templates (index.html)
-    │   ├── utils/                # Helper modules
-    │   ├── app.py                # Main Flask application entry point
-    │   └── README.md             # Project internal documentation
-    │
-    ├── routes_admin.py           # API routes for Admin dashboard & operations
-    ├── routes_auth.py            # Login, authentication, and session validation
-    ├── routes_portfolio.py       # API routes for dynamic student dashboards
-    ├── routes_security.py        # API routes for gate management & live search
-    ├── utils.py                  # Database connection handlers & JWT decorators
-    │
-    ├── benchmark.py              # Python script for measuring query performance
-    ├── benchmark_results...      # Raw output from the performance benchmarking
-    ├── report.pdf                # Final Optimization Implementation Report (LaTeX output)
+    │   ├── static/                   # Frontend assets (style.css, script.js)
+    │   ├── templates/                # HTML templates (index.html)
+    │   ├── utils/                    # Helper modules
+    │   ├── app.py                    # Main Flask application entry point
+    │   ├── README.md                 # Project internal documentation
+        ├── routes_admin.py           # API routes for Admin dashboard & operations
+        ├── routes_auth.py            # Login, authentication, and session validation
+        ├── routes_portfolio.py       # API routes for dynamic student dashboards
+        ├── routes_security.py        # API routes for gate management & live search
+        ├── utils.py                  # Database connection handlers & JWT decorators
+    ├── benchmark.py                  # Python script for measuring query performance
+    ├── benchmark_results.ipynb       # Raw output from the performance benchmarking
+    ├── report.pdf                    # Final Optimization Implementation Report (LaTeX output)
+    ├── requirements.txt              # Requirements file
     │
     ├── logs/                 
     │   └── audit.log             # System audit, login tracking, and security logs
