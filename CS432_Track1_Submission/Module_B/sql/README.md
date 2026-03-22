@@ -2,7 +2,7 @@
 
 This directory contains the database export files required to run the StayEase Management System. To accommodate different testing preferences, the database is provided in both a unified, optimized format and a modular, pre-optimized format.
 
-## Quick Start (Recommended for Grading)
+## Quick Start
 
 To instantly set up the fully optimized database with all dummy data, users, and performance indexes required for **SubTask 4 & 5**, please import the following file:
 
