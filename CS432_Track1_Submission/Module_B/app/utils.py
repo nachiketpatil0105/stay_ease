@@ -31,8 +31,8 @@ def log_audit(username, role, action, status="SUCCESS"):
 def get_db_connection():
     return mysql.connector.connect(
         host='localhost',
-        user='root',
-        password='password',  # Ensure this matches your MySQL password!
+        user='stayease',
+        password='stayease',  # Ensure this matches your MySQL password!
         database='stayease'
     )
 
