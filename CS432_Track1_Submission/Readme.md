@@ -8,6 +8,7 @@ ensure secure data isolation and a customized dashboard experience for every use
 
 **GitHub Link:** https://github.com/nachiketpatil0105/stay_ease/tree/main/CS432_Track1_Submission
 **Module_A_Youtube_Link:** https://youtu.be/zy84JT_yegc
+
 **Module_B_Youtube_Link:** https://youtu.be/sLhqd4x2cTs 
 
 ## Features
