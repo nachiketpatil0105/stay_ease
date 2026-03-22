@@ -13,7 +13,7 @@ To instantly set up the fully optimized database with all dummy data, users, and
 
 ---
 
-## 📂 Modular Architecture (Pre-Optimization State)
+## 📂 Modular Architecture
 
 If you prefer to review the database architecture step-by-step , the initial database state has been split into three distinct files based on separation of concerns in the database folder of this directory:
 
