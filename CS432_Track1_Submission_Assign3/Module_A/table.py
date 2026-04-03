@@ -83,7 +83,14 @@ class Table:
             if self.manager and self.manager.active_transaction is not None:
                 # Store the old_record so we can restore it during ROLLBACK
                 self.manager.active_transaction.append((self, record_id, old_record, "UPDATE"))
-            
+
+            # Log old value for WAL recovery (UNDO needs it)
+            if self.manager:
+                self.manager._write_to_log("UPDATE", self.name, record_id, {
+                    "old": old_record,
+                    "new": new_record
+                })
+
             self.data.update(record_id, new_record)
             return (True, "Record updated")
         except (ValueError, TypeError) as e:
@@ -102,7 +109,11 @@ class Table:
         if self.manager and self.manager.active_transaction is not None:
             # Store the old_record so we can re-insert it during ROLLBACK
             self.manager.active_transaction.append((self, record_id, old_record, "DELETE"))
-            
+
+        # Log old value for WAL recovery (UNDO needs it)
+        if self.manager:
+            self.manager._write_to_log("DELETE", self.name, record_id, old_record)
+
         success = self.data.delete(record_id)
         return (True, "Record deleted") if success else (False, "Deletion failed")
 

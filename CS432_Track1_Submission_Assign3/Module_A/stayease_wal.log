@@ -1,9 +1,4 @@
 {"op": "BEGIN", "table": null, "key": null, "data": null}
-{"op": "INSERT", "table": "members", "key": 110, "data": {"Member_ID": 110, "First_Name": "Priya", "Last_Name": "Sharma", "Gender": "F", "Age": 20, "Contact_Number": "8888800001", "Email": "priya@student.com", "Status": "Active", "Role_ID": 1, "Image_Path": "uploads/default.jpg", "Emergency_Contact": "7777700001"}}
-{"op": "INSERT", "table": "members", "key": 112, "data": {"Member_ID": 112, "First_Name": "Ravi", "Last_Name": "Kumar", "Gender": "M", "Age": 22, "Contact_Number": "8888800002", "Email": "ravi@student.com", "Status": "Active", "Role_ID": 1, "Image_Path": "uploads/default.jpg", "Emergency_Contact": "7777700002"}}
-{"op": "INSERT", "table": "rooms", "key": 101, "data": {"Room_ID": 101, "Room_Number": "101", "Hostel_ID": 2, "Floor_Number": 1, "Capacity": 2}}
-{"op": "COMMIT", "table": null, "key": null, "data": null}
-{"op": "BEGIN", "table": null, "key": null, "data": null}
 {"op": "INSERT", "table": "members", "key": 130, "data": {"Member_ID": 130, "First_Name": "Test", "Last_Name": "User", "Gender": "M", "Age": 21, "Contact_Number": "9000000001", "Email": "testuser@student.com", "Status": "Active", "Role_ID": 1, "Image_Path": "uploads/default.png", "Emergency_Contact": "9000000002"}}
 {"op": "INSERT", "table": "rooms", "key": 303, "data": {"Room_ID": 303, "Room_Number": "303", "Hostel_ID": 2, "Floor_Number": 3, "Capacity": 2}}
 {"op": "INSERT", "table": "room_allocations", "key": 20, "data": {"Allocation_ID": 20, "Member_ID": 130, "Room_ID": 303, "Allocation_Date": "2026-04-01", "Check_Out_Date": "None", "Status": "Active"}}
@@ -11,4 +6,7 @@
 {"op": "BEGIN", "table": null, "key": null, "data": null}
 {"op": "INSERT", "table": "members", "key": 131, "data": {"Member_ID": 131, "First_Name": "Ghost", "Last_Name": "User", "Gender": "M", "Age": 22, "Contact_Number": "9000000003", "Email": "ghost@student.com", "Status": "Active", "Role_ID": 1, "Image_Path": "uploads/default.png", "Emergency_Contact": "9000000004"}}
 {"op": "BEGIN", "table": null, "key": null, "data": null}
+{"op": "DELETE", "table": "room_allocations", "key": 20, "data": {"Allocation_ID": 20, "Member_ID": 130, "Room_ID": 303, "Allocation_Date": "2026-04-01", "Check_Out_Date": "None", "Status": "Active"}}
+{"op": "DELETE", "table": "rooms", "key": 303, "data": {"Room_ID": 303, "Room_Number": "303", "Hostel_ID": 2, "Floor_Number": 3, "Capacity": 2}}
+{"op": "DELETE", "table": "members", "key": 130, "data": {"Member_ID": 130, "First_Name": "Test", "Last_Name": "User", "Gender": "M", "Age": 21, "Contact_Number": "9000000001", "Email": "testuser@student.com", "Status": "Active", "Role_ID": 1, "Image_Path": "uploads/default.png", "Emergency_Contact": "9000000002"}}
 {"op": "COMMIT", "table": null, "key": null, "data": null}

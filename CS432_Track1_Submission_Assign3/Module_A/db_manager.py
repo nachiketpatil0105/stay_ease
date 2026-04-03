@@ -243,7 +243,7 @@ class DatabaseManager:
 
                     elif op == "UPDATE":
                         if table_obj.data.search(key) is not None:
-                            table_obj.data.update(key, data)
+                            table_obj.data.update(key, data["new"])
                             print(f"  REDO UPDATE: {entry['table']} key={key}")
 
                     elif op == "DELETE":
@@ -271,7 +271,7 @@ class DatabaseManager:
                     # If an incomplete UPDATE made it to disk, restore old value
                     elif op == "UPDATE":
                         if data is not None and table_obj.data.search(key) is not None:
-                            table_obj.data.update(key, data)
+                            table_obj.data.update(key, data["old"])
                             print(f"  UNDO UPDATE: {entry['table']} key={key}")
 
                     # If an incomplete DELETE made it to disk, re-insert
