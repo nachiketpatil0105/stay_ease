@@ -109,8 +109,6 @@ class DatabaseManager:
                     print(f"Restored table '{table_obj.name}' from disk.")
 
     def _write_to_log(self, op_type, table_name, key, data):
-        if self.active_transaction is None and op_type not in ["BEGIN", "COMMIT"]:
-            return
         log_entry = {
             "op": op_type,
             "table": table_name,
@@ -187,20 +185,101 @@ class DatabaseManager:
             return
 
         print(f"--- RECOVERY: Processing {self.log_file} ---")
-        
+
         with open(self.log_file, "r") as f:
-            lines = f.readlines()
+            lines = [line.strip() for line in f.readlines() if line.strip()]
 
-        committed_tx = False
-        # In a simple engine, we check if the LAST transaction in the log has a COMMIT
-        # For this assignment, we assume one transaction at a time for simplicity.
-        if lines and "COMMIT" in lines[-1]:
-            committed_tx = True
+        if not lines:
+            return
 
-        if committed_tx:
-            print("RECOVERY: Committed data already loaded from disk. No redo needed.")
-        else:
-            print("RECOVERY: Incomplete transaction found. Ignoring partial updates.")
+        # Parse all log entries
+        entries = []
+        for line in lines:
+            try:
+                entries.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+
+        # Split into transactions by BEGIN/COMMIT boundaries
+        transactions = []
+        current_tx = []
+        in_tx = False
+
+        for entry in entries:
+            if entry["op"] == "BEGIN":
+                current_tx = []
+                in_tx = True
+            elif entry["op"] == "COMMIT":
+                if in_tx:
+                    transactions.append(("COMMITTED", current_tx))
+                current_tx = []
+                in_tx = False
+            else:
+                if in_tx:
+                    current_tx.append(entry)
+
+        # If there are ops after last BEGIN with no COMMIT — incomplete transaction
+        if in_tx and current_tx:
+            transactions.append(("INCOMPLETE", current_tx))
+
+        # Process each transaction
+        for status, ops in transactions:
+            if status == "COMMITTED":
+                # Redo: replay all ops from this committed transaction
+                print("RECOVERY: Replaying committed transaction...")
+                for entry in ops:
+                    table_obj, _ = self.get_table(db_name, entry["table"])
+                    if table_obj is None:
+                        continue
+                    op = entry["op"]
+                    key = entry["key"]
+                    data = entry["data"]
+
+                    if op == "INSERT":
+                        # Only insert if not already present (pickle may have it)
+                        if table_obj.data.search(key) is None:
+                            table_obj.data.insert(key, data)
+                            print(f"  REDO INSERT: {entry['table']} key={key}")
+
+                    elif op == "UPDATE":
+                        if table_obj.data.search(key) is not None:
+                            table_obj.data.update(key, data)
+                            print(f"  REDO UPDATE: {entry['table']} key={key}")
+
+                    elif op == "DELETE":
+                        if table_obj.data.search(key) is not None:
+                            table_obj.data.delete(key)
+                            print(f"  REDO DELETE: {entry['table']} key={key}")
+
+            elif status == "INCOMPLETE":
+                # Undo: incomplete transaction — ignore, data not committed
+                print("RECOVERY: Incomplete transaction found. Ignoring partial updates.")
+                for entry in ops:
+                    table_obj, _ = self.get_table(db_name, entry["table"])
+                    if table_obj is None:
+                        continue
+                    op = entry["op"]
+                    key = entry["key"]
+                    data = entry["data"]
+
+                    # If an incomplete INSERT made it to disk, remove it
+                    if op == "INSERT":
+                        if table_obj.data.search(key) is not None:
+                            table_obj.data.delete(key)
+                            print(f"  UNDO INSERT: {entry['table']} key={key}")
+
+                    # If an incomplete UPDATE made it to disk, restore old value
+                    elif op == "UPDATE":
+                        if data is not None and table_obj.data.search(key) is not None:
+                            table_obj.data.update(key, data)
+                            print(f"  UNDO UPDATE: {entry['table']} key={key}")
+
+                    # If an incomplete DELETE made it to disk, re-insert
+                    elif op == "DELETE":
+                        if data is not None and table_obj.data.search(key) is None:
+                            table_obj.data.insert(key, data)
+                            print(f"  UNDO DELETE: {entry['table']} key={key}")
 
         # After recovery, clear the log because the state is now synced
         open(self.log_file, 'w').close()
+        print("RECOVERY: Log cleared. Database state is consistent.")
