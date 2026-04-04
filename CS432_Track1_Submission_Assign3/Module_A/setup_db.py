@@ -46,7 +46,7 @@ db_admin.create_table("stayease", "members", members_schema, search_key="Member_
 db_admin.create_table("stayease", "rooms", rooms_schema, search_key="Room_ID")
 db_admin.create_table("stayease", "room_allocations", allocations_schema, search_key="Allocation_ID")
 
-# 4. Try to load existing data from disk [cite: 97, 99]
+# 4. Try to load existing data from disk
 # If you've run this before, this will fill your B+ Trees with saved records.
 db_admin.reload_all("stayease")
 
@@ -58,7 +58,7 @@ members_table, msg = db_admin.get_table("stayease", "members")
 rooms_table, _ = db_admin.get_table("stayease", "rooms")
 alloc_table, _ = db_admin.get_table("stayease", "room_allocations")
 
-if not members_table.get(110)[0] or not rooms_table.get(101)[0] or not members_table.get(112)[0]:
+if not members_table.get(110)[0] or not rooms_table.get(101)[0] or not members_table.get(112)[0] or not alloc_table.get(1)[0] or not alloc_table.get(2)[0]:
     db_admin.begin()
     if not members_table.get(110)[0]:
         priya = {
@@ -85,7 +85,25 @@ if not members_table.get(110)[0] or not rooms_table.get(101)[0] or not members_t
         }
         rooms_table.insert(room_data)
         print("Seed data inserted: Room 101")
+    if not alloc_table.get(1)[0]:
+        alloc_data = {
+            'Allocation_ID': 1, 'Member_ID': 110, 'Room_ID': 101,
+            'Allocation_Date': '2026-01-01', 'Check_Out_Date': 'None',
+            'Status': 'Active'
+        }
+        alloc_table.insert(alloc_data)
+        print("Seed data inserted: Allocation 1")
+    if not alloc_table.get(2)[0]:
+        alloc_data = {
+            'Allocation_ID': 2, 'Member_ID': 112, 'Room_ID': 101,
+            'Allocation_Date': '2026-01-01', 'Check_Out_Date': 'None',
+            'Status': 'Active'
+        }
+        alloc_table.insert(alloc_data)
+        print("Seed data inserted: Allocation 2")
     db_admin.commit("stayease")
+
+
 
 # 6. Save everything to disk
 # This ensures that even if you stop the script now, the data is safe in .tree files.

@@ -124,7 +124,7 @@ def simulate_restart():
 
     durability_ok = member_found and room_found and alloc_found
 
-    print("\n" + ("✅ DURABILITY TEST PASSED" if durability_ok else "❌ DURABILITY TEST FAILED"))
+    print("\n" + ("DURABILITY TEST PASSED" if durability_ok else "DURABILITY TEST FAILED"))
     print("=" * 60)
 
     # --- Cleanup ---

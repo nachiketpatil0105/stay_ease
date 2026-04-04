@@ -150,15 +150,49 @@ class DatabaseManager:
                     # To undo a delete, we re-insert the original record
                     table_obj.data.insert(key, old_value)
         finally:
-            self.active_transaction = None # Clear the transaction state 
+            self.active_transaction = None # Clear the transaction state
+
+            # Clean up log — remove the incomplete transaction, keep committed ones
+            if os.path.exists(self.log_file):
+                with open(self.log_file, "r") as f:
+                    lines = [line.strip() for line in f.readlines() if line.strip()]
+                entries = []
+                for line in lines:
+                    try:
+                        entries.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        continue
+                # Rewrite only committed transactions
+                committed_blocks = []
+                current_tx = []
+                in_tx = False
+                for entry in entries:
+                    if entry["op"] == "BEGIN":
+                        current_tx = []
+                        in_tx = True
+                    elif entry["op"] == "COMMIT":
+                        if in_tx:
+                            committed_blocks.append(current_tx)
+                        current_tx = []
+                        in_tx = False
+                    else:
+                        if in_tx:
+                            current_tx.append(entry)
+                with open(self.log_file, "w") as f:
+                    for block in committed_blocks:
+                        f.write(json.dumps({"op": "BEGIN", "table": None, "key": None, "data": None}) + "\n")
+                        for entry in block:
+                            f.write(json.dumps(entry) + "\n")
+                        f.write(json.dumps({"op": "COMMIT", "table": None, "key": None, "data": None}) + "\n")
+
             self.lock.release()
                 
-        print("ROLLBACK: All changes reverted. Database is back to original state[cite: 74, 118].")
+        print("ROLLBACK: All changes reverted. Database is back to original state.")
         return True
     
     def commit(self, db_name):
         """
-        Finalizes the transaction and persists changes to disk[cite: 67, 84, 96].
+        Finalizes the transaction and persists changes to disk.
         """
         if self.active_transaction is None:
             print("No active transaction to commit.")
@@ -280,6 +314,13 @@ class DatabaseManager:
                             table_obj.data.insert(key, data)
                             print(f"  UNDO DELETE: {entry['table']} key={key}")
 
-        # After recovery, clear the log because the state is now synced
-        open(self.log_file, 'w').close()
-        print("RECOVERY: Log cleared. Database state is consistent.")
+        # After recovery, rewrite log keeping only committed transactions
+        # Remove incomplete transactions, retain committed ones for future recovery
+        with open(self.log_file, 'w') as f:
+            for status, ops in transactions:
+                if status == "COMMITTED":
+                    f.write(json.dumps({"op": "BEGIN", "table": None, "key": None, "data": None}) + "\n")
+                    for entry in ops:
+                        f.write(json.dumps(entry) + "\n")
+                    f.write(json.dumps({"op": "COMMIT", "table": None, "key": None, "data": None}) + "\n")
+        print("RECOVERY: Incomplete transactions removed. Committed transactions retained in log.")

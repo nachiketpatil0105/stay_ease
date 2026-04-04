@@ -105,7 +105,7 @@ def test_isolation():
         results.get('thread2') == 'committed'
     )
 
-    print("\n" + ("✅ ISOLATION TEST PASSED" if isolation_ok else "❌ ISOLATION TEST FAILED"))
+    print("\n" + ("ISOLATION TEST PASSED" if isolation_ok else "ISOLATION TEST FAILED"))
     print("=" * 60)
 
 test_isolation()

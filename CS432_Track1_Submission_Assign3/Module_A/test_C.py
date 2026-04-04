@@ -98,7 +98,7 @@ def test_consistency():
         not ghost_exists
     )
 
-    print("\n" + ("✅ CONSISTENCY TEST PASSED" if consistency_ok else "❌ CONSISTENCY TEST FAILED"))
+    print("\n" + ("CONSISTENCY TEST PASSED" if consistency_ok else "CONSISTENCY TEST FAILED"))
     print("=" * 60)
 
     # --- Cleanup: remove test data ---

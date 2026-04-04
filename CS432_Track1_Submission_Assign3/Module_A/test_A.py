@@ -63,7 +63,7 @@ def test_atomicity():
 
     print(f"[AFTER] Member 112 Status   : {member_after['Status']}  (Expected: Active)")
     print(f"[AFTER] Room 101 Capacity   : {room_after['Capacity']}  (Expected: 2)")
-    print(f"[AFTER] Allocation IDs      : {alloc_ids_after}  (Expected: no 999)")
+    print(f"[AFTER] Allocation IDs      : {alloc_ids_after}  (Expected: [1, 2] — no 999)")
 
     # --- Pass / Fail ---
     atomicity_ok = (
@@ -72,7 +72,7 @@ def test_atomicity():
         999 not in alloc_ids_after
     )
 
-    print("\n" + ("✅ ATOMICITY TEST PASSED" if atomicity_ok else "❌ ATOMICITY TEST FAILED"))
+    print("\n" + ("ATOMICITY TEST PASSED" if atomicity_ok else "ATOMICITY TEST FAILED"))
     print("=" * 60)
 
 test_atomicity()
