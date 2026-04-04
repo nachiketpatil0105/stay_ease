@@ -1,0 +1,29 @@
+{"txn_id": 1, "type": "BEGIN", "lsn": 0, "timestamp": 1775238599.822859}
+{"txn_id": 1, "type": "WRITE", "table": "users", "operation": "INSERT", "key": 1, "old_value": null, "new_value": {"user_id": 1, "name": "Alice", "balance": 1000, "city": "Delhi"}, "lsn": 1, "timestamp": 1775238599.823054}
+{"txn_id": 1, "type": "WRITE", "table": "users", "operation": "INSERT", "key": 2, "old_value": null, "new_value": {"user_id": 2, "name": "Bob", "balance": 500, "city": "Mumbai"}, "lsn": 2, "timestamp": 1775238599.8231392}
+{"txn_id": 1, "type": "WRITE", "table": "products", "operation": "INSERT", "key": 10, "old_value": null, "new_value": {"product_id": 10, "name": "Laptop", "stock": 5, "price": 800}, "lsn": 3, "timestamp": 1775238599.823211}
+{"txn_id": 1, "type": "WRITE", "table": "products", "operation": "INSERT", "key": 11, "old_value": null, "new_value": {"product_id": 11, "name": "Phone", "stock": 0, "price": 300}, "lsn": 4, "timestamp": 1775238599.823274}
+{"txn_id": 1, "type": "COMMIT", "lsn": 5, "timestamp": 1775238599.823332}
+{"txn_id": 2, "type": "BEGIN", "lsn": 6, "timestamp": 1775238599.826088}
+{"txn_id": 2, "type": "WRITE", "table": "users", "operation": "UPDATE", "key": 1, "old_value": {"user_id": 1, "name": "Alice", "balance": 1000, "city": "Delhi"}, "new_value": {"user_id": 1, "name": "Alice", "balance": 800, "city": "Delhi"}, "lsn": 7, "timestamp": 1775238599.826168}
+{"txn_id": 2, "type": "WRITE", "table": "products", "operation": "UPDATE", "key": 10, "old_value": {"product_id": 10, "name": "Laptop", "stock": 5, "price": 800}, "new_value": {"product_id": 10, "name": "Laptop", "stock": 4, "price": 800}, "lsn": 8, "timestamp": 1775238599.826236}
+{"txn_id": 2, "type": "ROLLBACK", "lsn": 9, "timestamp": 1775238599.826317}
+{"txn_id": 3, "type": "BEGIN", "lsn": 10, "timestamp": 1775238599.826401}
+{"txn_id": 3, "type": "WRITE", "table": "users", "operation": "UPDATE", "key": 1, "old_value": {"user_id": 1, "name": "Alice", "balance": 1000, "city": "Delhi"}, "new_value": {"user_id": 1, "name": "Alice", "balance": 700, "city": "Delhi"}, "lsn": 11, "timestamp": 1775238599.826459}
+{"txn_id": 3, "type": "WRITE", "table": "orders", "operation": "INSERT", "key": 1002, "old_value": null, "new_value": {"order_id": 1002, "user_id": 1, "amount": 300, "time": "2026-04-01"}, "lsn": 12, "timestamp": 1775238599.826518}
+{"txn_id": 3, "type": "ROLLBACK", "lsn": 13, "timestamp": 1775238599.826593}
+{"txn_id": 4, "type": "BEGIN", "lsn": 14, "timestamp": 1775238599.826674}
+{"txn_id": 4, "type": "WRITE", "table": "products", "operation": "UPDATE", "key": 10, "old_value": {"product_id": 10, "name": "Laptop", "stock": 5, "price": 800}, "new_value": {"product_id": 10, "name": "Laptop", "stock": 1, "price": 800}, "lsn": 15, "timestamp": 1775238599.826735}
+{"txn_id": 4, "type": "COMMIT", "lsn": 16, "timestamp": 1775238599.8268}
+{"txn_id": 5, "type": "BEGIN", "lsn": 17, "timestamp": 1775238599.827241}
+{"txn_id": 5, "type": "WRITE", "table": "users", "operation": "UPDATE", "key": 1, "old_value": {"user_id": 1, "name": "Alice", "balance": 1000, "city": "Delhi"}, "new_value": {"user_id": 1, "name": "Alice", "balance": 200, "city": "Delhi"}, "lsn": 18, "timestamp": 1775238599.8273568}
+{"txn_id": 6, "type": "BEGIN", "lsn": 19, "timestamp": 1775238599.839363}
+{"txn_id": 5, "type": "WRITE", "table": "products", "operation": "UPDATE", "key": 10, "old_value": {"product_id": 10, "name": "Laptop", "stock": 1, "price": 800}, "new_value": {"product_id": 10, "name": "Laptop", "stock": 0, "price": 800}, "lsn": 20, "timestamp": 1775238599.877852}
+{"txn_id": 5, "type": "WRITE", "table": "orders", "operation": "INSERT", "key": 2001, "old_value": null, "new_value": {"order_id": 2001, "user_id": 1, "amount": 800, "time": "2026-04-01"}, "lsn": 21, "timestamp": 1775238599.878052}
+{"txn_id": 5, "type": "COMMIT", "lsn": 22, "timestamp": 1775238599.87814}
+{"txn_id": 6, "type": "ROLLBACK", "lsn": 23, "timestamp": 1775238599.878601}
+{"txn_id": 7, "type": "BEGIN", "lsn": 24, "timestamp": 1775238599.878793}
+{"txn_id": 7, "type": "WRITE", "table": "users", "operation": "INSERT", "key": 99, "old_value": null, "new_value": {"user_id": 99, "name": "Durable Dave", "balance": 777, "city": "Chennai"}, "lsn": 25, "timestamp": 1775238599.878881}
+{"txn_id": 7, "type": "WRITE", "table": "products", "operation": "INSERT", "key": 99, "old_value": null, "new_value": {"product_id": 99, "name": "Titanium Shield", "stock": 50, "price": 100}, "lsn": 26, "timestamp": 1775238599.878983}
+{"txn_id": 7, "type": "WRITE", "table": "orders", "operation": "INSERT", "key": 9999, "old_value": null, "new_value": {"order_id": 9999, "user_id": 99, "amount": 100, "time": "2026-04-03"}, "lsn": 27, "timestamp": 1775238599.87905}
+{"txn_id": 7, "type": "COMMIT", "lsn": 28, "timestamp": 1775238599.879107}

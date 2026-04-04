@@ -1,0 +1,42 @@
+StayEase Database Engine: Transaction Management, Concurrency Control, and ACID Validation
+
+1. How Correctness of Operations is Ensured
+
+The primary objective of the StayEase database engine is to maintain strict correctness and data integrity under both normal operations and heavy usage. Correctness is enforced at multiple levels of the architecture, ensuring full ACID compliance.
+At the lowest level, the custom B+ Tree serves as the primary storage engine and index for all database relations. The B+ Tree guarantees that all keys remain in strictly increasing order and that node capacities never violate their defined limits, dynamically splitting or merging nodes to maintain a perfectly balanced search path.
+At the application level, correctness is ensured by the Table abstraction layer. Before any data is passed to the B+ Tree, the validate_record method dynamically checks incoming dictionaries against the defined table schema. It strictly enforces that all required columns are present and that data types (e.g., int, str) match exactly, rejecting invalid operations before they enter the transaction pipeline.
+Finally, the TransactionManager ensures logical correctness (Consistency) across multi-table operations. By bundling related actions—such as adding a student, assigning them a room, and logging a fee payment—into a single transactional unit, the system guarantees that all relations remain valid after the operation. If any business rule is violated (e.g., a room exceeds capacity), the entire transaction is explicitly rolled back to prevent partial, inconsistent data states.
+
+2. How Failures are Handled
+
+Failure handling and crash recovery are managed natively within the Database Manager to ensure Atomicity and Durability. The system utilizes a Write-Ahead Logging (WAL) mechanism combined with periodic snapshotting.
+When a transaction begins, the TransactionManager records every intended modification (INSERT, UPDATE, DELETE) to the wal.log file before applying any changes to the in-memory B+ Tree. Crucially, the WAL records the old_value of the data, which acts as an undo image. If the system crashes mid-transaction (e.g., power loss before COMMIT), the incomplete transaction leaves behind dirty data in the RAM, which is lost, but the WAL on disk remains intact.
+To handle Durability, the Persistence module utilizes atomic file operations (os.replace) to save the entire DatabaseManager state to a .pkl snapshot upon every successful COMMIT.
+When the system restarts, it performs an ARIES-simplified crash recovery algorithm. It first loads the last successful snapshot. Then, the _recover() function parses the wal.log and identifies any transactions marked "INCOMPLETE" (lacking a COMMIT or ROLLBACK tag). Because the snapshot might contain dirty data from a crash that occurred right as a save was happening, the system reads the WAL backward and applies the old_value undo steps in reverse (LIFO) order. This successfully wipes out incomplete transactions, ensuring no partial data is stored.
+
+3. How Multi-User Conflicts are Handled
+
+In a hostel management environment, multiple users (wardens, students, admins) frequently interact with the system simultaneously, creating a high risk of Race Conditions. To ensure users do not interfere with each other and to guarantee Isolation, the database employs Table-Level Locking via Python's threading.Lock.
+When a transaction attempts to read or write to a specific relation, the TransactionManager invokes the _acquire_lock method. This grants the transaction exclusive access to that table. If a second user attempts to modify the same table (e.g., two students submitting complaints simultaneously), their thread is blocked and placed in a waiting queue until the first transaction calls COMMIT or ROLLBACK, which triggers _release_all_locks.
+This strict serialization effectively prevents "Lost Update" anomalies. By forcing concurrent threads to wait, the system guarantees that when an ID is calculated or an inventory stock is reduced, the data is not overwritten by another thread acting at the exact same millisecond.
+
+4. What Experiments Were Performed
+
+To validate the system, an extensive testing pipeline was executed, encompassing both Module A (The Engine) and Module B (The Stress Test).
+
+i. Atomicity & Crash Simulation: A Python script (test_failure_simulation.py) was written to execute a bulk enrollment (inserting a user and allocating a room). An exception was intentionally raised mid-transaction to simulate a server crash. The system successfully caught the error, executed tm.rollback(), and the user was verified to be completely wiped from the database.
+ii. Consistency Validation: Business rules were tested by intentionally submitting schema violations (e.g., string values in integer fields) and logical violations (over-allocating rooms). The transactions were successfully rejected across all tables.
+iii. Concurrency and Race Condition Testing: A multi-threaded script (test_concurrent_usage.py) spawned 5 simultaneous threads simulating 5 students submitting complaints at the exact same time. Initially, a race condition occurred, resulting in only 1 saved complaint. After implementing _acquire_lock before the ID calculation, the system correctly queued the requests, saving all 5 complaints without double-spending IDs.
+iv. Durability Restart Testing: The system was gracefully shut down and restarted. The Persistence.load() function successfully restored the database from the db_snapshot.pkl file, verifying that committed data persists across failures.
+v. High-Load Stress Testing: The open-source load-testing tool Locust was deployed against the Flask application. The system was subjected to 500 simulated users spawning at a rate of 50 users per second, continuously fetching dashboard views and submitting maintenance complaints.
+
+5. Observations and Limitations
+
+Observations:
+* B+ Tree Efficiency: Implementing the database entirely in memory using the B+ Tree resulted in incredibly fast reads and range queries. The linked-list structure of the leaf nodes made operations like fetching a student's complete complaint history highly optimal.
+* Robustness under Load: During the Locust stress test, the system behaved reliably under heavy concurrent usage. The table-level locks effectively prevented data corruption, proving the isolation architecture is sound.
+
+Limitations:
+* Coarse Locking Granularity: The TransactionManager relies on table-level locking. While safe, it creates performance bottlenecks under high write-loads. For instance, if a student submits a complaint, the entire complaints table is locked, preventing other wardens from updating completely unrelated complaints. Upgrading to row-level locking would significantly improve throughput.
+* Snapshot Overhead: The current durability model uses pickle to serialize and save the entire DatabaseManager to disk upon every commit. While atomic and crash-safe, writing the entire database to disk for a single row update scales very poorly. As the hostel data grows, these commits will become progressively slower. A more advanced implementation would implement page-level flushing directly from the B+ Tree.
+* Memory Constraints: Because the B+ Tree and the databases dictionary are stored entirely in the application's RAM, the total size of the database is hard-limited by the host server's available physical memory.

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: #f8f9fa; padding: 20px; border-radius: 5px; border: 1px solid #e9ecef; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #343a40; color: white; }
+        .badge-pending { color: #d39e00; font-weight: bold; }
+        .badge-resolved { color: #28a745; font-weight: bold; }
+        form { display: flex; flex-direction: column; gap: 10px; }
+        select, textarea { padding: 10px; border-radius: 4px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; }
+        button { padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button.pay-btn { background-color: #28a745; }
+        button:hover { opacity: 0.9; }
+        .success { background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #c3e6cb;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>StayEase Student Portal</h2>
+            <a href="/logout" style="color: red; font-weight: bold; text-decoration: none;">Log Out</a>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">✔ {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="grid-layout">
+            <div class="card">
+                <h3>🏠 My Room</h3>
+                {% if room %}
+                    <p><strong>Hostel ID:</strong> {{ room.Hostel_ID }}</p>
+                    <p><strong>Room Number:</strong> {{ room.Room_Number }}</p>
+                    <p><strong>Floor:</strong> {{ room.Floor_Number }}</p>
+                {% else %}
+                    <p style="color: red;">No active room allocation found.</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h3>💳 Pay Hostel Fees</h3>
+                <form method="POST" action="/pay_fee">
+                    <select name="fee_id" required>
+                        <option value="" disabled selected>Select Fee to Pay...</option>
+                        {% for fee in available_fees %}
+                            <option value="{{ fee.Fee_Type_ID }}">{{ fee.Fee_Name }} (₹{{ fee.Amount }})</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="pay-btn">Proceed to Payment</button>
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <h3>🛠️ Register a Complaint</h3>
+            <form method="POST" action="/submit_complaint">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <select id="category" name="category" onchange="updateSubcategories()" required>
+                        <option value="" disabled selected>1. Select Issue Area...</option>
+                        {% for category in complaint_dict.keys() %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <select id="subcategory" name="subcategory" required disabled>
+                        <option value="" disabled selected>2. Select Specific Issue...</option>
+                    </select>
+                </div>
+                
+                <textarea name="description" rows="2" placeholder="Describe the problem in detail..." required></textarea>
+                <button type="submit">Submit Ticket</button>
+            </form>
+        </div>
+
+        <div class="grid-layout">
+            <div>
+                <h3>📜 Complaint History</h3>
+                {% if complaints %}
+                    <table>
+                        <tr><th>Date</th><th>Description</th><th>Status</th></tr>
+                        {% for comp in complaints %}
+                        <tr>
+                            <td>{{ comp.Submission_Date }}</td>
+                            <td>{{ comp.Description }}</td>
+                            <td class="{% if comp.Status == 'Pending' %}badge-pending{% else %}badge-resolved{% endif %}">{{ comp.Status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No complaints submitted.</p>
+                {% endif %}
+            </div>
+
+            <div>
+                <h3>🧾 Payment Receipts</h3>
+                {% if my_payments %}
+                    <table>
+                        <tr><th>Date</th><th>Fee Name</th><th>Amount</th><th>Ref</th></tr>
+                        {% for pay in my_payments %}
+                        <tr>
+                            <td>{{ pay.Payment_Date }}</td>
+                            <td>{{ pay.Fee_Name }}</td>
+                            <td>₹{{ pay.Amount_Paid }}</td>
+                            <td style="font-family: monospace;">{{ pay.Transaction_Reference }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>No payment history.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script id="complaint-data" type="application/json">
+        {{ complaint_dict | tojson | safe }}
+    </script>
+
+    <script>
+        // Read the text from the hidden tag above and parse it into a JS Object
+        const complaintData = JSON.parse(document.getElementById("complaint-data").textContent);
+
+        function updateSubcategories() {
+            const categorySelect = document.getElementById("category");
+            const subSelect = document.getElementById("subcategory");
+            const selectedCategory = categorySelect.value;
+
+            // Clear out old options
+            subSelect.innerHTML = '<option value="" disabled selected>2. Select Specific Issue...</option>';
+            
+            if (selectedCategory in complaintData) {
+                // Enable the second dropdown
+                subSelect.disabled = false;
+                
+                // Loop through the data and add the new options
+                complaintData[selectedCategory].forEach(function(item) {
+                    let option = document.createElement("option");
+                    option.value = item.id;
+                    option.text = item.sub;
+                    subSelect.appendChild(option);
+                });
+            } else {
+                subSelect.disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
