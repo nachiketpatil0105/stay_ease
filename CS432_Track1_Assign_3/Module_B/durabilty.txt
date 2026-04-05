@@ -1,0 +1,116 @@
+PS C:\Users\niraj\Desktop\project DB\assign 3\Module_B> python verify_durability.py
+Restored table 'members' from disk.
+Restored table 'rooms' from disk.
+Restored table 'room_allocations' from disk.
+--- RECOVERY: Processing stayease_wal.log ---
+RECOVERY: Replaying committed transaction...
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=200
+  REDO INSERT: rooms key=400
+  REDO INSERT: room_allocations key=50
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=50
+  REDO DELETE: rooms key=400
+  REDO DELETE: members key=200
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=130
+  REDO INSERT: rooms key=303
+  REDO INSERT: room_allocations key=20
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=20
+  REDO DELETE: rooms key=303
+  REDO DELETE: members key=130
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: members key=112
+  REDO UPDATE: members key=112
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=130
+  REDO INSERT: rooms key=303
+  REDO INSERT: room_allocations key=20
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=20
+  REDO DELETE: rooms key=303
+  REDO DELETE: members key=130
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: members key=112
+  REDO UPDATE: members key=112
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=200
+  REDO INSERT: rooms key=400
+  REDO INSERT: room_allocations key=50
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=50
+  REDO DELETE: rooms key=400
+  REDO DELETE: members key=200
+RECOVERY: Incomplete transactions removed. Committed transactions retained in log.
+All tables in 'stayease' persisted to disk.
+Database is ready and persistent.
+---PHASE 1: Writing Transactions to WAL ---
+BEGIN: Transaction started. [tx_id=2037d3a6]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+Transaction True committed.
+BEGIN: Transaction started. [tx_id=3f235bac]
+Transaction True started but NOT committed (simulating crash)...
+
+--- PHASE 2: Simulating System Restart & Recovery ---
+--- RECOVERY: Processing C:\Users\niraj\Desktop\project DB\assign 3\Module_B\stress_wal.log ---
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=5002
+  REDO UPDATE: rooms key=101
+  REDO INSERT: room_allocations key=8002
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=5052
+  REDO UPDATE: rooms key=101
+  REDO INSERT: room_allocations key=8052
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=5026
+  REDO UPDATE: rooms key=101
+  REDO INSERT: room_allocations key=8026
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=5089
+  REDO UPDATE: rooms key=101
+  REDO INSERT: room_allocations key=8089
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=5061
+  REDO UPDATE: rooms key=101
+  REDO INSERT: room_allocations key=8061
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+RECOVERY: Incomplete transactions removed. Committed transactions retained in log.
+
+--- PHASE 3: Verification ---
+Member 9999 (Committed) exists: True
+Member 8888 (Uncommitted) exists: False

@@ -1,0 +1,288 @@
+PS C:\Users\niraj\Desktop\project DB\assign 3\Module_B> python stress_test.py
+Restored table 'members' from disk.
+Restored table 'rooms' from disk.
+Restored table 'room_allocations' from disk.
+--- RECOVERY: Processing stayease_wal.log ---
+RECOVERY: Replaying committed transaction...
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=200
+  REDO INSERT: rooms key=400
+  REDO INSERT: room_allocations key=50
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=50
+  REDO DELETE: rooms key=400
+  REDO DELETE: members key=200
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=130
+  REDO INSERT: rooms key=303
+  REDO INSERT: room_allocations key=20
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=20
+  REDO DELETE: rooms key=303
+  REDO DELETE: members key=130
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: members key=112
+  REDO UPDATE: members key=112
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=130
+  REDO INSERT: rooms key=303
+  REDO INSERT: room_allocations key=20
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=20
+  REDO DELETE: rooms key=303
+  REDO DELETE: members key=130
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: rooms key=101
+  REDO UPDATE: rooms key=101
+RECOVERY: Replaying committed transaction...
+  REDO UPDATE: members key=112
+  REDO UPDATE: members key=112
+RECOVERY: Replaying committed transaction...
+  REDO INSERT: members key=200
+  REDO INSERT: rooms key=400
+  REDO INSERT: room_allocations key=50
+RECOVERY: Replaying committed transaction...
+  REDO DELETE: room_allocations key=50
+  REDO DELETE: rooms key=400
+  REDO DELETE: members key=200
+RECOVERY: Incomplete transactions removed. Committed transactions retained in log.
+All tables in 'stayease' persisted to disk.
+Database is ready and persistent.
+============================================================
+MODULE B: STRESS TEST & RACE CONDITION DEFENSE
+============================================================
+BEGIN: Transaction started. [tx_id=402e2c06]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+
+[START] Room 101 capacity set to 5.
+[START] Unleashing 100 concurrent booking requests...
+BEGIN: Transaction started. [tx_id=68feb7eb]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+BEGIN: Transaction started. [tx_id=cf4615a9]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+BEGIN: Transaction started. [tx_id=46f2b97b]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+BEGIN: Transaction started. [tx_id=7e8d84a6]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+BEGIN: Transaction started. [tx_id=c0b3e17a]
+All tables in 'stayease' persisted to disk.
+COMMIT: Changes saved.
+LOCK RELEASED.
+BEGIN: Transaction started. [tx_id=d819a0ee]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=4d0e6f70]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=eb06397e]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=6ec545a2]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=eebc6d67]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a648b277]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=c38fb99c]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=bb08d3a3]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=164c9c37]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=184d3ef3]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=053d3165]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=273d4c8f]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=985f8866]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=bb98e2e3]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=504d5a51]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=3de93d50]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=fdce559b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=14e1a699]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=fa0a4145]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a3c56f04]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=4810ae44]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=2cbabd7b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=6cba2647]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=249d5790]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=f299e6af]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=69578396]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=3f11f487]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=9f92ca86]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=5e9a8965]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=241d23c4]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a39e9776]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=460d62b3]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=dd9480e0]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=075aedde]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=f6980ab2]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=2143b295]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=b442fd2a]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=80132cc2]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=321e28bd]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=e8755306]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=60eff5e1]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=46a32c75]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=e23f1926]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=54d15f6b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=c65bfbf0]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=d6b61ce7]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a4ee8f78]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a61e0c41]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=7a3412dc]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=b591844e]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=7d7dd701]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=54e497e6]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=99633fef]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=607919f2]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=03315620]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=77900323]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=4f012226]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=4cf37f25]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=ab658511]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=d9d297eb]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=448351c1]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=15f49d59]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=286d317a]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=8302f858]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=e525c446]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=f7e9970b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=48a59f35]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=eb194bb1]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=9b9e753e]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=3c7ed397]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=676d433d]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=d0ca8051]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=7d659fc2]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=c760932b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=dde810af]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=30d88168]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=1bac4818]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=47fda64a]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=215ec771]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=cbe8cb7f]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=42a094ce]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=a0b86f98]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=cda9f453]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=3395b1c9]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=19cb378e]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=7fa62bd7]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=463a6fe5]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=0260f5fb]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=38c680aa]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=753ebaaf]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=2ca2b276]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=03facefc]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=8b67dd0d]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=2e23324b]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=7810edea]
+ROLLBACK: All changes reverted. Database is back to original state.
+BEGIN: Transaction started. [tx_id=b78b2417]
+ROLLBACK: All changes reverted. Database is back to original state.
+
+============================================================
+STRESS TEST RESULTS
+============================================================
+Total Execution Time  : 3.53 seconds
+Successful Bookings   : 5 (Expected: 5)
+Room Full Rejections  : 90 (Expected: 90)
+Simulated Crashes     : 5 (Expected: 5)
+Unexpected Errors     : 0 (Expected: 0)
+
+[FINAL] Room 101 Capacity Remaining: 0 (Expected: 0)
+
+MODULE B CONCURRENCY TEST PASSED PERFECTLY!
