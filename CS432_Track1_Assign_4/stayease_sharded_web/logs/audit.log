@@ -5490,3 +5490,109 @@
 [2026-04-17 23:51:23] - INFO - 127.0.0.1 - - [17/Apr/2026 23:51:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
 [2026-04-17 23:51:23] - INFO - 127.0.0.1 - - [17/Apr/2026 23:51:23] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
 [2026-04-17 23:51:23] - INFO - 127.0.0.1 - - [17/Apr/2026 23:51:23] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-04-18 15:45:43] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-04-18 15:45:43] - INFO - [33mPress CTRL+C to quit[0m
+[2026-04-18 15:45:43] - INFO -  * Restarting with stat
+[2026-04-18 15:45:44] - WARNING -  * Debugger is active!
+[2026-04-18 15:45:44] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:45:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:50] "GET /dashboard HTTP/1.1" 200 -
+[2026-04-18 15:45:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:50] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-04-18 15:45:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:50] "GET /static/script.js HTTP/1.1" 200 -
+[2026-04-18 15:45:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:50] "GET /static/style.css HTTP/1.1" 200 -
+[2026-04-18 15:45:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2026-04-18 15:45:58] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:45:58] - INFO - 127.0.0.1 - - [18/Apr/2026 15:45:58] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:00] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:00] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:00] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:04] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:04] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:04] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:20] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:20] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:20] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:26] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:26] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:26] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:28] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:28] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:28] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:46:59] - WARNING - User: 'admin' (Role: Unknown) | Action: Failed login attempt | Status: FAILED
+[2026-04-18 15:46:59] - INFO - 127.0.0.1 - - [18/Apr/2026 15:46:59] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+[2026-04-18 15:49:36] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:49:37] - INFO -  * Restarting with stat
+[2026-04-18 15:49:38] - WARNING -  * Debugger is active!
+[2026-04-18 15:49:38] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:49:43] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:49:43] - INFO -  * Restarting with stat
+[2026-04-18 15:49:45] - WARNING -  * Debugger is active!
+[2026-04-18 15:49:45] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:49:47] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:49:48] - INFO -  * Restarting with stat
+[2026-04-18 15:49:49] - WARNING -  * Debugger is active!
+[2026-04-18 15:49:49] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:49:51] - INFO - 127.0.0.1 - - [18/Apr/2026 15:49:51] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:49:52] - INFO - 127.0.0.1 - - [18/Apr/2026 15:49:52] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:49:59] - INFO - 127.0.0.1 - - [18/Apr/2026 15:49:59] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:50:19] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:50:19] - INFO -  * Restarting with stat
+[2026-04-18 15:50:20] - WARNING -  * Debugger is active!
+[2026-04-18 15:50:20] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:50:41] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:50:42] - INFO -  * Restarting with stat
+[2026-04-18 15:50:43] - WARNING -  * Debugger is active!
+[2026-04-18 15:50:43] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:50:46] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:50:46] - INFO -  * Restarting with stat
+[2026-04-18 15:50:46] - WARNING -  * Debugger is active!
+[2026-04-18 15:50:46] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:50:50] - INFO - 127.0.0.1 - - [18/Apr/2026 15:50:50] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:50:51] - INFO - 127.0.0.1 - - [18/Apr/2026 15:50:51] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:50:51] - INFO - 127.0.0.1 - - [18/Apr/2026 15:50:51] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:50:51] - INFO - 127.0.0.1 - - [18/Apr/2026 15:50:51] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:51:04] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-04-18 15:51:04] - INFO - [33mPress CTRL+C to quit[0m
+[2026-04-18 15:51:04] - INFO -  * Restarting with stat
+[2026-04-18 15:51:04] - WARNING -  * Debugger is active!
+[2026-04-18 15:51:05] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:51:09] - INFO - 127.0.0.1 - - [18/Apr/2026 15:51:09] "GET /dashboard HTTP/1.1" 200 -
+[2026-04-18 15:51:09] - INFO - 127.0.0.1 - - [18/Apr/2026 15:51:09] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-04-18 15:51:09] - INFO - 127.0.0.1 - - [18/Apr/2026 15:51:09] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+[2026-04-18 15:51:09] - INFO - 127.0.0.1 - - [18/Apr/2026 15:51:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-04-18 15:51:16] - INFO - 127.0.0.1 - - [18/Apr/2026 15:51:16] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+[2026-04-18 15:52:12] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:52:12] - INFO -  * Restarting with stat
+[2026-04-18 15:52:13] - WARNING -  * Debugger is active!
+[2026-04-18 15:52:13] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:55:09] - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[2026-04-18 15:55:09] - INFO - [33mPress CTRL+C to quit[0m
+[2026-04-18 15:55:09] - INFO -  * Restarting with stat
+[2026-04-18 15:55:10] - WARNING -  * Debugger is active!
+[2026-04-18 15:55:10] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:55:13] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:13] "GET /dashboard HTTP/1.1" 200 -
+[2026-04-18 15:55:13] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:13] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-04-18 15:55:13] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:13] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-04-18 15:55:14] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:14] "GET /static/script.js HTTP/1.1" 200 -
+[2026-04-18 15:55:20] - INFO - User: 'admin' (Role: Admin) | Action: User logged in successfully | Status: SUCCESS
+[2026-04-18 15:55:20] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:20] "POST /login HTTP/1.1" 200 -
+[2026-04-18 15:55:20] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:20] "GET /isAuth HTTP/1.1" 200 -
+[2026-04-18 15:55:20] - INFO - User: 'admin' (Role: Admin) | Action: Viewed FULL portfolio of Member ID 100 | Status: SUCCESS
+[2026-04-18 15:55:20] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:20] "GET /portfolio/100 HTTP/1.1" 200 -
+[2026-04-18 15:55:20] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:20] "GET /admin/stats HTTP/1.1" 200 -
+[2026-04-18 15:55:30] - INFO - 127.0.0.1 - - [18/Apr/2026 15:55:30] "GET /admin/members HTTP/1.1" 200 -
+[2026-04-18 15:58:12] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:58:12] - INFO -  * Restarting with stat
+[2026-04-18 15:58:13] - WARNING -  * Debugger is active!
+[2026-04-18 15:58:13] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 15:58:24] - INFO -  * Detected change in 'C:\\Users\\niraj\\Desktop\\project DB\\Assignment_4\\app\\routes_auth.py', reloading
+[2026-04-18 15:58:24] - INFO -  * Restarting with stat
+[2026-04-18 15:58:25] - WARNING -  * Debugger is active!
+[2026-04-18 15:58:25] - INFO -  * Debugger PIN: 111-122-564
+[2026-04-18 16:14:57] - INFO - 127.0.0.1 - - [18/Apr/2026 16:14:57] "GET /api/admin/available-rooms/2 HTTP/1.1" 200 -
+[2026-04-18 16:15:03] - INFO - User: 'admin' (Role: Admin) | Action: Added member 127 to room 102 | Status: SUCCESS
+[2026-04-18 16:15:03] - INFO - 127.0.0.1 - - [18/Apr/2026 16:15:03] "[35m[1mPOST /admin/members HTTP/1.1[0m" 201 -
+[2026-04-18 16:15:16] - INFO - 127.0.0.1 - - [18/Apr/2026 16:15:16] "GET /admin/members HTTP/1.1" 200 -
+[2026-04-18 16:17:09] - INFO - 127.0.0.1 - - [18/Apr/2026 16:17:09] "GET /admin/members HTTP/1.1" 200 -
+[2026-04-18 16:17:18] - INFO - 127.0.0.1 - - [18/Apr/2026 16:17:18] "GET /admin/complaints HTTP/1.1" 200 -
+[2026-04-18 16:44:53] - INFO - 127.0.0.1 - - [18/Apr/2026 16:44:53] "GET /dashboard HTTP/1.1" 200 -
+[2026-04-18 16:44:53] - INFO - 127.0.0.1 - - [18/Apr/2026 16:44:53] "[33mGET /static/images/default-avatar.png HTTP/1.1[0m" 404 -
+[2026-04-18 16:44:54] - INFO - 127.0.0.1 - - [18/Apr/2026 16:44:54] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[2026-04-18 16:44:54] - INFO - 127.0.0.1 - - [18/Apr/2026 16:44:54] "GET /static/script.js HTTP/1.1" 200 -

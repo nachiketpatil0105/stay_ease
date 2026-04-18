@@ -6,19 +6,22 @@ async function login() {
   const response = await fetch("/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ user: user, password: pass }),
+    // Changed 'user: user' to 'username: user' so Flask recognizes it!
+    body: JSON.stringify({ username: user, password: pass }), 
   });
 
   const data = await response.json();
 
   if (response.ok) {
-    localStorage.setItem("session_token", data["session token"]);
+    // Changed data["session token"] to data.token to match Flask's output!
+    localStorage.setItem("session_token", data.token);
     document.getElementById("login-error").innerText = "";
     loadPortfolio();
   } else {
     document.getElementById("login-error").innerText = data.error;
   }
 }
+
 
 // Load Portfolio
 async function loadPortfolio() {
