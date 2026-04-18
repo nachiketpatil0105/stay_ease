@@ -4,7 +4,7 @@ import mysql.connector
 LOCAL_DB_CONFIG = {
     "host": "localhost",
     "user": "root",          
-    "password": "Niraj@1607",  # Change to your local password
+    "password": "password",  # Change to your local password
     "database": "stayease"   
 }
 
