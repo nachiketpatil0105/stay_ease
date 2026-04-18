@@ -53,3 +53,4 @@ Note: This script automatically handles both hashing the transactional tables an
 * routes_portfolio.py: Implements Direct Routing for user-specific lookups, updates, and inserts.
 
 * QueryCraft_report.pdf: The complete scalability, consistency, and trade-offs analysis report.
+
